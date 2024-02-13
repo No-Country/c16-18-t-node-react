@@ -33,6 +33,48 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </section>
+                <section className="p-8">
+                    <h2 className="text-[2.5rem] font-bold">Categorias</h2>
+                    <div className="grid grid-flow-col auto-cols-max justify-evenly text-center">
+                        <div>
+                            <div className="p-4 bg-darkGreen1 w-fit rounded-full">
+                                <img src="/gluten-free-icon.svg" alt=" " />
+                            </div>
+                            <p className="font-semibold mt-6">SIN T.A.C.C</p>
+                        </div>
+                        <div>
+                            <div className="p-4 bg-darkGreen1 w-fit rounded-full">
+                                <img src="/vegan-icon.svg" alt=" " />
+                            </div>
+                            <p className="font-semibold mt-6">VEGANO</p>
+                        </div>
+                        <div>
+                            <div className="p-4 bg-darkGreen1 w-fit rounded-full">
+                                <img src="/keto-icon.svg" alt=" " />
+                            </div>
+                            <p className="font-semibold mt-6">KETO</p>
+                        </div>
+                        <div>
+                            <div className="p-4 bg-darkGreen1 w-fit rounded-full">
+                                <img src="/sugar-free-icon.svg" alt=" " />
+                            </div>
+                            <p className="font-semibold mt-6">SIN AZUCAR</p>
+                        </div>
+                        <div>
+                            <div className="p-4 bg-darkGreen1 w-fit rounded-full">
+                                <img src="/organic-icon.svg" alt=" " />
+                            </div>
+                            <p className="font-semibold mt-6">ORGÁNICO</p>
+                        </div>
+                        <div>
+                            <div className="p-4 bg-darkGreen1 w-fit rounded-full">
+                            <img src="/more-icon.svg" alt=" " />
+                            </div>
+                            <p className="font-semibold mt-6">VER MÁS</p>
+                        </div>
+
+                    </div>
+                </section>
             </main>
             <footer>
 
