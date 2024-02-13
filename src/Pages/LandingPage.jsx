@@ -24,10 +24,13 @@ const LandingPage = () => {
             </header>
             <main>
                 <section className="relative flex justify-center items-center overflow-hidden">
-                    <img className="object-start" src="/hero.png" alt=" " />
-                    <div className="absolute">
+                    <img className="object-contain object-center" src="/hero.png" alt=" " />
+                    <div className="absolute top-1/2">
                         <h1 className="text-[2.625rem] max-w-[20ch]">Hace que tus días, <span className="text-darkGreen1 font-bold">tengan más sabor...</span></h1>
-                        <input type="text" placeholder="Veamos que tenes cerca" />
+                        <div className="relative">
+                            <input className="p-4 rounded-full w-full" type="text" placeholder="Veamos que tenes cerca" />
+                            <button className="absolute top-0 right-0 px-6 py-4 font-bold bg-grayishGreen3 rounded-full" type="button">Buscar</button>
+                        </div>
                     </div>
                 </section>
             </main>
