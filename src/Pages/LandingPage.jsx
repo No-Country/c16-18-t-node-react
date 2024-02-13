@@ -77,7 +77,7 @@ const LandingPage = () => {
                 <section className="px-12 py-8 ">
                     <div className="flex justify-between items-center mb-8">
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
-                        <a href="#">Ver más</a>
+                        <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
                 </section>
                 <section className="flex flex-col gap-8 px-12 py-8">
