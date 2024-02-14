@@ -1,3 +1,6 @@
+import ProductCard from "../components/ProductCard.jsx"
+import products from "../constants/Products.js"
+
 const LandingPage = () => {
     return (
         <>
@@ -79,6 +82,12 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
+                    <div className="w-full h-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-4">
+                    {products.map((product) => (
+                        <ProductCard key={product.id} {...product}/>
+                    ))}
+                    </div>
+                    
                 </section>
                 <section className="flex flex-col gap-8 px-12 py-8">
                     <div className="flex">
