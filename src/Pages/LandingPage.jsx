@@ -1,42 +1,21 @@
 import ProductCard from "../components/ProductCard.jsx"
 import products from "../constants/Products.js"
+import Header from "../components/Header.jsx"
+import Searchbar from "../components/Searchbar.jsx"
 
 const LandingPage = () => {
     return (
         <>
-            <header className="flex justify-between items-center p-8">
-                <div className="flex gap-14">
-                    <div>
-                        <p>LOGO</p>
-                    </div>
-                    <nav className="flex gap-6">
-                        <a href="#">Home</a>
-                        <a href="#">Sobre Nosotros</a>
-                        <a href="#">Contacto</a>
-                    </nav>
-                </div>
-
-                <div className="flex gap-6 items-center">
-                    <img src="/magnifier-icon.svg" alt=" " />
-                    <img src="/cart-icon.svg" alt=" " />
-                    <div>
-                        <a className="text-darkGreen1 font-bold" href="#">Inicia Sesión</a>
-                        <a className="px-6 py-3 ml-6 bg-grayishGreen3 rounded-full" href="#">Registrate</a>
-                    </div>
-                </div>
-            </header>
+            <Header />
             <main>
                 <section className="relative flex justify-center items-center overflow-hidden">
-                    <img className="object-contain object-center" src="/hero.png" alt=" " />
+                    <img className="w-full" src="/hero.png" alt=" " />
                     <div className="absolute top-1/2">
-                        <h1 className="text-[2.625rem] max-w-[20ch]">Hace que tus días, <span className="text-darkGreen1 font-extrabold">tengan más sabor...</span></h1>
-                        <div className="relative">
-                            <input className="p-4 rounded-full w-full" type="text" placeholder="Veamos que tenes cerca" />
-                            <button className="absolute top-0 right-0 px-6 py-4 font-bold bg-grayishGreen3 rounded-full" type="button">Buscar</button>
-                        </div>
+                        <h1 className="mb-2 text-[2.625rem] max-w-[20ch]">Hace que tus días, <span className="text-darkGreen1 font-extrabold">tengan más sabor...</span></h1>
+                        <Searchbar />
                     </div>
                 </section>
-                <section className="px-12 py-8 bg-[#edebee]">
+                <section className="p-12 bg-[#edebee]">
                     <h2 className="mb-8 text-[2.5rem] text-darkGreen1 font-extrabold">Categorias</h2>
                     <div className="grid grid-flow-col auto-cols-max justify-evenly text-center">
                         <div>
@@ -89,7 +68,7 @@ const LandingPage = () => {
                     </div>
                     
                 </section>
-                <section className="flex flex-col gap-8 px-12 py-8">
+                <section className="flex flex-col gap-8 p-12">
                     <div className="flex">
                         <div className="flex flex-col">
                             <h2 className="text-[2.5rem] font-bold max-w-[30ch]">¿Sabías que ahora podes hacer tus pedidos desde la web?</h2>
@@ -99,7 +78,7 @@ const LandingPage = () => {
                         <img className="w-1/2" src="/guy-with-veggies-img.png" alt=" "/>
                     </div>
 
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-flow-col auto-cols-fr gap-8">
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
                             <img src="best-prices-icon.svg" alt=" " />
                             <p>Los mejores precios y ofertas</p>
@@ -119,8 +98,32 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
-            <footer>
-
+            <footer className="flex justify-between p-12 leading-8">
+                <div>
+                    <p>LOGO</p>
+                </div>
+                <div className="grid grid-flow-col auto-cols-fr gap-24">
+                    <div>
+                        <p className="font-bold">Sobre Nosotros</p>
+                        <ul>
+                            <li>¿Quienes Somos?</li>
+                            <li>Preguntas Frecuentes</li>
+                            <li>Contacto</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p className="font-bold">Legal</p>
+                        <ul>
+                            <li>Términos y Condiciones</li>
+                            <li>Pólitica de Privacidad</li>
+                        </ul>
+                    </div>
+                    <div className="flex items-start">
+                        <img src="/instagram-icon.svg" alt=" " />
+                        <img src="/facebook-icon.svg" alt=" " />
+                    </div>
+                </div>            
+            
             </footer>
         </>
 
