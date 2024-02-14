@@ -16,7 +16,11 @@ export default {
         grayishGreen2: "#5ca35c",
         grayishGreen3: "#aac76f",
         yellowGreen: "#a7d251",
-        avocadoGreen: "#76902e"
+        avocadoGreen: "#76902e",
+        greenLabel: "#3BB77E",
+        redLabel: "#B73B51",
+        orangeLabel: "#F59758",
+        greenButton: "#76902E",
       },
       backgroundImage: {
         heroImg: "url('./public/hero.png')"
