@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { options }  from "../config/options.config.js"
+import { options }  from "../../config/options.config.js"
 
 //conectamos mongodb a travez de una instancia
 

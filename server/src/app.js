@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { options } from "./config/options.config.js";
-import { MongooseDB } from "./db/mongo.db.js";
+import { MongooseDB } from "./dao/db/mongo.db.js";
+import productsRouter from "./routes/products.router.js"
 
 const app = express();
 
@@ -15,5 +16,7 @@ MongooseDB.getInstance();
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+
+app.use("/api/products", productsRouter);
 
 export default app;

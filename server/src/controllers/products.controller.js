@@ -1,13 +1,10 @@
-import { Router } from "express";
-import { ProductManager } from "../dao/product.dao.js";
+import { productService } from "../services/index.js"
 
-const router = Router();
-
-export const getProductController = async (req, res) => {
+const getProduct = async (req, res) => {
  
       try {
-        const getProducts = await ProductManager.getProducts();
-        res.status(200).send({ status: "ok", payload: getProducts });
+        const products = await productService.getAll();
+        res.status(200).send({ status: "ok", payload: products });
       } catch (err) {
         res.status(400).send({ status: "error", payload: err.message });
       }
@@ -15,19 +12,26 @@ export const getProductController = async (req, res) => {
     };
 
 
-export const createProductController = async (req, res) => {
+const createProduct = async (req, res) => {
+
+  const {name, price, quanty} = req.body
+
+  const product = {
+    name,
+    price,
+    quanty
+  }
 
       try {
-            const paginate = await ProductManager.paginateProducts(query, options);
-            res.status(200).send({ status: "ok", payload: paginate });
+            const result = await productService.create(product);
+            res.status(200).send({ status: "ok", payload: result });
           } catch (err) {
             res.status(400).send({ status: "error", payload: err.message });
        }
-
-        const createProduct = await ProductManager.paginateProducts();
-        return res.status(201).json({ status: "ok", payload: createProduct });
     
   };
 
-
-  export default router;
+  export default {
+    getProduct,
+    createProduct
+}

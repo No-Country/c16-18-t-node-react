@@ -1,15 +1,24 @@
-import productModel from "../models/product.model.js";
+import productModel from "../dao/models/product.model.js";
 
-export class ProductManager {
-  
-    static getProducts = async () => {
-      const products = await productModel.find().lean();
-      return products;
-    };
+export default class ProductDAO {
 
-    static createProduct = async (objProduct) => {
-      const newProduct = await productModel.create(objProduct);
-      return newProduct;
-    };
-  
-};
+    get = (params) =>{
+        return productModel.find(params)
+    }
+
+    getBy = (params) =>{
+        return productModel.findOne(params);
+    }
+
+    save = (doc) =>{
+        return productModel.create(doc);
+    }
+
+    update = (id,doc) =>{
+        return productModel.findByIdAndUpdate(id,{$set:doc})
+    }
+
+    delete = (id) =>{
+        return productModel.findByIdAndDelete(id);
+    }
+}
