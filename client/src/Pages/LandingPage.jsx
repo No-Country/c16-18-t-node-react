@@ -2,6 +2,7 @@ import ProductCard from "../components/ProductCard.jsx"
 import products from "../constants/Products.js"
 import Header from "../components/Header.jsx"
 import Searchbar from "../components/Searchbar.jsx"
+import Footer from "../components/Footer.jsx"
 
 const LandingPage = () => {
     return (
@@ -98,33 +99,7 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
-            <footer className="flex justify-between p-12 leading-8">
-                <div>
-                    <p>LOGO</p>
-                </div>
-                <div className="grid grid-flow-col auto-cols-fr gap-24">
-                    <div>
-                        <p className="font-bold">Sobre Nosotros</p>
-                        <ul>
-                            <li>¿Quienes Somos?</li>
-                            <li>Preguntas Frecuentes</li>
-                            <li>Contacto</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="font-bold">Legal</p>
-                        <ul>
-                            <li>Términos y Condiciones</li>
-                            <li>Pólitica de Privacidad</li>
-                        </ul>
-                    </div>
-                    <div className="flex items-start">
-                        <img src="/instagram-icon.svg" alt=" " />
-                        <img src="/facebook-icon.svg" alt=" " />
-                    </div>
-                </div>            
-            
-            </footer>
+            <Footer/>
         </>
 
     )
