@@ -20,7 +20,7 @@ export default {
         greenLabel: "#3BB77E",
         redLabel: "#B73B51",
         orangeLabel: "#F59758",
-        greenButton: "#76902E",
+        blueLabel: "#3A82ED",
       },
       backgroundImage: {
         heroImg: "url('./public/hero.png')"
