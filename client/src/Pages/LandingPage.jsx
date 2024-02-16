@@ -3,6 +3,8 @@ import products from "../constants/Products.js"
 import Header from "../components/Header.jsx"
 import Searchbar from "../components/Searchbar.jsx"
 
+const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
+
 const LandingPage = () => {
     return (
         <>
@@ -15,6 +17,34 @@ const LandingPage = () => {
                         <Searchbar />
                     </div>
                 </section>
+                <section className={` ${userIsLogged ? 'block' : 'hidden'} gap-12 p-12`}>
+                    <div className="flex justify-between items-center mb-8">
+                        <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold" >Comercios cercanos</h2>
+                        <a className="flex items-center gap-2" href="#"><p>Ver más</p> <img src="/arrow-icon.svg" alt=" " /></a>
+                    </div>
+                    <div className="grid grid-flow-col auto-cols-fr gap-4">
+                        <div className="flex flex-col bg-avocadoGreen rounded-xl">
+                            <img src="/carrefour-logo.svg" alt="carrefour's logo" />
+                            <p className="py-4 text-lg text-center text-white font-semibold">Carrefour</p>
+                        </div>
+                        <div className="flex flex-col bg-avocadoGreen rounded-xl">
+                            <img src="/dietetica-online-logo.svg" alt="dietetica online's logo" />
+                            <p className="py-4 text-lg text-center text-white font-semibold">Dietetica Online</p>
+                        </div>
+                        <div className="flex flex-col bg-avocadoGreen rounded-xl">
+                            <img src="/natural-dietetica-logo.svg" alt="natural dietetica's logo" />
+                            <p className="py-4 text-lg text-center text-white font-semibold">Natural Dietetica</p>
+                        </div>
+                        <div className="flex flex-col bg-avocadoGreen rounded-xl">
+                            <img src="/dieteticas-tomy-logo.svg" alt="dieteticas tomy's logo" />
+                            <p className="py-4 text-lg text-center text-white font-semibold">Dieteticas Tomy</p>
+                        </div>
+                        <div className="flex flex-col bg-avocadoGreen rounded-xl">
+                            <img src="/dietetica-callao-logo.svg" alt="dietetica callao's logo" />
+                            <p className="py-4 text-lg text-center text-white font-semibold">Dietetica Callao</p>
+                        </div>
+                    </div>
+                </section> 
                 <section className="p-12 bg-[#edebee]">
                     <h2 className="mb-8 text-[2.5rem] text-darkGreen1 font-extrabold">Categorias</h2>
                     <div className="grid grid-flow-col auto-cols-max justify-evenly text-center">
@@ -61,7 +91,7 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
-                    <div className="w-full h-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-4">
+                    <div className="grid grid-cols-4">
                     {products.map((product) => (
                         <ProductCard key={product.id} {...product}/>
                     ))}
@@ -77,7 +107,6 @@ const LandingPage = () => {
                         </div>
                         <img className="w-1/2" src="/guy-with-veggies-img.png" alt=" "/>
                     </div>
-
                     <div className="grid grid-flow-col auto-cols-fr gap-8">
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
                             <img src="best-prices-icon.svg" alt=" " />
