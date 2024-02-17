@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import { options } from "./config/options.config.js";
 import mongoose from "mongoose";
+import { options } from "./config/options.config.js";
 import productsRouter from "./routes/products.router.js"
 
 const app = express();
@@ -12,7 +12,7 @@ app.listen(options.server.port, () => {
   });
 
 mongoose.connect(options.mongo.url).then((conn) => {
-    console.log("Connected to DB!");
+    console.log("MongoDB conectado");
   });
   
 
