@@ -7,12 +7,12 @@ const productSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    price: { type: Number,required:true,min:1},
+    price: { type: Number,min:1},
 
     quanty: {type: Number,required:true},
 })
 
 productSchema.plugin(mongoosePaginate)
-
+   
 const productModel = mongoose.model(productsCollection, productSchema)
 export default productModel

@@ -8,9 +8,16 @@ router.get(
     productController.getProductController
   );
 
+  router.get(
+    "/:oid",
+    productController.getProductByIdController
+  );
+
 router.post(
     "/",
     productController.createProductController
   );
+
+  
 
 export default router;

@@ -2,12 +2,12 @@ import productModel from "../models/product.model.js";
 
 export default class ProductDAO {
 
-    get = (params) =>{
-        return productModel.find(params)
+    get = () =>{
+        return productModel.find()
     }
 
-    getBy = (params) =>{
-        return productModel.findOne(params);
+    getById = (params) =>{
+        return productModel.findById(params);
     }
 
     save = (doc) =>{
