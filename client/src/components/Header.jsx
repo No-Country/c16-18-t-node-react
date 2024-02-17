@@ -26,7 +26,7 @@ const Header = () => {
                 <div>
                 {isLoggedIn ?
                 <div className="relative flex items-center gap-2 group" onMouseEnter={() => {setIsOpen(!isOpen)}} onMouseLeave={() => {setIsOpen(!isOpen)}}>
-                    <div>
+                    <div className="pl-12">
                         <p className="text-sm text-darkGreen1 font-bold">Julio Rossi</p>
                         <a className="text-xs text-grayishGreen2 font-bold" href="#"><p>Cerrar Sesión</p></a>
                     </div>
