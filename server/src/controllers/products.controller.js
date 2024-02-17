@@ -1,9 +1,9 @@
-import { productService } from "../services/index.js"
+import productService from "../services/product.service.js"
 
-const getProduct = async (req, res) => {
+const getProductController = async (req, res) => {
  
       try {
-        const products = await productService.getAll();
+        const products = await productService.getProducts();
         res.status(200).send({ status: "ok", payload: products });
       } catch (err) {
         res.status(400).send({ status: "error", payload: err.message });
@@ -12,18 +12,10 @@ const getProduct = async (req, res) => {
     };
 
 
-const createProduct = async (req, res) => {
-
-  const {name, price, quanty} = req.body
-
-  const product = {
-    name,
-    price,
-    quanty
-  }
+const createProductController = async (req, res) => {
 
       try {
-            const result = await productService.create(product);
+            const result = await productService.createProduct(req.body);
             res.status(200).send({ status: "ok", payload: result });
           } catch (err) {
             res.status(400).send({ status: "error", payload: err.message });
@@ -32,6 +24,6 @@ const createProduct = async (req, res) => {
   };
 
   export default {
-    getProduct,
-    createProduct
+    getProductController,
+    createProductController
 }

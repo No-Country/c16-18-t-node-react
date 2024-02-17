@@ -5,12 +5,12 @@ const router = Router();
 
 router.get(
     "/",
-    productController.getProduct
+    productController.getProductController
   );
 
 router.post(
     "/",
-    productController.createProduct
+    productController.createProductController
   );
 
 export default router;
