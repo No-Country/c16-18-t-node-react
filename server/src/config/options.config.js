@@ -11,7 +11,6 @@ const PERSISTENCE = process.env.PERSISTENCE;
 export const options = { 
     server:{
         port: PORT,
-        persistence: PERSISTENCE
     },
     mongo:{
         url: MONGO_URL,
