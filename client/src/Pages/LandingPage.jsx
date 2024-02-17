@@ -110,19 +110,19 @@ const LandingPage = () => {
                     </div>
                     <div className="grid grid-flow-col auto-cols-fr gap-8">
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="best-prices-icon.svg" alt=" " />
+                            <img src="/best-prices-icon.svg" alt=" " />
                             <p>Los mejores precios y ofertas</p>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="free-delivery-icon.svg" alt=" " />
+                            <img src="/free-delivery-icon.svg" alt=" " />
                             <p>Delivery gratis</p>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="daily-offers-icon.svg" alt=" " />
+                            <img src="/daily-offers-icon.svg" alt=" " />
                             <p>Ofertas diarias</p>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="wide-variety-icon.svg" alt=" " />
+                            <img src="/wide-variety-icon.svg" alt=" " />
                             <p>Amplia variedad</p>
                         </div>
                     </div>
