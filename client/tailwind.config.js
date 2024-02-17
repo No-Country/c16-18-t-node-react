@@ -15,6 +15,7 @@ export default {
         grayishGreen1: "#418541",
         grayishGreen2: "#5ca35c",
         grayishGreen3: "#aac76f",
+        grayishGreen4: "#dde2d0",
         yellowGreen: "#a7d251",
         avocadoGreen: "#76902e",
         greenLabel: "#3BB77E",
