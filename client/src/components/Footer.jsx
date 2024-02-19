@@ -36,25 +36,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-// <div>
-// <p>LOGO</p>
-// </div>
-// <div className="grid grid-flow-col auto-cols-fr gap-24">
-// <div>
-//   <p className="font-bold">Sobre Nosotros</p>
-//   <ul>
-//     <li>¿Quienes Somos?</li>
-//     <li>Preguntas Frecuentes</li>
-//     <li>Contacto</li>
-//   </ul>
-// </div>
-// <div>
-//   <p className="font-bold">Legal</p>
-//   <ul>
-//     <li>Términos y Condiciones</li>
-//     <li>Pólitica de Privacidad</li>
-//   </ul>
-// </div>
-
-// </div>

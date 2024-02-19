@@ -1,15 +1,12 @@
 import ProductCard from "../components/ProductCard.jsx"
 import products from "../constants/Products.js"
-import Header from "../components/Header.jsx"
 import Searchbar from "../components/Searchbar.jsx"
-import Footer from "../components/Footer.jsx"
 
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
 
 const LandingPage = () => {
     return (
         <>
-            <Header />
             <main>
                 <section className="relative flex justify-center items-center overflow-hidden">
                     <img className="w-full" src="/hero.png" alt=" " />
@@ -92,7 +89,7 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
-                    <div className="grid grid-cols-4">
+                    <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
                     {products.map((product) => (
                         <ProductCard key={product.id} {...product}/>
                     ))}
@@ -128,7 +125,6 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
-            <Footer/>
         </>
 
     )
