@@ -1,9 +1,13 @@
-import LandingPage from "./Pages/LandingPage"
+import Cart from "./Pages/Cart";
+import LandingPage from "./Pages/LandingPage";
 
 const App = () => {
-    return (
-        <LandingPage/>
-    )
-}
+  return (
+    <>
+      {/* <LandingPage /> */}
+      <Cart />
+    </>
+  );
+};
 
-export default App
+export default App;
