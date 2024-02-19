@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UserMenu from "./UserMenu.jsx"
+import { NavLink } from "react-router-dom";
 
 const isLoggedIn = true; // esto deberia ser info que viene de la base de datos
 
@@ -14,9 +15,9 @@ const Header = () => {
                     <p>LOGO</p>
                 </div>
                 <nav className="flex gap-6">
-                    <a href="#">Home</a>
-                    <a href="#">Sobre Nosotros</a>
-                    <a href="#">Contacto</a>
+                    <NavLink className={({isActive}) => ` ${isActive ? 'active' : ''}`} to="/">Home</NavLink>
+                    <NavLink className={({isActive}) => ` ${isActive ? 'active' : ''}`} to="/about">Sobre Nosotros</NavLink>
+                    <NavLink className={({isActive}) => ` ${isActive ? 'active' : ''}`} to="/contact">Contacto</NavLink>
                 </nav>
             </div>
             <div>
