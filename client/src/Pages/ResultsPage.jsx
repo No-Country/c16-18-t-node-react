@@ -71,19 +71,13 @@ const ResultPage = () => {
                     <div className="relative flex justify-between py-4">
                         <h2>Precio</h2>
                         <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
-                        <div className="absolute top-full w-full">
-                            <div className="relative w-full rounded-full">
-                                <div className="absolute z-0 w-full h-2 bg-avocadoGreen rounded-full"></div>
-                                <div className="absolute z-10 w-full bg-transparent">
-                                    <input className="absolute -top-1 w-full bg-transparent appearance-none z-20" min="0" max="30000" step="100" type="range" />
-                                    <input className="absolute -top-1 z-30 w-full bg-transparent appearance-none" min="0" max="30000" step="100" type="range" />
-                                </div>
-                            </div> 
+                        <div className="absolute w-full top-full bg-transparent">
+                            <input className="absolute w-full h-[2px] appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
+                            <input className="absolute w-full h-[2px] bg-grayishGreen4 appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
                         </div>
-
                     </div>
                 </div>
-                <ul className="grid grid-cols-3  gap-y-8">
+                <ul className="grid grid-cols-3 gap-y-8">
                     {products.map(product => <li key={product.id}><ProductCard {...product}/></li>)}
                 </ul>
             </section>
