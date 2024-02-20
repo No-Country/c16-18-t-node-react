@@ -3,8 +3,15 @@ import Footer from "../components/Footer.jsx"
 import Searchbar from "../components/Searchbar.jsx"
 import products from "../constants/Products.js"
 import ProductCard from "../components/ProductCard.jsx"
+import { useState } from "react"
 
 const ResultPage = () => {
+
+   const [isCatOpen, setIsCatOpen] = useState(false)
+   const [isProdOpen, setIsProdOpen] = useState(false)
+   const [isPriceOpen, setIsPriceOpen] = useState(false)
+   const [isShopOpen, setIsShopOpen] = useState(false)
+
     return(
         <>
         <Header />
@@ -16,68 +23,111 @@ const ResultPage = () => {
                 </div>
                 <img className="relative -right-8" src="/hero2.svg" alt=" " />
             </section>
-            <section className="grid grid-flow-col gap-8">
-                <div>
-                    <div className="relative flex justify-between py-4"> 
-                        <h2>Categorías</h2>
-                        <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
-                        <div className="absolute top-full hidden">
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Vegano</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Vegetariano</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Organico</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Sin T.A.C.C</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Sin azúcar</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Sin aditivos</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Bajo en grasas</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Keto</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Bajo en calorias</button>
-                            <button className="text-sm px-4 py-2 m-1 bg-[#f2f2f2] rounded-full">Sin sodio</button>
+            <section className="flex gap-8">
+                <div className="w-1/4">
+                    <div className="relative py-4 cursor-pointer"> 
+                        <div className="flex justify-between" onClick={() => {setIsCatOpen(!isCatOpen)}}>
+                            <h2>Categorias</h2>
+                            <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
+                        </div>
+                        <div className={`relative top-full mt-4 ${isCatOpen ? 'block' : 'hidden'}`}>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Vegano</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Vegetariano</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Organico</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin T.A.C.C</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin azúcar</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin aditivos</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Bajo en grasas</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Keto</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Bajo en calorias</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin sodio</button>
                         </div>
                     </div>
-                    <div className="relative flex justify-between py-4">
-                        <h2>Productos</h2>
-                        <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
-                        <div className="absolute top-full hidden flex-col gap-2">
-                            <div>
-                                <input type="radio" name="bebidas" id="bebidas" />
-                                <label htmlFor="bebidas">Bebidas (0)</label>   
+                    <div className="relative flex flex-col py-4 cursor-pointer">
+                        <div className="flex justify-between" onClick={() => {setIsProdOpen(!isProdOpen)}}>
+                            <h2>Productos</h2>
+                            <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
+                        </div>
+                        <div className={`relative top-full mt-4 ${isProdOpen ? 'flex-col gap-2' : 'hidden'}`}>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3" type="checkbox" name="bebidas" id="bebidas" />
+                                <div>Bebidas (0)</div>  
                             </div>
-                            <div>
-                                <input type="radio" name="verduras" id="verduras" />
-                                <label htmlFor="verduras">Verduras (0)</label>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3" type="checkbox" name="verduras" id="verduras" />
+                                <div>Verduras (0)</div>
                             </div>
-                            <div>
-                                <input type="radio" name="frutas" id="frutas" />
-                                <label htmlFor="frutas">Frutas (0)</label>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3 peer" type="checkbox" name="frutas" id="frutas" />
+                                <div>Frutas (0)</div>
+                                 
                             </div>
-                            <div>
-                                <input type="radio" name="almacen" id="almacen" />
-                                <label htmlFor="almacen">Almacén (0)</label>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3" type="checkbox" name="almacen" id="almacen" />
+                                <div>Almacén (0)</div>
                             </div>
-                            <div>
-                                <input type="radio" name="congelados" id="congelados" />
-                                <label htmlFor="congelados">Congelados (0)</label>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3" type="checkbox" name="congelados" id="congelados" />
+                                <div>Congelados (0)</div>
                             </div>
-                            <div>
-                                <input type="radio" name="frutos secos" id="frutos-secos" />
-                                <label htmlFor="frutos-secos">Frutos secos (0)</label>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3" type="checkbox" name="frutos secos" id="frutos-secos" />
+                                <div>Frutos secos (0)</div>
                             </div>
-                            <div>
-                                <input type="radio" name="suplementos" id="suplementos" />
-                                <label htmlFor="suplementos">Suplementos (0)</label>
+                            <div className="relative flex items-center gap-2">
+                                <input className="p-2 border border-grayishGreen4 rounded-full appearance-none checked:bg-grayishGreen3" type="checkbox" name="suplementos" id="suplementos" />
+                                <div>Suplementos (0)</div>
                             </div>
                         </div>
                     </div>
-                    <div className="relative flex justify-between py-4">
-                        <h2>Precio</h2>
-                        <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
-                        <div className="absolute w-full top-full bg-transparent">
+                    <div className="relative flex flex-col py-4 cursor-pointer">
+                        <div className="flex justify-between" onClick={() => {setIsPriceOpen(!isPriceOpen)}}>
+                            <h2>Precio</h2>
+                            <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
+                        </div>
+                        <div className={`relative top-full ${isPriceOpen ? 'block' : 'hidden'} mt-4 w-full bg-transparent`}>
                             <input className="absolute w-full h-[2px] appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
                             <input className="absolute w-full h-[2px] bg-grayishGreen4 appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
+                            <p className="mt-4">precio:  <span className="font-semibold">x</span> - <span className="font-semibold">y</span></p>
+                        </div>
+                    </div>
+                    <div className="relative flex flex-col py-4 cursor-pointer">
+                        <div className="flex justify-between" onClick={() => {setIsShopOpen(!isShopOpen)}}>
+                            <h2>Comercios cercanos</h2>
+                            <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
+                        </div>
+                        <div className={`relative top-full mt-4 ${isShopOpen ? 'grid  gap-3' : 'hidden'}`}>
+                            <div className="flex items-center gap-2 border border-grayishGreen4 rounded-md">
+                                <img className="w-1/3" src="/dieteticas-tomy-logo.svg" alt=" " />
+                                <div>
+                                    <p className="text-sm">Dieteticas Tomy</p>
+                                    <p className="text-sm" >Envio $750</p>
+                                    <p className="text-sm">30-45 min</p>
+                                    <p className="text-sm">⭐⭐⭐⭐</p> 
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2 border border-grayishGreen4 rounded-md">
+                                <img className="w-1/3" src="/natural-dietetica-logo.svg" alt=" " />
+                                <div>
+                                    <p className="text-sm">Natural Dietetica</p>
+                                    <p className="text-sm" >Envio $750</p>
+                                    <p className="text-sm">30-45 min</p> 
+                                    <p className="text-sm">⭐⭐⭐⭐</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2 border border-grayishGreen4 rounded-md">
+                                <img className="w-1/3" src="/dietetica-online-logo.svg" alt=" " />
+                                <div>
+                                    <p className="text-sm">Dietetica Online</p>
+                                    <p className="text-sm">Envio $750</p>
+                                    <p className="text-sm">30-45 min</p>
+                                    <p className="text-sm">⭐⭐⭐⭐</p> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <ul className="grid grid-cols-3 gap-y-8">
+                <ul className="grid grid-cols-3 gap-8">
                     {products.map(product => <li key={product.id}><ProductCard {...product}/></li>)}
                 </ul>
             </section>
