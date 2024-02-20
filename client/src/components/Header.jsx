@@ -15,9 +15,9 @@ const Header = () => {
                     <p>LOGO</p>
                 </div>
                 <nav className="flex gap-6">
-                    <NavLink className={({isActive}) => ` ${isActive ? 'active' : ''}`} to="/">Home</NavLink>
-                    <NavLink className={({isActive}) => ` ${isActive ? 'active' : ''}`} to="/about">Sobre Nosotros</NavLink>
-                    <NavLink className={({isActive}) => ` ${isActive ? 'active' : ''}`} to="/contact">Contacto</NavLink>
+                    <NavLink className={({isActive}) => `hover:underline ${isActive ? 'active' : ''}`} to="/">Home</NavLink>
+                    <NavLink className={({isActive}) => `hover:underline ${isActive ? 'active' : ''}`} to="/about">Sobre Nosotros</NavLink>
+                    <NavLink className={({isActive}) => `hover:underline ${isActive ? 'active' : ''}`} to="/contact">Contacto</NavLink>
                 </nav>
             </div>
             <div>

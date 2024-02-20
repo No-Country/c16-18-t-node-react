@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className=" w-full h-[335px] bg-darkGreen1 flex items-center justify-center">
@@ -25,8 +27,8 @@ const Footer = () => {
           <div className="flex flex-col  items-start">
             <h3 className="font-bold">Seguinos en:</h3>
             <div className="flex items-start">
-              <img src="/facebook-icon.svg" alt=" " className="pr-2" />
-              <img src="/instagram-icon.svg" alt=" " className="" />
+              <Link to="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><img src="/facebook-icon.svg" alt=" " className="pr-2" /></Link>
+              <Link to="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><img src="/instagram-icon.svg" alt=" " className="" /></Link>
             </div>
           </div>
         </div>
