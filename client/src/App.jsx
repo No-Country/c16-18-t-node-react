@@ -1,9 +1,15 @@
-import LandingPage from "./Pages/LandingPage.jsx"
-import ResultPage from "./Pages/ResultsPage.jsx"
+import { BrowserRouter } from "react-router-dom"
+import Footer from "./components/Footer"
+import Header from "./components/Header"
+import AppRouter from "./router/AppRouter"
 
 const App = () => {
     return (
-        <ResultPage/ >
+        <BrowserRouter>
+        <Header/>
+        <AppRouter/>
+        <Footer/>
+        </BrowserRouter>
     )
 }
 

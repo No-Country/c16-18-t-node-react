@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.active{
+    @apply   text-darkGreen1 underline hover:text-darkGreen2;
+}
+
 input[type="range"]::-webkit-slider-thumb{
     appearance: none;
     pointer-events: all;
