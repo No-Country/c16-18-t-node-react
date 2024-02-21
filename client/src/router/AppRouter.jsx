@@ -3,6 +3,7 @@ import LandingPage from '../Pages/LandingPage'
 import AboutPage from '../Pages/AboutPage'
 import ContactPage from '../Pages/ContactPage'
 import UserProfilePage from '../Pages/UserProfilePage'
+import ResultPage from '../Pages/ResultsPage'
 
 const AppRouter = () => {
 
@@ -17,6 +18,7 @@ const AppRouter = () => {
             <Route path="/contact" element={<ContactPage />} />
             {/* Si esta loggeado, mostrar el componente de comercios cercanos */}
             <Route path="/profile" element={<UserProfilePage />} />
+            <Route path="/results" element={<ResultPage />} />
             <Route  path='/*' element={<Navigate to='/'/>} />
         </>
 

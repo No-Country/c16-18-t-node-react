@@ -1,5 +1,3 @@
-import Header from "../components/Header.jsx"
-import Footer from "../components/Footer.jsx"
 import Searchbar from "../components/Searchbar.jsx"
 import products from "../constants/Products.js"
 import ProductCard from "../components/ProductCard.jsx"
@@ -14,7 +12,6 @@ const ResultPage = () => {
 
     return(
         <>
-        <Header />
         <main className="px-8 my-12">
             <section className="flex items-center">
                 <div className="flex flex-col gap-4">
@@ -132,7 +129,6 @@ const ResultPage = () => {
                 </ul>
             </section>
         </main>
-        <Footer />
         </>
     )
 }   
