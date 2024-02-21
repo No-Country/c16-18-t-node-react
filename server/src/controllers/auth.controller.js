@@ -1,16 +1,16 @@
 import bcrypt from 'bcryptjs';
-import usersModel from '../models/users.model.js';
+import userModel from '../models/user.model.js';
 import { createAccessToken } from '../helpers/utils/jwt.utils.js';
 
 export const register = async (req, res) => {
 	try {
 		const { email, username, password } = req.body;
 
-		const userFound = await usersModel.findOne({ email });
+		const userFound = await userModel.findOne({ email });
 		if (userFound) return res.status(400).json(['The email is already in use']);
 
 		const passwordHash = await bcrypt.hash(password, 10);
-		const newUser = new usersModel({
+		const newUser = new userModel({
 			username,
 			email,
 			password: passwordHash,
@@ -37,7 +37,7 @@ export const login = async (req, res) => {
 	const { email, password } = req.body;
 
 	try {
-		const userFound = await usersModel.findOne({ email });
+		const userFound = await userModel.findOne({ email });
 		if (!userFound) return res.status(400).json({ message: 'User not found' });
 
 		const isMatch = await bcrypt.compare(password, userFound.password);
@@ -68,6 +68,6 @@ export const logout = (req, res) => {
 
 // esto es solo para verificar que se cargaron los datos, no va aqui
 export const getUsers = async (req, res) => {
-	const users = await usersModel.find();
+	const users = await userModel.find();
 	res.json(users);
 };
