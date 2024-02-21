@@ -8,7 +8,7 @@ const Discount = () => {
         className="border border-platinum rounded-full w-[482px] h-12 py-6 px-3.5 mr-3.5"
         placeholder="Ingresar codigo"
       ></input>
-      <button className="py-4 px-10 bg-black text-white text-base rounded-full">
+      <button className=" px-10 bg-black text-white text-center rounded-full">
         Aplicar
       </button>
     </div>
