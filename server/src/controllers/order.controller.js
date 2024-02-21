@@ -39,7 +39,7 @@ const deleteOrderController = async (req, res) => {
 
 const addProductOrderController = async (req, res) => {
   try {
-    const result = await orderService.addProduct(req.params.oid, req.params.pid, req.body);
+    const result = await orderService.addProduct(req.params.oid, req.params.pid, req.body.quantity);
     res.status(201).send({ status: "ok", payload: result });
   } catch (err) {
     res.status(400).send({ status: "error", payload: err.message });

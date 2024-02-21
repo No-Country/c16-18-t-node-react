@@ -13,16 +13,37 @@ export default class OrderDAO {
     return orderModel.create({});
   };
 
-  update = (id, doc) => {
-    return orderModel.findByIdAndUpdate(id, { $set: doc }, { new: true });
+  updateQuantityProduct = (id, idProduct, quantity) => {
+    return orderModel.updateOne(
+      {
+        _id: id,
+        'products.product_id': idProduct,
+      },
+      {
+        $set: {
+          'products.$.quantity': quantity,
+        },
+      }
+    );
   };
 
-  updateOne = (id, doc) => {
+  insertProductOrder = (id, doc) => {
     return orderModel.updateOne(
       { _id: id },
       {
         $push: {
           products: doc,
+        },
+      }
+    );
+  };
+
+  deleteProductOrder = (id, idProduct) => {
+    return orderModel.updateOne(
+      { _id: id },
+      {
+        $pull: {
+          products: { product_id: idProduct },
         },
       }
     );

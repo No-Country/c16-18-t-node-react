@@ -42,19 +42,20 @@ const deleteOrder = async (id) => {
   }
 };
 
-const addProduct = async (orderId, productId, obj) => {
+const addProduct = async (orderId, productId, quantityNeed) => {
   try {
     const order = await orderDAO.getById(orderId);
     if (!order) throw new Error("El id ingresado no existe");
     const product = await productDAO.getById(productId);
     if (!product) throw new Error("El id ingresado no existe");
-    if (product.quanty == 0 || product.quanty < obj) {
-      throw new Error("El stock es insuficiente");
-    }
-    const papa = await checkStockProduct(productId, obj)
-    const result = await orderDAO.updateOne(orderId, product)
-    return result
 
+    const orderProduct = await checkItemExistOrder(orderId, productId);
+
+    if (orderProduct) {
+      return await updateQuantity(orderId, orderProduct, quantityNeed);
+    } else {
+      return await addNewProduct(orderId, productId, quantityNeed);
+    }
   } catch (err) {
     throw new Error(err.message);
   }
@@ -63,15 +64,86 @@ const addProduct = async (orderId, productId, obj) => {
 const checkStockProduct = async (productId, quantityNeed) => {
   try {
     const product = await productDAO.getById(productId);
-    console.log(product.stock)
-    
-  } catch (error) {
-    
+    if (!product) {
+      return 0;
+    }
+    if (product.discontinued) {
+      return 0;
+    }
+    return product.stock >= quantityNeed ? quantityNeed : product.stock;
+  } catch (err) {
+    throw new Error(err.message);
   }
-}
+};
+
+const addNewProduct = async (orderId, productId, quantity) => {
+  try {
+    const quantityNeed = quantity || 1;
+    const stockDisponible = await checkStockProduct(productId, quantityNeed);
+    if (stockDisponible > 0) {
+      const newProduct = {
+        product_id: productId,
+        quantity: stockDisponible,
+      };
+      const result = await orderDAO.insertProductOrder(orderId, newProduct);
+      return result;
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+const checkItemExistOrder = async (orderId, productId) => {
+  try {
+    const order = await orderDAO.getById(orderId);
+    if (order && order.products && order.products.length > 0) {
+      return order.products.find((product) => product.product_id === productId);
+    }
+    return null;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+const updateQuantity = async (orderId, orderProduct, quantity) => {
+  try {
+    const quantityNeed = quantity;
+    const quantityOrder = orderProduct.quantity + quantityNeed;
+
+    if(quantityOrder <= 0){
+      return await deleteProductOrder(orderId, orderProduct.product_id)
+    }
+
+    const stockDisponible = await checkStockProduct(
+      orderProduct.product_id,
+      quantityOrder
+    );
+
+    if (stockDisponible > 0) {
+      return await orderDAO.updateQuantityProduct(
+        orderId,
+        orderProduct.product_id,
+        stockDisponible
+      );
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+const deleteProductOrder = async (orderId, productId) => {
+  try {
+    return await orderDAO.deleteProductOrder(
+      orderId,
+      productId,
+    );
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 export default {
-  getOrders, 
+  getOrders,
   getOrderById,
   createOrder,
   deleteOrder,
