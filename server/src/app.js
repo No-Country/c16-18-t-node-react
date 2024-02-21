@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import { options } from "./config/options.config.js";
 import productsRouter from "./routes/products.router.js";
 import authRouter from "./routes/auth.router.js";
-//import bussinesRouter from "./routes/bussines.router.js";
+import bussinesRouter from "./routes/bussines.router.js";
 const app = express();
 
 app.listen(options.server.port, () => {
@@ -22,6 +22,6 @@ app.use(morgan("dev"));
 
 app.use("/api/products", productsRouter);
 app.use("/api", authRouter);
-//app.use("/api/bussines", bussinesRouter);
+app.use("/api/bussines", bussinesRouter);
 
 export default app;

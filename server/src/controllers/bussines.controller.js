@@ -1,6 +1,6 @@
-import { businessModel } from "../models/business.model";
+import businessModel from "../models/business.model";
 
-export const getBusiness = async (req, res) => {
+const getBusiness = async (req, res) => {
   try {
     const business = await businessModel.findById(req.params.id);
     res.status(200).json(business);
@@ -9,7 +9,7 @@ export const getBusiness = async (req, res) => {
   }
 };
 
-export const createBusiness = async (req, res) => {
+const createBusiness = async (req, res) => {
   const business = req.body;
   const newBusiness = new businessModel(business);
   try {
@@ -19,3 +19,5 @@ export const createBusiness = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export default { createBusiness, getBusiness };
