@@ -2,7 +2,7 @@
 const UserProfilePage = () => {
   return (
     <>
-    <section className="flex gap-4">
+    <section className="flex pb-12 gap-6">
       <aside className="flex flex-col gap-8 p-2 w-[20%] bg-darkGreen2 text-grayishGreen4">
         <div className="flex flex-col items-center self-center">
           <img className="w-[90px]" src="/pfp.svg" alt=" " />
@@ -50,11 +50,11 @@ const UserProfilePage = () => {
           </li>
         </ul>
       </aside>
-      <main className="w-[60%] pr-8">
+      <main className="flex flex-col gap-8 w-[60%] pr-8">
         <h1 className="font-extrabold text-[2.625rem] text-darkGreen1">Mi cuenta</h1>
         <section>
-          <h2 className="font-semibold text-2xl">Perfil</h2>
-          <div className="flex items-center justify-between px-4 py-4 text-2xl font-semibold bg-grayishGreen2">
+          <h2 className="mb-2 font-semibold text-2xl">Perfil</h2>
+          <div className="flex items-center justify-between p-4 text-2xl font-semibold bg-grayishGreen2">
             <div className="flex items-center gap-4">
               <svg width="40" height="40" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_192_1021)">
@@ -74,8 +74,40 @@ const UserProfilePage = () => {
           </div>
         </section>
         <section>
-
+          <h2 className="mb-2 font-semibold text-2xl">Soporte técnico</h2>
+          <div className="flex items-center justify-between gap-4 p-4 text-2xl font-semibold bg-grayishGreen2">
+            <div className="flex items-center gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512">
+                <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" fill="#ffffff"/>
+              </svg>
+              <p className="text-white">Términos y condiciones</p>
+            </div>
+            <svg width="25" height="25" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.55984 12L0.839844 11.28L5.79984 6.36C5.87984 6.25333 5.91984 6.13333 5.91984 6C5.91984 5.86667 5.87984 5.74667 5.79984 5.64L0.839844 0.72L1.55984 0L6.47984 4.92C6.77318 5.21333 6.91984 5.57333 6.91984 6C6.91984 6.42667 6.77318 6.78667 6.47984 7.08L1.55984 12Z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div className="flex items-center justify-between gap-4 p-4 text-2xl font-semibold bg-grayishGreen2">
+            <div className="flex items-center gap-4">
+              <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.8025 23.2884C22.9842 25.38 20.5449 26.8355 17.8407 27.4425C15.1365 28.0494 12.3091 27.7759 9.77139 26.662C7.23366 25.5478 5.1186 23.6515 3.73506 21.25C2.35153 18.8485 1.77199 16.0676 2.08109 13.3133C2.38994 10.5588 3.57139 7.97519 5.45288 5.93983C7.33437 3.90447 9.81734 2.52398 12.5391 2M17.4617 2.01054C19.2895 2.36254 21.0203 3.10307 22.537 4.182C24.0538 5.26094 25.3211 6.6531 26.2531 8.26429C27.1853 9.87549 27.7604 11.6681 27.9396 13.5209C28.1188 15.3737 27.898 17.2433 27.2919 19.0033" stroke="white" stroke-width="3.75" stroke-linecap="round"/>
+                <path d="M12.1932 14.0683V11.557C12.1932 10.0342 13.4512 8.7998 15.0031 8.7998C16.5551 8.7998 17.813 10.0342 17.813 11.557V14.0683M11.4908 14.0683H18.5155C19.2938 14.0683 19.9204 14.6949 19.9204 15.4733V19.3369C19.9204 20.1152 19.2938 20.7418 18.5155 20.7418H11.4908C10.7124 20.7418 10.0858 20.1152 10.0858 19.3369V15.4733C10.0858 14.6949 10.7124 14.0683 11.4908 14.0683Z" stroke="white" stroke-width="3.75"/>
+              </svg>
+              <p className="text-white">Políticas de privacidad</p>
+            </div>
+            <svg width="25" height="25" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.55984 12L0.839844 11.28L5.79984 6.36C5.87984 6.25333 5.91984 6.13333 5.91984 6C5.91984 5.86667 5.87984 5.74667 5.79984 5.64L0.839844 0.72L1.55984 0L6.47984 4.92C6.77318 5.21333 6.91984 5.57333 6.91984 6C6.91984 6.42667 6.77318 6.78667 6.47984 7.08L1.55984 12Z" fill="#ffffff"/>
+            </svg>
+          </div>
         </section>
+        <section>
+          <div className="flex items-center  gap-4 p-4 text-2xl font-semibold bg-grayishGreen2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512">
+              <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" fill="#ffffff"/>
+            </svg>
+            <p className="text-white">Cerrar sesión </p>
+          </div>
+        </section>
+
       </main>
     </section>  
   </>
