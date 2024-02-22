@@ -89,8 +89,9 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-4">
-                    {products.slice(0,8).map((product) => <ProductCard key={product.id} {...product}/>)}
+                    <div className="grid grid-cols-4 gap-3">
+                    {products.slice(0,8).map((product) => (<ProductCard key={product.id} {...product}/>)
+                    )}
                     </div>
                     
                 </section>
