@@ -8,7 +8,7 @@ import CartPage from "../Pages/CartPage";
 
 const AppRouter = () => {
   // Aca obtenemos el status en base a un estado global de la aplicacion
-  const status = "not-authorized"; // || 'authorized'
+  // const status = "not-authorized"; 
 
   return (
     <Routes>
