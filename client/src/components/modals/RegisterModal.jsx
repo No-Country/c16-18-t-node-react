@@ -1,4 +1,4 @@
-import RegisterForm from "./Register/RegisterForm";
+import RegisterForm from "../Register/RegisterForm";
 
 const RegisterModal = ({visible, onClose}) => {
 
