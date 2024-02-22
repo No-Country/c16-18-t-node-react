@@ -5,6 +5,7 @@ import Searchbar from "../components/Searchbar.jsx"
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
 
 const LandingPage = () => {
+
     return (
         <>
             <main>
@@ -124,6 +125,7 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
+            
         </>
 
     )
