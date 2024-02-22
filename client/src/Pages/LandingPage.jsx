@@ -1,17 +1,26 @@
 import useSWR from "swr";
-import axios from "axios"
-import ProductCard from "../components/ProductCard.jsx"
-// import products from "../constants/Products.js"
-import Searchbar from "../components/Searchbar.jsx"
-
+import axios from "axios";
+import ProductCard from "../components/ProductCard.jsx";
+import ProductModal from "../components/modals/ProductModal.jsx";
+import Searchbar from "../components/Searchbar.jsx";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+ 
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
 
 const fetcher = url => axios.get(url).then(res => res.data);
 const LandingPage = () => {
     
-    const {data, isLoading, error} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+    const [modalOpen, setModalOpen] = useState(false)
+    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+
+    const modalHandler = () => {
+        setModalOpen(!modalOpen)
+    }
+
     return (
-        <>
+        <>  
+            {modalOpen && createPortal(<ProductModal modalHandler={modalHandler} modalOpen={modalOpen}/>, document.getElementById("product-modal"))}
             <main>
                 <section className="relative flex justify-center items-center overflow-hidden">
                     <img className="w-full" src="/hero.png" alt=" " />
@@ -95,7 +104,7 @@ const LandingPage = () => {
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
                     <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
-                        {!isLoading ? data.payload.map(product => <ProductCard key={product._id} {...product}/>) : null}
+                        {!isLoading ? data.payload.map(product => <ProductCard key={product._id} {...product} modalHandler={modalHandler}/>) : null}
                     </div>
                     
                 </section>

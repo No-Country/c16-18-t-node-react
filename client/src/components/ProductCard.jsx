@@ -2,10 +2,8 @@ import { clsx } from "clsx";
 
 const ProductCard = ({ category, image, rating, price, name, modalHandler}) => {
 
-
   return (
     <>
-    
     <div className="w-[298px] h-[466px] rounded-2xl border border-gray-300 overflow-hidden">
       <div className="w-full h-[31px] flex justify-start ">
         <div
