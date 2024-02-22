@@ -1,6 +1,5 @@
 import ProductCard from "../components/ProductCard.jsx"
 import products from "../constants/Products.js"
-import Header from "../components/Header.jsx"
 import Searchbar from "../components/Searchbar.jsx"
 
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
@@ -8,7 +7,6 @@ const userIsLogged = true; //esto deberia ser un dato para saber si el usuario e
 const LandingPage = () => {
     return (
         <>
-            <Header />
             <main>
                 <section className="relative flex justify-center items-center overflow-hidden">
                     <img className="w-full" src="/hero.png" alt=" " />
@@ -91,10 +89,9 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
-                    <div className="grid grid-cols-4">
-                    {products.map((product) => (
-                        <ProductCard key={product.id} {...product}/>
-                    ))}
+                    <div className="grid grid-cols-4 gap-3git">
+                    {products.slice(0,8).map((product) => (<ProductCard key={product.id} {...product}/>)
+                    )}
                     </div>
                     
                 </section>
@@ -109,51 +106,24 @@ const LandingPage = () => {
                     </div>
                     <div className="grid grid-flow-col auto-cols-fr gap-8">
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="best-prices-icon.svg" alt=" " />
+                            <img src="/best-prices-icon.svg" alt=" " />
                             <p>Los mejores precios y ofertas</p>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="free-delivery-icon.svg" alt=" " />
+                            <img src="/free-delivery-icon.svg" alt=" " />
                             <p>Delivery gratis</p>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="daily-offers-icon.svg" alt=" " />
+                            <img src="/daily-offers-icon.svg" alt=" " />
                             <p>Ofertas diarias</p>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-[#F4F6FA] rounded-xl">
-                            <img src="wide-variety-icon.svg" alt=" " />
+                            <img src="/wide-variety-icon.svg" alt=" " />
                             <p>Amplia variedad</p>
                         </div>
                     </div>
                 </section>
             </main>
-            <footer className="flex justify-between p-12 leading-8">
-                <div>
-                    <p>LOGO</p>
-                </div>
-                <div className="grid grid-flow-col auto-cols-fr gap-24">
-                    <div>
-                        <p className="font-bold">Sobre Nosotros</p>
-                        <ul>
-                            <li>¿Quienes Somos?</li>
-                            <li>Preguntas Frecuentes</li>
-                            <li>Contacto</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="font-bold">Legal</p>
-                        <ul>
-                            <li>Términos y Condiciones</li>
-                            <li>Pólitica de Privacidad</li>
-                        </ul>
-                    </div>
-                    <div className="flex items-start">
-                        <img src="/instagram-icon.svg" alt=" " />
-                        <img src="/facebook-icon.svg" alt=" " />
-                    </div>
-                </div>            
-            
-            </footer>
         </>
 
     )
