@@ -12,7 +12,6 @@ const ProductModal = ({modalOpen, modalHandler}) => {
             const newAmount = amount - 1;
             setAmount(newAmount); 
         }
-
     }
 
     return(
