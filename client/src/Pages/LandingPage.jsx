@@ -1,5 +1,7 @@
+import useSWR from "swr";
+import axios from "axios"
 import ProductCard from "../components/ProductCard.jsx"
-import products from "../constants/Products.js"
+// import products from "../constants/Products.js"
 import Searchbar from "../components/Searchbar.jsx"
 import { useState } from "react";
 import { createPortal } from 'react-dom';
@@ -7,13 +9,19 @@ import ProductModal from "../components/ProductModal.jsx";
 
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
 
+const fetcher = url => axios.get(url).then(res => res.data);
 const LandingPage = () => {
+<<<<<<< HEAD
     const [modalOpen, setModalOpen] = useState(false);
 
     const modalHandler = () => {
         setModalOpen(!modalOpen)
       }
 
+=======
+    
+    const {data, isLoading, error} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+>>>>>>> 236367dc5cdeca426dc87703afd898b6e6da3ada
     return (
         <>  
             {modalOpen && createPortal(<ProductModal modalOpen={modalOpen} modalHandler={modalHandler}/>, document.getElementById("product-modal"))}
@@ -99,9 +107,14 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
+<<<<<<< HEAD
                     <div className="grid grid-cols-4 gap-3">
                     {products.slice(0,8).map((product) => (<ProductCard key={product.id} {...product} modalHandler={modalHandler}/>)
                     )}
+=======
+                    <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
+                        {!isLoading ? data.payload.map(product => <ProductCard key={product._id} {...product}/>) : null}
+>>>>>>> 236367dc5cdeca426dc87703afd898b6e6da3ada
                     </div>
                     
                 </section>

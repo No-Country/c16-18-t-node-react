@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LocationFormModal from "./LocationFormModal";
+import LocationFormModal from "./modals/LocationFormModal";
 
 const Searchbar = () => {
   const [showLocationFormModal, setShowLocationFormModal] = useState(false);
