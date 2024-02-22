@@ -1,12 +1,16 @@
 import { useState } from "react";
 import UserMenu from "./UserMenu.jsx"
 import { NavLink } from "react-router-dom";
+import RegisterModal from "./RegisterModal.jsx";
 
 const isLoggedIn = true; // esto deberia ser info que viene de la base de datos
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const handleCloseRegisterModal = () => {
+        setShowRegisterModal(false)
+    }
 
     return(
         <header className="flex justify-between items-center p-8">
@@ -23,13 +27,14 @@ const Header = () => {
             <div>
                 <div className="flex gap-6 items-center">
                     <img src="/magnifier-icon.svg" alt=" " />
-                    <img src="/cart-icon.svg" alt=" " />
+                    <NavLink to="/cart"><img src="/cart-icon.svg" alt=" " /></NavLink>
+
                 <div>
                 {isLoggedIn ?
                 <div className="relative flex items-center gap-2 group" onMouseEnter={() => {setIsOpen(!isOpen)}} onMouseLeave={() => {setIsOpen(!isOpen)}}>
                     <div className="pl-12">
                         <p className="text-sm text-darkGreen1 font-bold">Julio Rossi</p>
-                        <a className="text-xs text-grayishGreen2 font-bold" href="#"><p>Cerrar Sesión</p></a>
+                        <a onClick={() => setShowRegisterModal(true)} className="text-xs text-grayishGreen2 font-bold" href="#"><p>Cerrar Sesión</p></a>
                     </div>
                     <img src="/pfp.svg" alt=" " />
                     <img className="rotate-90 group-hover:rotate-[270deg]" src="/arrow-icon.svg" alt=" " />
@@ -44,6 +49,7 @@ const Header = () => {
                 </div>
             </div>
         </div>    
+        <RegisterModal visible={showRegisterModal} onClose={handleCloseRegisterModal} />
         </header>
     )
 }
