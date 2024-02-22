@@ -104,7 +104,7 @@ const LandingPage = () => {
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
                     <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
-                        {!isLoading ? data.payload.map(product => <ProductCard key={product._id} {...product} modalHandler={modalHandler}/>) : null}
+                        {data ? data.payload.map(product => <ProductCard key={product._id} {...product} modalHandler={modalHandler}/>) : null}
                     </div>
                     
                 </section>

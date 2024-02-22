@@ -1,4 +1,20 @@
+import { useState } from "react"
+
 const ProductModal = ({modalOpen, modalHandler}) => {
+
+    const [amount, setAmount] = useState(0);
+
+    const amountHandler = (e) => {
+        if(e.target.innerText === "+"){
+            const newAmount = amount + 1;
+            setAmount(newAmount);
+        }else if(amount > 0){
+            const newAmount = amount - 1;
+            setAmount(newAmount); 
+        }
+
+    }
+
     return(
             <div className={`${modalOpen ? 'flex' : 'hidden'} fixed top-0 z-50 justify-center items-center w-full h-full bg-slate-400 bg-opacity-75`}>
                 <div className="relative flex flex-col gap-8 p-10 h-5/6 bg-white rounded-md overflow-y-scroll scroll-smooth">
@@ -19,7 +35,7 @@ const ProductModal = ({modalOpen, modalHandler}) => {
                                 <p className="text-sm font-bold">Disponible en: <span className="text-slate-400 font-semibold">Lorem ipsum, Dolor sit</span></p>
                                 <div className="flex gap-2">
                                     <div className="flex gap-4 items-center py-1 px-2 border-2 border-[#f0f0f0] rounded">
-                                        <button className="text-xl font-bold px-3 py-1 bg-[#f0f0f0] rounded-sm">-</button> 0 <button className="text-xl font-bold px-3 py-1 bg-[#f0f0f0] rounded-sm">+</button>
+                                        <button className="text-xl font-bold px-3 py-1 bg-[#f0f0f0] rounded-sm" onClick={(e) => {amountHandler(e)}}>-</button> {amount} <button className="text-xl font-bold px-3 py-1 bg-[#f0f0f0] rounded-sm" onClick={(e) => {amountHandler(e)}}>+</button>
                                     </div>
                                     <button className="text-white font-semibold bg-avocadoGreen px-8 rounded">Agregar al carrito</button>
                                     <button className="p-2 border-2 border-slate-200 rounded"> 
