@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import { options } from './config/options.config.js';
+import productTypeRouter from './routes/productType.router.js';
 import productRouter from './routes/product.router.js';
 import orderRouter from './routes/order.router.js'
 import authRouter from './routes/auth.router.js';
@@ -23,6 +24,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use("/api/productType", productTypeRouter);
 app.use("/api/bussines", bussinesRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
