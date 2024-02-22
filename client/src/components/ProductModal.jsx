@@ -1,8 +1,8 @@
-const ProductModal = () => {
+const ProductModal = ({modalOpen, modalHandler}) => {
     return(
-            <div className="fixed top-0 z-50 flex justify-center items-center w-full h-full bg-slate-400 bg-opacity-75">
+            <div className={`${modalOpen ? 'flex' : 'hidden'} fixed top-0 z-50 justify-center items-center w-full h-full bg-slate-400 bg-opacity-75`}>
                 <div className="relative flex flex-col gap-8 p-10 h-5/6 bg-white rounded-md overflow-y-scroll scroll-smooth">
-                    <img className="absolute top-4 left-4 w-6" src="/cross-icon.svg" alt=" " />
+                    <img className="absolute top-4 left-4 w-6 cursor-pointer" src="/cross-icon.svg" alt=" " onClick={() => {modalHandler()}} />
                     <div className="grid grid-flow-col gap-12">
                         <img className="w-[400px] h-[400px] object-contain" src="/dummyImg.png" alt=" " />
                         <div className="flex flex-col gap-10">

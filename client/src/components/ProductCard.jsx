@@ -1,6 +1,11 @@
 import { clsx } from "clsx";
-const ProductCard = ({ category, image, rating, price, name }) => {
+
+const ProductCard = ({ category, image, rating, price, name, modalHandler}) => {
+
+
   return (
+    <>
+    
     <div className="w-[298px] h-[466px] rounded-2xl border border-gray-300 overflow-hidden">
       <div className="w-full h-[31px] flex justify-start ">
         <div
@@ -19,7 +24,7 @@ const ProductCard = ({ category, image, rating, price, name }) => {
       </div>
       <div className="w-full h-[435px] flex flex-col justify-between pt-1 pb-8 items-center px-5">
         <div className="w-[246px h-[246px] rounded-lg px-2">
-          <img className="" src={image} alt=" " />
+          <img className="cursor-pointer" src={image} alt=" " onClick={() => {modalHandler()}} />
         </div>
         <div className="w-full flex flex-col items-center gap-1">
           <div className="w-full flex flex-col items-start  gap-0">
@@ -43,6 +48,7 @@ const ProductCard = ({ category, image, rating, price, name }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
