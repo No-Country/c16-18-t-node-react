@@ -1,6 +1,18 @@
 import ProductCard from "../components/ProductCard.jsx"
-import products from "../constants/Products.js"
+// import products from "../constants/Products.js"
 import Searchbar from "../components/Searchbar.jsx"
+
+const response = await fetch(
+    "https://c16-18-t-node-react.onrender.com/api/products",
+    {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    },
+);
+
+const data = await response.json();
+console.log(data)
+
 
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
 
@@ -91,7 +103,7 @@ const LandingPage = () => {
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
                     <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
-                    {products.map((product) => (
+                    {data.payload.map((product) => (
                         <ProductCard key={product.id} {...product}/>
                     ))}
                     </div>
