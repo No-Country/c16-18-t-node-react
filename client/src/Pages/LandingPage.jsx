@@ -104,7 +104,7 @@ const LandingPage = () => {
                     </div>
                     <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
                     {data.payload.map((product) => (
-                        <ProductCard key={product.id} {...product}/>
+                        <ProductCard key={product._id} {...product}/>
                     ))}
                     </div>
                     
