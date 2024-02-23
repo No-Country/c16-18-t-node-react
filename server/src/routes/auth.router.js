@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// import { body, validationResult } from "express-validator";
 import {
 	register,
 	login,

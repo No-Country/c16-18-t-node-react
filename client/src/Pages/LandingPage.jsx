@@ -1,12 +1,26 @@
-import ProductCard from "../components/ProductCard.jsx"
-import products from "../constants/Products.js"
-import Searchbar from "../components/Searchbar.jsx"
-
+import useSWR from "swr";
+import axios from "axios";
+import ProductCard from "../components/ProductCard.jsx";
+import ProductModal from "../components/modals/ProductModal.jsx";
+import Searchbar from "../components/Searchbar.jsx";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+ 
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
 
+const fetcher = url => axios.get(url).then(res => res.data);
 const LandingPage = () => {
+    
+    const [modalOpen, setModalOpen] = useState(false)
+    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+
+    const modalHandler = () => {
+        setModalOpen(!modalOpen)
+    }
+
     return (
-        <>
+        <>  
+            {modalOpen && createPortal(<ProductModal modalHandler={modalHandler} modalOpen={modalOpen}/>, document.getElementById("product-modal"))}
             <main>
                 <section className="relative flex justify-center items-center overflow-hidden">
                     <img className="w-full" src="/hero.png" alt=" " />
@@ -89,10 +103,8 @@ const LandingPage = () => {
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">Productos más vendidos</h2>
                         <a className="flex items-center gap-2" href="#">Ver más <img src="/arrow-icon.svg" alt=" " /></a>
                     </div>
-                    <div className="w-full h-auto flex items-center justify-center flex-wrap gap-y-10 gap-x-16">
-                    {products.map((product) => (
-                        <ProductCard key={product.id} {...product}/>
-                    ))}
+                    <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
+                        {data ? data.payload.slice(0, 8).map(product => <ProductCard key={product._id} {...product} modalHandler={modalHandler}/>) : null}
                     </div>
                     
                 </section>
@@ -125,6 +137,7 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
+            
         </>
 
     )

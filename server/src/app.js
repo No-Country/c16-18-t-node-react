@@ -5,9 +5,11 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
 import { options } from './config/options.config.js';
-import productsRouter from './routes/products.router.js';
+import productRouter from './routes/product.router.js';
+import orderRouter from './routes/order.router.js';
 import authRouter from './routes/auth.router.js';
 import usersRouter from './routes/users.router.js';
+import bussinesRouter from './routes/bussines.router.js';
 
 const app = express();
 
@@ -24,7 +26,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
-app.use('/api/products', productsRouter);
+app.use('/api/bussines', bussinesRouter);
+app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
 app.use('/api', authRouter);
 app.use('/api', usersRouter);
 
