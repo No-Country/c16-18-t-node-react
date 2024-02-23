@@ -4,7 +4,7 @@ import { createAccessToken } from '../helpers/utils/jwt.utils.js';
 
 export const register = async (req, res) => {
 	try {
-		const { email, username, password } = req.body;
+		const { email, username, rol, password } = req.body;
 
 		const userFound = await userModel.findOne({ email });
 		if (userFound) return res.status(400).json(['The email is already in use']);
@@ -13,11 +13,16 @@ export const register = async (req, res) => {
 		const newUser = new userModel({
 			username,
 			email,
+			rol,
 			password: passwordHash,
 		});
 
 		const userSaved = await newUser.save();
-		const token = await createAccessToken({ id: userSaved._id });
+		const token = await createAccessToken({
+			id: userSaved._id,
+			email: userSaved.email,
+			rol: userSaved.rol,
+		});
 
 		res.cookie('token', token);
 
@@ -25,6 +30,7 @@ export const register = async (req, res) => {
 			id: userSaved._id,
 			username: userSaved.username,
 			email: userSaved.email,
+			rol: userSaved.rol,
 			createdAt: userSaved.createdAt,
 			updatedAt: userSaved.updatedAt,
 		});
@@ -34,7 +40,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-	const { email, password } = req.body;
+	const { email, rol, password } = req.body;
 
 	try {
 		const userFound = await userModel.findOne({ email });
@@ -43,7 +49,11 @@ export const login = async (req, res) => {
 		const isMatch = await bcrypt.compare(password, userFound.password);
 		if (!isMatch) return res.status(400).json({ message: 'Incorrect credentials' });
 
-		const token = await createAccessToken({ id: userFound._id });
+		const token = await createAccessToken({
+			id: userFound._id,
+			email: userFound.email,
+			rol: userFound.rol,
+		});
 
 		res.cookie('token', token);
 
@@ -51,6 +61,7 @@ export const login = async (req, res) => {
 			id: userFound._id,
 			username: userFound.username,
 			email: userFound.email,
+			rol: userFound.rol,
 			createdAt: userFound.createdAt,
 			updatedAt: userFound.updatedAt,
 		});
@@ -67,7 +78,8 @@ export const logout = (req, res) => {
 };
 
 // esto es solo para verificar que se cargaron los datos, no va aqui
-export const getUsers = async (req, res) => {
-	const users = await userModel.find();
+/* export const getUsers = async (req, res) => {
+	const users = await usersModel.find();
 	res.json(users);
 };
+ */
