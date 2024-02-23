@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ordersCollection } from "../config/collections.config.js";
+import { businessCollection } from "../config/collections.config.js";
 
 const businessSchema = new mongoose.Schema({
     name:{
@@ -9,4 +9,6 @@ const businessSchema = new mongoose.Schema({
     productos:[]
 });
 
-export const businessModel = mongoose.model(ordersCollection, businessSchema);
+ const businessModel = mongoose.model(businessCollection, businessSchema);
+ 
+ export default businessModel

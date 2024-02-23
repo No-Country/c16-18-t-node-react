@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { options } from '../config/options.config.js';
+import { options } from '../../config/options.config.js';
 
 export function createAccessToken(payload) {
 	console.log(options.token.secretKey);

@@ -1,16 +1,24 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
-	register,
-	login,
-	logout,
-	getUsers,
-} from '../controllers/auth.controller.js';
+  register,
+  login,
+  logout,
+  getUsers,
+} from "../controllers/auth.controller.js";
+
+import {
+  validateRegister,
+  validateLogin,
+} from "../helpers/checks/auth.check.js";
 
 const router = Router();
 
-router.post('/register', register);
-router.post('/login', login);
-router.post('/logout', logout);
+router.post("/register", validateRegister, register);
 
-router.get('/users', getUsers);
+router.post("/login", validateLogin, login);
+
+router.post("/logout", logout);
+
+router.get("/users", getUsers);
+
 export default router;
