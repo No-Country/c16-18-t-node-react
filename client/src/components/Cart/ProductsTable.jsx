@@ -1,7 +1,10 @@
 import cart from "../../constants/Cart";
 import ProductRow from "./ProductRow";
 
-const ProductsTable = () => {
+const ProductsTable = (props) => {
+
+  // const {cart} = props;
+
   return (
     <div className=" mt-12 ml-16 border border-platinum rounded-lg">
     <table className="table-auto ">
@@ -19,7 +22,7 @@ const ProductsTable = () => {
       <tbody>
         {cart.map((product) => {
           return <>
-          <ProductRow key={product.id} product={product} />
+          <ProductRow key={product.index} product={product} />
           <hr className="text-platinum mx-5"/>
           </>
         })}

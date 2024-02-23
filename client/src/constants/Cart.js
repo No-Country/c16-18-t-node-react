@@ -1,6 +1,6 @@
 const cart = [
     {
-      id: 1,
+      sku: 1,
       image: "/product-harinademaiz.svg",
       category: "Sin TACC",
       name: "Harina de maíz",
@@ -8,7 +8,7 @@ const cart = [
       price: 1000.00
     },
     {
-      id: 2,
+      sku: 2,
       image: "/product-granola-vegana.svg",
       category: "Vegano",
       name: "Granola vegana 1kg",
@@ -16,7 +16,7 @@ const cart = [
       price: 950.00
     },
     {
-      id: 3,
+      sku: 3,
       image: "/product-hamburguesas.svg",
       category: "Keto",
       name: "Hamburguesas Amaranto y arroz yamaní",
