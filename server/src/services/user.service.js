@@ -1,4 +1,4 @@
-import UsersDAO from '../dao/users.dao.js';
+import UsersDAO from '../dao/user.dao.js';
 
 const usersDAO = new UsersDAO();
 

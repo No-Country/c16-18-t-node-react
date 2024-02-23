@@ -1,4 +1,4 @@
-import usersModel from '../models/users.model.js';
+import usersModel from '../models/user.model.js';
 
 export default class UsersDAO {
 	get = () => {

@@ -5,7 +5,7 @@ import {
 	getUserById,
 	updateUser,
 	deleteUser,
-} from '../controllers/users.controller.js';
+} from '../controllers/user.controller.js';
 
 import { validateRegister } from '../helpers/checks/auth.check.js';
 import { authRequired } from '../middlewares/validateToken.js';

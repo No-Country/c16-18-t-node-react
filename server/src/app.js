@@ -9,7 +9,7 @@ import productTypeRouter from './routes/productType.router.js';
 import productRouter from './routes/product.router.js';
 import orderRouter from './routes/order.router.js';
 import authRouter from './routes/auth.router.js';
-import usersRouter from './routes/users.router.js';
+import usersRouter from './routes/user.router.js';
 import bussinesRouter from './routes/bussines.router.js';
 
 const app = express();
