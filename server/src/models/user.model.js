@@ -7,6 +7,8 @@ const usersSchema = new mongoose.Schema(
 		email: { type: String, unique: true, required: true },
 		password: { type: String, required: true },
 		rol: { type: String, enum: ['user', 'vendedor', 'admin'], default: 'user' },
+		code: {type: String, required: true},
+		status: {type: String, required:true, default: 'UNVERIFIED'},
 		pedidos: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
