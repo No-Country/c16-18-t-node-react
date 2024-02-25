@@ -12,8 +12,6 @@ export const authRequired = (req, res, next) => {
 		if (err)
 			return res.status(403).json({ message: 'Invalid token', error: err.message });
 
-		console.log('desde el middleware', user);
-
 		req.user = user;
 
 		next();

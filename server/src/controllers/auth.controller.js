@@ -4,14 +4,19 @@ import { createAccessToken } from '../helpers/utils/jwt.utils.js';
 
 export const register = async (req, res) => {
 	try {
-		const { email, username, rol, password } = req.body;
+		const { email, name, lastname, rol, password, confirmPassword } = req.body;
 
 		const userFound = await userModel.findOne({ email });
 		if (userFound) return res.status(400).json(['The email is already in use']);
 
+		if (password !== confirmPassword) {
+			return res.status(400).json({ message: 'Passwords do not macth!' });
+		}
+
 		const passwordHash = await bcrypt.hash(password, 10);
 		const newUser = new userModel({
-			username,
+			name,
+			lastname,
 			email,
 			rol,
 			password: passwordHash,
@@ -28,7 +33,8 @@ export const register = async (req, res) => {
 
 		res.json({
 			id: userSaved._id,
-			username: userSaved.username,
+			name: userSaved.name,
+			lastname: userSaved.lastname,
 			email: userSaved.email,
 			rol: userSaved.rol,
 			createdAt: userSaved.createdAt,
