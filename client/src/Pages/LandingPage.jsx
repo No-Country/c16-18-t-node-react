@@ -12,7 +12,7 @@ const fetcher = url => axios.get(url).then(res => res.data);
 const LandingPage = () => {
     
     const [modalOpen, setModalOpen] = useState(false)
-    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+    const {data, isLoading} = useSWR('http://localhost:3000/api/products', fetcher);
 
     const modalHandler = () => {
         setModalOpen(!modalOpen)
