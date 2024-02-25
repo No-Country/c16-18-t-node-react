@@ -5,10 +5,15 @@ import {
   validateId,
   validateUpdate,
 } from "../helpers/checks/product.check.js";
+import compression from "express-compression";
 
 const router = Router();
 
-router.get("/", productController.getProductController);
+router.get(
+  "/",
+  compression({ brotli: { eneable: true, zlib: {} } }),
+  productController.getProductController
+);
 
 router.get("/:pid", validateId, productController.getProductByIdController);
 
@@ -19,3 +24,4 @@ router.put("/:pid", validateUpdate, productController.updateProductController);
 router.delete("/:pid", validateId, productController.deleteProductController);
 
 export default router;
+ 
