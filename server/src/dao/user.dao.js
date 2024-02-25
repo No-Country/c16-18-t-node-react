@@ -14,7 +14,7 @@ export default class UsersDAO {
 	};
 
 	update = (id, doc) => {
-		return usersModel.findByIdAndUpdate(id, { $set: doc });
+		return usersModel.findByIdAndUpdate(id, { $set: doc }, { new: true });
 	};
 
 	delete = (id) => {
