@@ -18,11 +18,11 @@ const RegisterModal = ({ visible, onClose }) => {
       onClick={handleOnClose}
       className="fixed inset-0 bg-slate-500 bg-opacity-80 backdrop-blur-sm flex justify-center items-center z-10"
     >
-      <div className="bg-white p-2 rounded h-[95vh]">
-        <div className=" flex flex-col justify-center items-center content-center  mx-6">
+      <div className="w-[95%] md:w-[60%] lg:w-[600px]  bg-white p-2 rounded h-[95vh] ">
+        <div className="w-full flex flex-col justify-center items-center content-center ">
           <img
             src="/register.png"
-            className="w-[428px] h-[241px] object-contain mb-4"
+            className="w-[210px] h-[120px] lg:w-[428px] lg:h-[241px] object-contain mb-4"
           ></img>
           <h3 className="text-3xl font-semibold leading-10 text-center mb-6">
             Creá tu cuenta
@@ -103,7 +103,7 @@ const RegisterModal = ({ visible, onClose }) => {
               Continuar
             </button>
           </Formik> */}
-          <p className="font-normal text-xs leading-5 text-center mb-6">
+          <p className="font-normal text-xs leading-5 text-center mb-1 lg:mb-6">
             Al continuar, aceptas nuestra Politica de privacidad y Términos de
             uso.
           </p>

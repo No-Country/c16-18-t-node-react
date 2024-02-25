@@ -1,16 +1,16 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import {  useState } from "react";
+import { useState } from "react";
 import useLogin from "../../hooks/useLogin";
 
 const LoginForm = ({ onClose }) => {
   const [formEnviado, setFormEnviado] = useState(false);
   const [loginError, setLoginError] = useState(null);
-  const {handleLogin} = useLogin();
+  const { handleLogin } = useLogin();
   return (
-<Formik
+    <Formik
       initialValues={{
         email: "",
-        password: ""
+        password: "",
       }}
       validate={(valores) => {
         let errores = {};
@@ -29,32 +29,27 @@ const LoginForm = ({ onClose }) => {
 
         return errores;
       }}
-      onSubmit={async(valores, { resetForm }) => {
-
+      onSubmit={async (valores, { resetForm }) => {
         try {
           const result = await handleLogin(valores);
-        console.log(result)
-        resetForm();
-        setLoginError(null);
-        setFormEnviado(true);
-        setTimeout(() => {
-          setFormEnviado(false);
-          onClose();
-        }, 1000);
-        console.log(valores);
+          console.log(result);
+          resetForm();
+          setLoginError(null);
+          setFormEnviado(true);
+          setTimeout(() => {
+            setFormEnviado(false);
+            onClose();
+          }, 1000);
+          console.log(valores);
         } catch (error) {
-          console.log('Error al iniciar sesion', error.message);
-          setLoginError(error.message)
+          console.log("Error al iniciar sesion", error.message);
+          setLoginError(error.message);
         }
-
-
-        
       }}
     >
       {({ values, handleBlur }) => (
-        <Form className="flex w-[50%] flex-col items-center   lg:w-full sm:w-[80%] sm:pt-3 xs:w-[95%] xs:pt-5 border border-red-500">
-
-          <div className="flex w-[95%] flex-col pl-10   sm:pl-0   xs:pl-0 ">
+        <Form className="flex w-full flex-col items-center  sm:w-[80%] sm:pt-3 px-10 ">
+          <div className="flex w-full flex-col lg:w-[80%]   ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
               htmlFor="email"
@@ -63,7 +58,7 @@ const LoginForm = ({ onClose }) => {
             </label>
             <Field
               type="email"
-              className="w-[95%]    py-1 px-4 border border-gray rounded-lg"
+              className="w-full   py-1 px-4 border border-gray rounded-lg"
               id="email"
               name="email"
               placeholder="name@gmail.com"
@@ -78,7 +73,7 @@ const LoginForm = ({ onClose }) => {
               ></ErrorMessage>
             </div>
           </div>
-          <div className="flex w-[95%] flex-col pl-10   sm:pl-0   xs:pl-0 ">
+          <div className="flex w-full flex-col  lg:w-[80%]  ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
               htmlFor="password"
@@ -87,7 +82,7 @@ const LoginForm = ({ onClose }) => {
             </label>
             <Field
               type="password"
-              className="w-[95%]    py-1 px-4 border border-gray rounded-lg "
+              className="w-full   py-1 px-4 border border-gray rounded-lg "
               id="password"
               name="password"
               placeholder="Ingrese su contraseña"
@@ -103,14 +98,14 @@ const LoginForm = ({ onClose }) => {
             </div>
           </div>
 
-
-          <div className="flex items-center justify-center  lg:self-center">
-                <button type="submit" className="mx-10 mt-4 mb-3 py-4 px-10 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6
-                "
-                >
-                    Iniciar Sesión
-                </button>
-            </div>
+          <div className="w-[70%] lg:w-[55%] flex items-center justify-center  ">
+            <button
+              type="submit"
+              className="mt-4 mb-3 py-4 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6"
+            >
+              Iniciar Sesión
+            </button>
+          </div>
 
           {formEnviado && (
             <p className="flex justify-start text-green-500 text-sm">
@@ -118,14 +113,14 @@ const LoginForm = ({ onClose }) => {
             </p>
           )}
           {loginError && (
-            <p className="flex justify-start text-red-600 text-sm">{loginError}</p>
+            <p className="flex justify-start text-red-600 text-sm">
+              {loginError}
+            </p>
           )}
         </Form>
       )}
     </Formik>
-  )
-    
-  
+  );
 };
 
 export default LoginForm;

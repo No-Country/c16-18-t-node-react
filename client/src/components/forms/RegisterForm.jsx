@@ -69,9 +69,9 @@ const RegisterForm = ({ onClose }) => {
       }}
     >
       {({ values, handleBlur }) => (
-        <Form className="flex w-[50%] flex-col items-center   lg:w-full sm:w-[80%] sm:pt-3 xs:w-[95%] xs:pt-5 ">
-          <div className="flex w-[95%] justify-between  pl-10   sm:pl-0   xs:pl-0">
-            <div className="flex flex-col w-[45%]">
+        <Form className="flex w-full flex-col items-center sm:pt-3 px-6 md:px-2 lg:px-10  ">
+          <div className="flex flex-col w-[95%] sm:flex-row justify-between ">
+            <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start text-lg lg:text-base md:text-sm  font-bold leading-6"
                 htmlFor="name"
@@ -80,7 +80,7 @@ const RegisterForm = ({ onClose }) => {
               </label>
               <Field
                 type="text"
-                className="w-[90%]   py-1 px-4 border border-gray rounded-lg "
+                className="w-full py-1 px-4 border border-gray rounded-lg "
                 id="name"
                 name="name"
                 placeholder="Ingrese su nombre"
@@ -96,7 +96,7 @@ const RegisterForm = ({ onClose }) => {
               </div>
             </div>
 
-            <div className="flex flex-col w-[45%] ">
+            <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
                 htmlFor="surname"
@@ -105,7 +105,7 @@ const RegisterForm = ({ onClose }) => {
               </label>
               <Field
                 type="text"
-                className="w-[90%]    py-1 px-4 border border-gray rounded-lg"
+                className="w-full py-1 px-4 border border-gray rounded-lg"
                 id="surname"
                 name="surname"
                 placeholder="Ingrese su apellido"
@@ -121,32 +121,7 @@ const RegisterForm = ({ onClose }) => {
               </div>
             </div>
           </div>
-
-          {/* <div className="flex w-[95%] flex-col pl-10   sm:pl-0   xs:pl-0 ">
-            <label
-              className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
-              htmlFor="surname"
-            >
-              Apellido
-            </label>
-            <Field
-              type="text"
-              className="w-[95%]    py-1 px-4 border border-gray rounded-lg"
-              id="surname"
-              name="surname"
-              placeholder="Ingrese su apellido"
-              value={values.surname}
-              onBlur={handleBlur}
-            />
-            <div className="w-full h-5">
-              <ErrorMessage
-                className="flex justify-start text-red-600 text-sm"
-                name="surname"
-                component="div"
-              ></ErrorMessage>
-            </div>
-          </div> */}
-          <div className="flex w-[95%] flex-col pl-10   sm:pl-0   xs:pl-0 ">
+          <div className="flex w-[95%] flex-col">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
               htmlFor="email"
@@ -155,7 +130,7 @@ const RegisterForm = ({ onClose }) => {
             </label>
             <Field
               type="email"
-              className="w-[95%]    py-1 px-4 border border-gray rounded-lg"
+              className="w-full    py-1 px-4 border border-gray rounded-lg"
               id="email"
               name="email"
               placeholder="name@gmail.com"
@@ -170,7 +145,7 @@ const RegisterForm = ({ onClose }) => {
               ></ErrorMessage>
             </div>
           </div>
-          <div className="flex w-[95%] flex-col pl-10   sm:pl-0   xs:pl-0 ">
+          <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
               htmlFor="password"
@@ -179,7 +154,7 @@ const RegisterForm = ({ onClose }) => {
             </label>
             <Field
               type="password"
-              className="w-[95%]    py-1 px-4 border border-gray rounded-lg "
+              className="w-full   py-1 px-4 border border-gray rounded-lg "
               id="password"
               name="password"
               placeholder="Ingrese su contraseña"
@@ -195,7 +170,7 @@ const RegisterForm = ({ onClose }) => {
             </div>
           </div>
 
-          <div className="flex w-[95%] flex-col pl-10   sm:pl-0   xs:pl-0 ">
+          <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
               htmlFor="password_confirmation"
@@ -204,7 +179,7 @@ const RegisterForm = ({ onClose }) => {
             </label>
             <Field
               type="password"
-              className="w-[95%]    py-1 px-4 border border-gray rounded-lg "
+              className="w-full py-1 px-4 border border-gray rounded-lg "
               id="password_confirmation"
               name="password_confirmation"
               placeholder="Confirme su contraseña"
@@ -220,10 +195,10 @@ const RegisterForm = ({ onClose }) => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center  lg:self-center">
+          <div className="w-[70%] lg:w-[55%] flex items-center justify-center ">
             <button
               type="submit"
-              className="mx-10 mt-4 mb-3 py-4 px-10 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6"
+              className="mt-4 mb-3 py-4 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6"
             >
               Registrarse
             </button>
