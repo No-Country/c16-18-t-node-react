@@ -11,7 +11,7 @@ const userIsLogged = true; //esto deberia ser un dato para saber si el usuario e
 const fetcher = url => axios.get(url).then(res => res.data);
 const LandingPage = () => {
     
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false);
     const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
 
     const modalHandler = () => {
@@ -106,7 +106,6 @@ const LandingPage = () => {
                     <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
                         {data ? data.payload.slice(0, 8).map(product => <ProductCard key={product._id} {...product} modalHandler={modalHandler}/>) : null}
                     </div>
-                    
                 </section>
                 <section className="flex flex-col gap-8 p-12">
                     <div className="flex">
@@ -137,7 +136,6 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
-            
         </>
 
     )

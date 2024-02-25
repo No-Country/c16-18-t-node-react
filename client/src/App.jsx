@@ -7,7 +7,7 @@ import { AuthProvider } from "./auth/context/AuthProvider"
 const App = () => {
     return (
         <AuthProvider>
-|           <BrowserRouter>
+            <BrowserRouter>
             <Header/>
             <AppRouter/>
             <Footer/>
