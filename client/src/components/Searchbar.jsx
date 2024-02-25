@@ -11,7 +11,6 @@ const Searchbar = ({handleSearch}) => {
     setShowLocationFormModal(false);
   };
 
-
   return (
       <div className="relative">
         <input
@@ -24,7 +23,7 @@ const Searchbar = ({handleSearch}) => {
         />
         <Link to={"/results"}
           className="absolute top-[1px] right-[1px] px-6 py-4 font-bold bg-grayishGreen3 rounded-full"
-          onClick={() => {handleSearch(searchRef, inputValue, setInputValue)}}
+          onClick={() => {handleSearch(inputValue)}}
         >
           Buscar
         </Link>
