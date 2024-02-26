@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR  from "swr";
 import axios from "axios";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductModal from "../components/modals/ProductModal.jsx";
