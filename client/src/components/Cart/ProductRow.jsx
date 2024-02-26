@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../../stores/useCart";
 import Counter from "./Counter";
-import { useEffect } from "react";
 
 const ProductRow = (props) => {
   const { product } = props;
+  const productId = product._id;
 
-  const productSku = product.sku;
-  const { setAmount } = useCart();
+  const [count, setCount] = useState(1);
 
-  const [count, setCount] = useState(0);
+  const { setSubtotal, deleteProductFromCart } = useCart();
+
+  const productSubtotal = product.price * count;
 
   useEffect(() => {
-    setAmount(productSku, count);
-  }, [count, setAmount]);
+    setSubtotal(productSubtotal, productId)
+  }, [productSubtotal, setSubtotal, productId]);
 
-  const context = "ProductRow";
+
+  const handleDelete = () => {
+    deleteProductFromCart(productId);
+    
+  };
+
   return (
     <tr className="w-[832px] h-28 flex justify-between items-center mx-5 my-3">
       <td className="w-80 h-28 flex gap-3 justify-start items-center">
@@ -25,15 +31,17 @@ const ProductRow = (props) => {
       <td className="pl-14">${product.price}</td>
       <td className="pl-16">
         <Counter
-        count={count}
-        setCount={setCount}
-        context={context}
-        product={product}
-        productSku={productSku}
+          count={count}
+          setCount={setCount}
+          productSubtotal={productSubtotal}
         />
       </td>
-      <td className="pl-16">${product.price}</td>
-      <img className="w-6 h-6" src="/cancel.svg"/>
+      <td className="pl-16">
+        ${productSubtotal}
+      </td>
+      <button onClick={handleDelete}>
+        <img className="w-6 h-6" src="/cancel.svg" />
+      </button>
     </tr>
   );
 };

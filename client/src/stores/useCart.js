@@ -1,31 +1,37 @@
 import { create } from "zustand";
 
 export const useCart = create((set) => ({
-  productsCart: [],
-  setProductForOrder: (product) =>
+  cart: [],
+  setCart: (product) =>
     set((state) => ({
-      productsCart: [...state.productsCart, product],
+      cart: [...state.cart, product],
     })),
-  setAmount: (productId, newQuantity) =>
+
+  subtotal: [],
+  setSubtotal: (productSubtotal, productId) =>
     set((state) => {
-      const updatedCart = state.productsCart.map((item) =>
-        item.id === productId ? { ...item, amount: newQuantity } : item,
+      const existingIndex = state.subtotal.findIndex(
+        (item) => item.productId === productId
       );
-      return { productsCart: updatedCart };
+      if (existingIndex !== -1) {
+        const newSubtotal = [...state.subtotal];
+        newSubtotal[existingIndex] = { productId, productSubtotal };
+        return { subtotal: newSubtotal };
+      } else {
+        return { 
+          subtotal: [...state.subtotal, { productId, productSubtotal }],
+        };
+      }
     }),
-  updateExistingProduct: (productId, count) =>
-    set((state) => {
-      const updatedCart = state.productsCart.map((item) =>
-        item.id === productId ? { ...item, amount: count } : item,
-      );
-      console.log(updatedCart);
-      return { productsCart: updatedCart };
-    }),
+
   deleteProductFromCart: (productId) =>
     set((state) => ({
-      productsCart: state.productsCart.filter(
-        (item) => item.id !== productId,
-      ),
+      cart: state.cart.filter((item) => item._id !== productId),
+      subtotal: state.subtotal.filter((item) => item.productId !== productId),
     })),
-  clearCart: () => set({ productsCart: [] }),
+
+
+
+  clearCart: () => set({ cart: [] }),
+  clearSubtotal: ()=> set({ subtotal: []})
 }));

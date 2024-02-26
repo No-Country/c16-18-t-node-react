@@ -1,7 +1,7 @@
 import ProductsTable from "../components/Cart/ProductsTable";
 import SearchBar from "../components/Cart/SearchBar";
 import Summary from "../components/Cart/Summary";
-import Discount from "../components/Cart/Discount"
+import Discount from "../components/Cart/Discount";
 
 const CartPage = () => {
   return (
@@ -11,7 +11,7 @@ const CartPage = () => {
         <ProductsTable />
         <Summary />
       </div>
-      <Discount/>
+      <Discount />
     </section>
   );
 };

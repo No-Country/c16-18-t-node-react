@@ -1,9 +1,9 @@
-import cart from "../../constants/Cart";
+import { useCart } from "../../stores/useCart";
 import ProductRow from "./ProductRow";
 
-const ProductsTable = (props) => {
+const ProductsTable = () => {
 
-  // const {cart} = props;
+  const {cart} = useCart();
 
   return (
     <div className=" mt-12 ml-16 border border-platinum rounded-lg">
@@ -22,7 +22,7 @@ const ProductsTable = (props) => {
       <tbody>
         {cart.map((product) => {
           return <>
-          <ProductRow key={product.index} product={product} />
+          <ProductRow key={product._id} product={product} />
           <hr className="text-platinum mx-5"/>
           </>
         })}
