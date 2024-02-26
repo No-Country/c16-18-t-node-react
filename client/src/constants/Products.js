@@ -81,7 +81,6 @@ const products = [
     rating: 4.5,
     price: 12.99
   },
-  // Add more products here...
 ];
 
 

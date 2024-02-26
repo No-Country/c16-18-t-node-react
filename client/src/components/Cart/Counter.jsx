@@ -1,15 +1,34 @@
-const Counter = () => {
+const Counter = (props) => {
+  const { count, setCount } = props;
+
+  const handleChange = (quantity) => {
+    setCount(count + quantity);
+  };
+
   return (
     <div className="w-32 h-12 border border-platinum rounded-full flex justify-center items-center">
-      <div className="w-10 h-10 rounded-full bg-whiteSmoke flex justify-center items-center">
-        <img src="/remove.svg" alt="remove" />
-      </div>
+      {count === 0 ? (
+        <button className="w-10 h-10 rounded-full bg-gray flex justify-center items-center">
+          <img src="/remove.svg" alt="remove" />
+        </button>
+      ) : (
+        <button
+          className="w-10 h-10 rounded-full bg-whiteSmoke flex justify-center items-center"
+          onClick={() => handleChange(-1)}
+        >
+          <img src="/remove.svg" alt="remove" />
+        </button>
+      )}
+
       <p className="w-10 h-6 text-center text-base leading-6 font-normal font-poppins">
-        3
+        {count}
       </p>
-      <div className="w-10 h-10 rounded-full bg-whiteSmoke flex justify-center items-center">
+      <button
+        className="w-10 h-10 rounded-full bg-whiteSmoke flex justify-center items-center"
+        onClick={() => handleChange(+1)}
+      >
         <img src="/add.svg" alt="add" />
-      </div>
+      </button>
     </div>
   );
 };
