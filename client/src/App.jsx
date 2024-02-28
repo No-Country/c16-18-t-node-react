@@ -21,5 +21,7 @@ const App = () => {
                 <Footer/>
             </BrowserRouter>
         </AuthProvider>
+    )
+}
 
 export default App;
