@@ -13,7 +13,6 @@ const ResultPage = ({handleSearch, searchedInput}) => {
     const [isPriceOpen, setIsPriceOpen] = useState(false);
     const [isShopOpen, setIsShopOpen] = useState(false);
     const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
-    
 
     const searchedData = data ? data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())) : []; 
 
