@@ -12,7 +12,7 @@ const fetcher = url => axios.get(url).then(res => res.data);
 
 const App = () => {
     const [searchedData, setSearchedData] = useState([]); 
-    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+    const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
     console.log(data);
 
     const handleSearch = (searchRef, inputValue, setInputValue) => {
@@ -30,5 +30,7 @@ const App = () => {
                 <Footer/>
             </BrowserRouter>
         </AuthProvider>
+    )
+}
 
 export default App;
