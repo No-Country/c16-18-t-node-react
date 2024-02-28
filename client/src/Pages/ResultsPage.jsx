@@ -1,14 +1,21 @@
 import Searchbar from "../components/Searchbar.jsx"
-import products from "../constants/Products.js"
 import ProductCard from "../components/ProductCard.jsx"
 import { useState } from "react"
+import useSWR from "swr"
+import axios from "axios"
 
-const ResultPage = () => {
+const fetcher = url => axios.get(url).then(res => res.data);
 
-   const [isCatOpen, setIsCatOpen] = useState(false)
-   const [isProdOpen, setIsProdOpen] = useState(false)
-   const [isPriceOpen, setIsPriceOpen] = useState(false)
-   const [isShopOpen, setIsShopOpen] = useState(false)
+const ResultPage = ({handleSearch, searchedInput}) => {
+
+    const [isCatOpen, setIsCatOpen] = useState(false);
+    const [isProdOpen, setIsProdOpen] = useState(false);
+    const [isPriceOpen, setIsPriceOpen] = useState(false);
+    const [isShopOpen, setIsShopOpen] = useState(false);
+    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+    
+
+    const searchedData = data ? data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())) : []; 
 
     return(
         <>
@@ -16,7 +23,7 @@ const ResultPage = () => {
             <section className="flex items-center">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-[2.625rem] max-w-[32ch]">¡Encuentra rápidamente tus productos favoritos o descubre nuevas opciones que se adapten a tus necesidades y gustos!</h1>
-                    <Searchbar/>
+                    <Searchbar handleSearch={handleSearch}/>
                 </div>
                 <img className="relative -right-8" src="/hero2.svg" alt=" " />
             </section>
@@ -125,7 +132,7 @@ const ResultPage = () => {
                     </div>
                 </div>
                 <ul className="grid grid-cols-3 gap-8">
-                    {products.map(product => <li key={product.id}><ProductCard {...product}/></li>)}
+                    {searchedData.map(product => <li key={product._id}><ProductCard {...product}/></li>)}
                 </ul>
             </section>
         </main>

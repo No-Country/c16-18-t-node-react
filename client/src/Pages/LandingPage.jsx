@@ -1,22 +1,22 @@
-import useSWR  from "swr";
-import axios from "axios";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductModal from "../components/modals/ProductModal.jsx";
 import Searchbar from "../components/Searchbar.jsx";
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import useSWR from "swr";
+import axios from "axios";
  
 const userIsLogged = true; //esto deberia ser un dato para saber si el usuario esta loggeado, modificar cuando el login este completo!!
-
 const fetcher = url => axios.get(url).then(res => res.data);
-const LandingPage = () => {
-    
-    const [modalOpen, setModalOpen] = useState(false)
-    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
 
+const LandingPage = ({handleSearch}) => {
+
+    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+    const [modalOpen, setModalOpen] = useState(false);
     const modalHandler = () => {
         setModalOpen(!modalOpen)
     }
+
 
     return (
         <>  
@@ -26,7 +26,7 @@ const LandingPage = () => {
                     <img className="w-full" src="/hero.png" alt=" " />
                     <div className="absolute top-1/2">
                         <h1 className="mb-2 text-[2.625rem] max-w-[20ch]">Hace que tus días, <span className="text-darkGreen1 font-extrabold">tengan más sabor...</span></h1>
-                        <Searchbar />
+                        <Searchbar handleSearch={handleSearch}/>
                     </div>
                 </section>
                 <section className={` ${userIsLogged ? 'block' : 'hidden'} gap-12 p-12`}>
@@ -106,7 +106,6 @@ const LandingPage = () => {
                     <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
                         {data ? data.payload.slice(0, 8).map(product => <ProductCard product={product} key={product._id} {...product} modalHandler={modalHandler}/>) : null}
                     </div>
-                    
                 </section>
                 <section className="flex flex-col gap-8 p-12">
                     <div className="flex">
@@ -137,7 +136,6 @@ const LandingPage = () => {
                     </div>
                 </section>
             </main>
-            
         </>
 
     )
