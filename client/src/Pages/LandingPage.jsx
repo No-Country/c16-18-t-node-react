@@ -22,7 +22,7 @@ const LandingPage = ({handleSearch}) => {
         <>  
             {modalOpen && createPortal(<ProductModal modalHandler={modalHandler} modalOpen={modalOpen}/>, document.getElementById("product-modal"))}
             <main>
-                <section className="relative flex justify-center items-center overflow-hidden border border-red-500">
+                <section className="relative flex justify-center items-center overflow-hidden">
                     <img className="w-full" src="/hero.png" alt=" " />
                     <div className="absolute top-1/2">
                         <h1 className="mb-2 text-[2.625rem] max-w-[20ch]">Hace que tus días, <span className="text-darkGreen1 font-extrabold">tengan más sabor...</span></h1>
