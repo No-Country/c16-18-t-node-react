@@ -37,9 +37,7 @@ export const updateUser = async (req, res) => {
 	const { uid } = req.params;
 
 	try {
-		const userUpdate = await userService.updateUser(uid, req.body, {
-			new: true,
-		});
+		const userUpdate = await userService.updateUser(uid, req.body);
 		res.status(200).send({ status: 'ok', payload: userUpdate });
 	} catch (error) {
 		console.log(error.message);

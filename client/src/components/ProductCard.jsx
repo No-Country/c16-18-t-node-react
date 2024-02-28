@@ -1,6 +1,23 @@
 import { clsx } from "clsx";
+import { useCart } from "../stores/useCart";
+import { useState } from "react";
 
-const ProductCard = ({ category, image, rating, price, name, modalHandler}) => {
+const ProductCard = ({ product, category, image, rating, price, name, modalHandler}) => {
+
+  const {setCart, deleteProductFromCart} = useCart();
+
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const handleAddToCart = () =>{
+    setCart(product);
+    setAddedToCart(true);
+  };
+
+  const handleRemoveFromCart = () =>{
+    deleteProductFromCart(product._id);
+    setAddedToCart(false)
+  }
+
 
   return (
     <>
@@ -39,9 +56,9 @@ const ProductCard = ({ category, image, rating, price, name, modalHandler}) => {
           <div className="w-full items-start">
             <p className="text-[18px] text-black font-bold ">${price}</p>
           </div>
-          <button className="flex items-center justify-center w-[148px] h-[36px]  rounded-[4px] bg-avocadoGreen">
-            <img src="/button-cart.svg" />
-            <p className="px-1 text-sm text-white">Agregar al carrito</p>
+          <button onClick={addedToCart? ()=>handleRemoveFromCart():()=>handleAddToCart()} className={`flex items-center justify-center w-[148px] h-[36px]  rounded-[4px] ${addedToCart?  'bg-yellowGreen text-black' :  'bg-avocadoGreen text-white'}`}>
+            {addedToCart? <img src="/check.svg" /> : <img src="/button-cart.svg" /> }
+            <p className="px-1 text-sm">{addedToCart? 'Agregado' : 'Agregar al carrito'}</p>
           </button>
         </div>
       </div>

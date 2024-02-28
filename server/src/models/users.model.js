@@ -3,11 +3,10 @@ import { usersCollection, ordersCollection } from '../config/collections.config.
 
 const usersSchema = new mongoose.Schema(
 	{
-		name: { type: String, required: true, trim: true },
-		lastname: { type: String, required: true, trim: true },
+		username: { type: String, required: true, trim: true },
 		email: { type: String, unique: true, required: true },
 		password: { type: String, required: true },
-		rol: { type: String, enum: ['user', 'vendedor', 'admin'], default: 'user' },
+		rol: String,
 		pedidos: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
@@ -18,5 +17,5 @@ const usersSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const userModel = mongoose.model(usersCollection, usersSchema);
-export default userModel;
+const usersModel = mongoose.model(usersCollection, usersSchema);
+export default usersModel;
