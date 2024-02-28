@@ -12,9 +12,16 @@ const ResultPage = ({handleSearch, searchedInput}) => {
     const [isProdOpen, setIsProdOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
     const [isShopOpen, setIsShopOpen] = useState(false);
-    const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
-
+    const [category, setCategory] = useState([]);
+    const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+    
     const searchedData = data ? data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())) : []; 
+
+    const categoryHandler = (e) => {
+        const temp = e.target.innerText;
+        const categoryFilter = data.payload.filter((item) => item.category.toLowerCase().includes(temp.toLowerCase()));
+        setCategory(categoryFilter);
+    }
 
     return(
         <>
@@ -34,16 +41,16 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                             <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
                         </div>
                         <div className={`relative top-full mt-4 ${isCatOpen ? 'block' : 'hidden'}`}>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Vegano</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Vegetariano</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Organico</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin T.A.C.C</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin azúcar</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin aditivos</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Bajo en grasas</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Keto</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Bajo en calorias</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin sodio</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Vegano</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Vegetariano</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Organico</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin T.A.C.C</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin azúcar</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin aditivos</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Bajo en grasas</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Keto</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Bajo en calorias</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin sodio</button>
                         </div>
                     </div>
                     <div className="relative flex flex-col py-4 cursor-pointer">
