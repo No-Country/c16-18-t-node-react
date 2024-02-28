@@ -6,7 +6,7 @@ import axios from "axios"
 
 const fetcher = url => axios.get(url).then(res => res.data);
 
-const ResultPage = ({handleSearch, searchInput}) => {
+const ResultPage = ({handleSearch, searchedInput}) => {
 
     const [isCatOpen, setIsCatOpen] = useState(false);
     const [isProdOpen, setIsProdOpen] = useState(false);
@@ -15,7 +15,7 @@ const ResultPage = ({handleSearch, searchInput}) => {
     const {data, isLoading} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
     
 
-    const searchedData = data ? data.payload.filter((item) => item.name.toLowerCase().includes(searchInput.toLowerCase())) : []; 
+    const searchedData = data ? data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())) : []; 
 
     return(
         <>

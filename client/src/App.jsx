@@ -11,13 +11,12 @@ const fetcher = url => axios.get(url).then(res => res.data);
 
 
 const App = () => {
-    const [searchedData, setSearchedData] = useState([]); 
+    const [searchedInput, setSearchedInput] = useState(""); 
     const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
     console.log(data);
 
     const handleSearch = (searchRef, inputValue, setInputValue) => {
-        const temp = data ? data.filter((item) => item.payload.name.contains(inputValue)) : [];
-        setSearchedData(temp)
+        setSearchedInput(inputValue)
         searchRef.current.value = "";
         setInputValue("");
     }
@@ -26,7 +25,7 @@ const App = () => {
         <AuthProvider>
             <BrowserRouter>
                 <Header/>
-                    <AppRouter searchInput={searchInput} handleSearch={handleSearch}/>
+                    <AppRouter searchedInput={searchedInput} handleSearch={handleSearch}/>
                 <Footer/>
             </BrowserRouter>
         </AuthProvider>
