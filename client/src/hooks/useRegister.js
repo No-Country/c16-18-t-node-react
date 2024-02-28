@@ -14,9 +14,9 @@ const useRegister = () => {
         },
         body: JSON.stringify(data)
       })
-      if (!response.ok) {
-        throw new Error('El email ya se encuentra registrado. Por favor, intente con otro email.');
-      }
+      // if (!response.ok) {
+      //   throw new Error('El email ya se encuentra registrado. Por favor, intente con otro email.');
+      // }
       const responseData = await response.json();
       if(responseData.username){
         login(responseData.id, responseData.username);

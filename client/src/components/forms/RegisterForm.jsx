@@ -53,7 +53,8 @@ const RegisterForm = ({ onClose }) => {
           const result = await handleRegister({
             username: name,
             email,
-            password
+            password,
+            confirmPassword: password
           });
           console.log("Result", result);
           resetForm();

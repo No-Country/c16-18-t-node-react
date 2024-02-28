@@ -29,6 +29,7 @@ const LandingPage = ({handleSearch}) => {
                         <Searchbar handleSearch={handleSearch}/>
                     </div>
                 </section>
+                {/* Mobile */}
                 <section className={` ${userIsLogged ? 'block' : 'hidden'} gap-12 p-12`}>
                     <div className="flex justify-between items-center mb-8">
                         <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold" >Comercios cercanos</h2>
