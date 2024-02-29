@@ -113,20 +113,20 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                             <form>
                             <Slider.Root 
                               className="relative flex items-center select-none touch-none w-full h-5"
-                              defaultValue={[0, 50]}
+                              defaultValue={[0, 100]}
                               max={100}
                               step={1}
                               minStepsBetweenThumbs={1}
                             >
-                            <Slider.Track className="bg-red-500 relative grow rounded-full h-[3px]">
-                                <Slider.Range className="absolute bg-red-200 rounded-full h-full" />
+                            <Slider.Track className="relative bg-avocadoGreen grow rounded h-[5px]">
+                                <Slider.Range className="absolute bg-grayishGreen4 rounded-full h-full" />
                             </Slider.Track>
                             <Slider.Thumb
-                                className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-blackA4 rounded-[10px] hover:bg-violet3 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-blackA5"
+                                className="block w-5 h-5 bg-white  outline-none border-2 border-avocadoGreen rounded-full"
                                 aria-label="Volume"
                             />
                             <Slider.Thumb
-                                className="block w-5 h-5 bg-black shadow-[0_2px_10px] shadow-blackA4 rounded-[10px] hover:bg-violet3 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-blackA5"
+                                className="block w-5 h-5 bg-white outline-none border-2 border-avocadoGreen rounded-full"
                                 aria-label="Volume"
                             />
 
