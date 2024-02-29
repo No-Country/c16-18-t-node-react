@@ -184,7 +184,7 @@ const LandingPage = ({ handleSearch }) => {
             <h2 className="text-xl lg:text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
             </h2>
-            <a className="self-end flex lg:items-center gap-2" href="#">
+            <a className="self-end flex lg:items-center gap-2" href="#"/>
 
             <NavLink className="flex items-center gap-2" to="/results">
 
