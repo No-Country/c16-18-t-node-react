@@ -28,6 +28,11 @@ const ResultPage = ({handleSearch, searchedInput}) => {
         }
     }, [data, searchedInput])
 
+    const priceFilter = useCallback(() => {
+       setToRender(data.payload.filter((item) => item.price <= priceValue[1] && item.price >= priceValue[0]))
+    }
+    , [priceValue, data])
+
     useEffect(() => {
         initializerFunction();
     }, [initializerFunction]);
@@ -119,6 +124,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                               step={100}
                               minStepsBetweenThumbs={1}
                               onValueChange={setPriceValue}
+                              onValueCommit={priceFilter}
                             >
                             <Slider.Track className="relative bg-avocadoGreen grow rounded h-[5px]">
                                 <Slider.Range className="absolute bg-grayishGreen4 rounded-full h-full" />
