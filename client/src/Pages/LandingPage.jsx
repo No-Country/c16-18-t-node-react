@@ -8,6 +8,11 @@ import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, FreeMode } from "swiper/modules";
+import "swiper/css/bundle";
+import categories from "../constants/Categories.js";
+
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 const LandingPage = ({ handleSearch }) => {
@@ -112,102 +117,128 @@ const LandingPage = ({ handleSearch }) => {
             </div>
           </div>
         </section>
-        {/* PENDIENTE DE VERSION MOBILE CON CAROUSEL */}
-        <section className="p-12 bg-[#edebee] hidden invisible md:visible md:block">
+
+        <section className="px-2 pb-3 sm:p-12 bg-[#edebee]">
           <h2 className="mb-8 text-2xl text-center md:text-5xl md:text-start text-darkGreen1 font-extrabold">
             Categorias
           </h2>
-          <div className="grid grid-flow-col auto-cols-max justify-evenly text-center">
-            <div>
-              <div className="relative rounded-full">
-                <img src="/noname0.svg" alt=" " />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-center font-extrabold">
-                    SIN T.A.C.C
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="relative rounded-full">
-                <img src="/noname1.svg" alt=" " />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-center font-extrabold">
-                    SIN EXCESO DE AZUCAR
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="relative rounded-full">
-                <img src="/noname.svg" alt=" " />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-center font-extrabold">KETO</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="relative rounded-full">
-                <img src="/noname4.svg" alt=" " />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-center font-extrabold">
-                    VEGANO
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="relative rounded-full">
-                <img src="/noname3.svg" alt=" " />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-center font-extrabold">
-                    ORGÁNICO
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="relative rounded-full">
-                <img src="/noname2.svg" alt=" " />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-center font-extrabold">
-                    DIABÉTICO
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="flex items-center justify-center">
-                <NavLink className="flex items-center gap-2" to="/results">
-                  <img src="/arrow-icon.svg" alt=" " />
-                </NavLink>
-              </div>
-            </div>
+        {/*Categorias version carousel*/}
+          <div >
+            <Swiper
+              loop={true}
+              modules={[A11y, FreeMode]}
+              slidesPerView={4}
+              spaceBetween={40}
+              breakpoints={{
+                640: {
+                  slidesPerView: 6,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 5.5,
+                  spaceBetween: 20,
+                },
+                1280: {
+                  slidesPerView: 6,
+                  spaceBetween: 20,
+                },
+              }}
+            >
+              {categories.map((category) => (
+                <SwiperSlide key={category.name}>
+                  <div
+                    className="relative rounded-full w-20 h-20 lg:w-36 lg:h-36 xl:w-44 xl:h-44 text-xs lg:text-xl"
+                    key={category.name}
+                  >
+                    <img src={category.image} alt=" " />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <p className="text-white text-center font-extrabold">
+                        {category.name}
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
+          {/*Categorias version grid*/}
+          {/* <div className="hidden sm:block">
+            <div className="grid grid-flow-col auto-cols-max justify-evenly text-center ">
+              {categories.map((category) => (
+                <div className="relative rounded-full w-24 h-24 text-xs md:w-44 md:h-44 md:text-xl" key={category.name}>
+                  <img src={category.image} alt=" " />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <p className="text-white text-center font-extrabold">
+                      {category.name}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+          </div> */}
         </section>
-        {/* PENDIENTE DE VERSION MOBILE CON CAROUSEL */}
-        <section className="px-12 py-8 hidden invisible md:visible md:block">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">
+
+        <section className="px-12 py-8 md:visible md:block">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
+            <h2 className="text-xl lg:text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
             </h2>
+            <a className="self-end flex lg:items-center gap-2" href="#">
+
             <NavLink className="flex items-center gap-2" to="/results">
+
               Ver más <img src="/arrow-icon.svg" alt=" " />
             </NavLink>
           </div>
-          <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
-            {data
-              ? data.payload
-                  .slice(0, 8)
-                  .map((product) => (
-                    <ProductCard
-                      product={product}
-                      key={product._id}
-                      {...product}
-                      modalHandler={modalHandler}
-                    />
+          <div className="block xl:hidden justify-center">
+            <Swiper
+              modules={[A11y, FreeMode]}
+              breakpoints={{
+                320: {
+                  slidesPerView: 1.3,
+                  spaceBetween: 30,
+                },
+                640: {
+                  slidesPerView: 2.3,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 2.5,
+                  spaceBetween: 20,
+                },
+              }}
+            >
+              {data
+                ? data.payload.slice(0, 8).map((product) => (
+                    <SwiperSlide key={product._id}>
+                      <ProductCard
+                        product={product}
+                        key={product._id}
+                        {...product}
+                        modalHandler={modalHandler}
+                      />
+                    </SwiperSlide>
                   ))
-              : null}
+                : null}
+            </Swiper>
+          </div>
+
+          <div className="hidden xl:block">
+            <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
+              {data
+                ? data.payload
+                    .slice(0, 8)
+                    .map((product) => (
+                      <ProductCard
+                        product={product}
+                        key={product._id}
+                        {...product}
+                        modalHandler={modalHandler}
+                      />
+                    ))
+                : null}
+            </div>
           </div>
         </section>
         <section className="flex flex-col gap-8 py-12 md:py-0 md:p-12">
