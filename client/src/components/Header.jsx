@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
 import UserMenu from "./UserMenu.jsx";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import RegisterModal from "./modals/RegisterModal.jsx";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
 import LoginModal from "./modals/LoginModal.jsx";
 import { useCart } from "../stores/useCart.js";
+import Sidebar from "./Sidebar.jsx";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -24,19 +27,47 @@ const Header = () => {
   const handleLogout = () => {
     logout(false);
   };
-
   const cartQuantity = cart.length;
+  const handleClick = () => {
+    setIsOpenMenu(!isOpenMenu);
+  };
+
+  const closeSidebar = () => {
+    setIsOpenMenu(false);
+  };
 
   return (
-    <header className="flex justify-between items-center p-8">
+    <header className="flex justify-between items-center p-8 h-20 md:h-28">
+      <div className="md:hidden">
+        <button
+          className=" flex-col justify-center items-center md:hidden "
+          onClick={handleClick}
+        >
+          <span
+            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm  ${
+              isOpenMenu ? "rotate-45 translate-y-1" : "-translate-y-0.5"
+            }`}
+          ></span>
+          <span
+            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+              isOpenMenu ? "opacity-0" : "opacity-100"
+            }`}
+          ></span>
+          <span
+            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+              isOpenMenu ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
+            }`}
+          ></span>
+        </button>
+      </div>
       <div className="flex gap-14">
-        <div>
-          <p>LOGO</p>
-        </div>
-        <nav className="flex gap-6">
+        <Link  to="/">
+          <img src="/nutrimarket-logo.svg" />
+        </Link> 
+        <nav className="hidden md:flex items-center  gap-6">
           <NavLink
             className={({ isActive }) =>
-              `hover:underline ${isActive ? "active" : ""}`
+              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
             }
             to="/"
           >
@@ -44,7 +75,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `hover:underline ${isActive ? "active" : ""}`
+              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
             }
             to="/about"
           >
@@ -52,7 +83,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `hover:underline ${isActive ? "active" : ""}`
+              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
             }
             to="/contact"
           >
@@ -62,7 +93,11 @@ const Header = () => {
       </div>
       <div>
         <div className="flex gap-6 items-center">
-          <img src="/magnifier-icon.svg" alt=" " />
+          <img
+            src="/magnifier-icon.svg"
+            alt=" "
+            className="hidden md:flex "
+          />
           <NavLink to="/cart">
             <img src="/cart-icon.svg" alt=" " />
             {cartQuantity === 0 ? (
@@ -74,7 +109,7 @@ const Header = () => {
             )}
           </NavLink>
 
-          <div>
+          <div className="hidden md:flex">
             {user ? (
               <div
                 className="relative flex items-center gap-2 group"
@@ -106,26 +141,28 @@ const Header = () => {
                 <UserMenu isOpen={isOpen} />
               </div>
             ) : (
-              <div>
-                <a
+              <div className="flex text-xs lg:text-lg">
+                <button
                   onClick={() => setShowLoginModal(true)}
                   className="text-darkGreen1 font-bold"
                   href="#"
                 >
                   Inicia Sesión
-                </a>
-                <a
+                </button>
+                <button
                   onClick={() => setShowRegisterModal(true)}
                   className="px-6 py-3 ml-6 bg-grayishGreen3 rounded-full"
                   href="#"
                 >
                   Registrate
-                </a>
+                </button>
               </div>
             )}
           </div>
         </div>
       </div>
+      {isOpenMenu && <div className="fixed inset-0 bg-black bg-opacity-50" onClick={closeSidebar}></div>}
+       <Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>          
       <RegisterModal
         visible={showRegisterModal}
         onClose={handleCloseRegisterModal}
