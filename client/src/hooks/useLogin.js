@@ -13,15 +13,23 @@ const useLogin = () => {
           },
           body: JSON.stringify(data)
         })
-        if (!response.ok) {
-          throw new Error('Credenciales inválidas');
-        }
+
         const responseData = await response.json();
+        console.log("Respuesta erronea", responseData.message)
+        if (!response.ok) {
+          throw new Error(responseData.message || 'Credenciales inválidas');
+        }
+  
+        if (responseData.error) {
+          throw new Error(responseData.error);
+        }
+        
         if(responseData.username){
           login(responseData.id, responseData.username);
         }
         return responseData;
       } catch (error) {
+        console.log(error)
         throw new Error(error.message);
       }
   

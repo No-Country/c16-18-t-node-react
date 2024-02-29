@@ -1,14 +1,47 @@
 import Searchbar from "../components/Searchbar.jsx"
-import products from "../constants/Products.js"
 import ProductCard from "../components/ProductCard.jsx"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import useSWR from "swr"
+import axios from "axios"
+import * as Slider from '@radix-ui/react-slider'
 
-const ResultPage = () => {
+const fetcher = url => axios.get(url).then(res => res.data);
 
-   const [isCatOpen, setIsCatOpen] = useState(false)
-   const [isProdOpen, setIsProdOpen] = useState(false)
-   const [isPriceOpen, setIsPriceOpen] = useState(false)
-   const [isShopOpen, setIsShopOpen] = useState(false)
+const ResultPage = ({handleSearch, searchedInput}) => {
+
+    const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+
+            
+
+    const [isCatOpen, setIsCatOpen] = useState(false);
+    const [isProdOpen, setIsProdOpen] = useState(false);
+    const [isPriceOpen, setIsPriceOpen] = useState(false);
+    const [isShopOpen, setIsShopOpen] = useState(false);
+    const [toRender, setToRender] = useState([]);
+    const [priceValue, setPriceValue] = useState([0, 2500])
+
+    const initializerFunction = useCallback(() => {
+        if(searchedInput){
+            setToRender(data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())));
+        }else if(data){
+            setToRender(data.payload);
+        }
+    }, [data, searchedInput])
+
+    const priceFilter = useCallback(() => {
+       setToRender(data.payload.filter((item) => item.price <= priceValue[1] && item.price >= priceValue[0]))
+    }
+    , [priceValue, data])
+
+    useEffect(() => {
+        initializerFunction();
+    }, [initializerFunction]);
+ 
+    const categoryHandler = (e) => {
+        const temp = e.target.innerText;
+        const categoryFilter = data.payload.filter((item) => item.category.toLowerCase().includes(temp.toLowerCase()));
+        setToRender(categoryFilter);
+    }
 
     return(
         <>
@@ -16,7 +49,7 @@ const ResultPage = () => {
             <section className="flex items-center">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-[2.625rem] max-w-[32ch]">¡Encuentra rápidamente tus productos favoritos o descubre nuevas opciones que se adapten a tus necesidades y gustos!</h1>
-                    <Searchbar/>
+                    <Searchbar handleSearch={handleSearch}/>
                 </div>
                 <img className="relative -right-8" src="/hero2.svg" alt=" " />
             </section>
@@ -28,16 +61,16 @@ const ResultPage = () => {
                             <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
                         </div>
                         <div className={`relative top-full mt-4 ${isCatOpen ? 'block' : 'hidden'}`}>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Vegano</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Vegetariano</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Organico</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin T.A.C.C</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin azúcar</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin aditivos</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Bajo en grasas</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Keto</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Bajo en calorias</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full">Sin sodio</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Vegano</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Vegetariano</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Organico</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin TACC</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin azúcar</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin aditivos</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Bajo en grasas</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Keto</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Bajo en calorias</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin sodio</button>
                         </div>
                     </div>
                     <div className="relative flex flex-col py-4 cursor-pointer">
@@ -82,10 +115,32 @@ const ResultPage = () => {
                             <h2>Precio</h2>
                             <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
                         </div>
-                        <div className={`relative top-full ${isPriceOpen ? 'block' : 'hidden'} mt-4 w-full bg-transparent`}>
-                            <input className="absolute w-full h-[2px] appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
-                            <input className="absolute w-full h-[2px] bg-grayishGreen4 appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
-                            <p className="mt-4">precio:  <span className="font-semibold">x</span> - <span className="font-semibold">y</span></p>
+                        <div className={`relative top-full ${isPriceOpen ? 'block' : 'hidden'} mt-4 w-full`}>
+                            <form>
+                            <Slider.Root 
+                              className="relative flex items-center select-none touch-none w-full h-5"
+                              value={priceValue}
+                              max={2500}
+                              step={100}
+                              minStepsBetweenThumbs={1}
+                              onValueChange={setPriceValue}
+                              onValueCommit={priceFilter}
+                            >
+                            <Slider.Track className="relative bg-avocadoGreen grow rounded h-[5px]">
+                                <Slider.Range className="absolute bg-grayishGreen4 rounded-full h-full" />
+                            </Slider.Track>
+                            <Slider.Thumb
+                                className="block w-5 h-5 bg-white  outline-none border-2 border-avocadoGreen rounded-full"
+                                aria-label="Volume"
+                            />
+                            <Slider.Thumb
+                                className="block w-5 h-5 bg-white outline-none border-2 border-avocadoGreen rounded-full"
+                                aria-label="Volume"
+                            />
+
+                            </Slider.Root>
+                            </form>
+                            <p className="mt-4">precio:  <span className="font-semibold">{priceValue[0]}</span> - <span className="font-semibold">{priceValue[1]}</span></p>
                         </div>
                     </div>
                     <div className="relative flex flex-col py-4 cursor-pointer">
@@ -125,7 +180,7 @@ const ResultPage = () => {
                     </div>
                 </div>
                 <ul className="grid grid-cols-3 gap-8">
-                    {products.map(product => <li key={product.id}><ProductCard {...product}/></li>)}
+                    {toRender.map(product => <li key={product._id}><ProductCard product={product} category={product.category} image={product.image} rating={product.rating} price={product.price} name={product.name} modalHandler={product.modalHandler}/></li>)}
                 </ul>
             </section>
         </main>

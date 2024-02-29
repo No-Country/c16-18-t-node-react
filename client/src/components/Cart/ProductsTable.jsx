@@ -5,6 +5,7 @@ const ProductsTable = () => {
   const { cart } = useCart();
 
   return (
+
     <div className="w-5/6 lg:w-11/12 mt-12 mx-8 sm:ml-16 border border-platinum rounded-lg">
       <table className="w-full">
         <thead className="font-normal text-sm text-gray border-b border-platinum hidden lg:block">
