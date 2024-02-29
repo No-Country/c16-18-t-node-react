@@ -113,9 +113,9 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                             <form>
                             <Slider.Root 
                               className="relative flex items-center select-none touch-none w-full h-5"
-                              defaultValue={[0, 100]}
-                              max={100}
-                              step={1}
+                              defaultValue={[0, 2500]}
+                              max={2500}
+                              step={100}
                               minStepsBetweenThumbs={1}
                             >
                             <Slider.Track className="relative bg-avocadoGreen grow rounded h-[5px]">
