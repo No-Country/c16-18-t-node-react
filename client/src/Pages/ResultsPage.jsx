@@ -180,7 +180,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                     </div>
                 </div>
                 <ul className="grid grid-cols-3 gap-8">
-                    {toRender.map(product => <li key={product._id}><ProductCard {...product}/></li>)}
+                    {toRender.map(product => <li key={product._id}><ProductCard product={product} category={product.category} image={product.image} rating={product.rating} price={product.price} name={product.name} modalHandler={product.modalHandler}/></li>)}
                 </ul>
             </section>
         </main>
