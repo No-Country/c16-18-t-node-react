@@ -11,6 +11,7 @@ const RegisterForm = ({ onClose }) => {
       initialValues={{
         name: "",
         surname: "",
+        rol:"",
         email: "",
         password: "",
         password_confirmation: "",
@@ -48,13 +49,16 @@ const RegisterForm = ({ onClose }) => {
         return errores;
       }}
       onSubmit={async (valores, { resetForm }) => {
+        console.log(valores)
         try {
-          const {name, email, password } = valores;
+          const {name, email, password, surname, rol, password_confirmation } = valores;
           const result = await handleRegister({
             username: name,
+            lastname: surname,
+            rol,
             email,
             password,
-            confirmPassword: password
+            password_confirmation
           });
           console.log("Result", result);
           resetForm();
@@ -70,14 +74,14 @@ const RegisterForm = ({ onClose }) => {
       }}
     >
       {({ values, handleBlur }) => (
-        <Form className="flex w-full flex-col items-center sm:pt-3 px-6 md:px-2 lg:px-10  ">
+        <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10  ">
           <div className="flex flex-col w-[95%] sm:flex-row justify-between ">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start text-lg lg:text-base md:text-sm  font-bold leading-6"
                 htmlFor="name"
               >
-                Nombre
+                Nombre:
               </label>
               <Field
                 type="text"
@@ -102,7 +106,7 @@ const RegisterForm = ({ onClose }) => {
                 className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
                 htmlFor="surname"
               >
-                Apellido
+                Apellido:
               </label>
               <Field
                 type="text"
@@ -145,6 +149,19 @@ const RegisterForm = ({ onClose }) => {
                 component="div"
               ></ErrorMessage>
             </div>
+          </div>
+          <div className="flex w-[95%] flex-col">
+          <label id="rol" className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm">Tipo de usuario</label>
+          <div role="group" className="w-[80%] flex items-center justify-around" aria-labelledby="rol">
+            <label className="px-1">
+              <Field type="radio" name="rol" value="Comprador" checked/>
+              Comprador
+            </label>
+            <label>
+              <Field type="radio" name="rol" value="Vendedor" />
+              vendedor
+            </label>
+          </div>
           </div>
           <div className="flex w-[95%] flex-col ">
             <label

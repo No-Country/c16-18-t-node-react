@@ -1,9 +1,5 @@
-// import { useContext } from "react";
-// import { AuthContext } from "../auth/context/AuthContext";
-
 
 const useRegister = () => {
-  // const {login} = useContext(AuthContext);
   const handleRegister = async(data) => {
     
     try {
