@@ -5,13 +5,18 @@ import Discount from "../components/Cart/Discount";
 
 const CartPage = () => {
   return (
-    <section>
+    <section className="mb-5 w-full">
       <SearchBar />
-      <div className="flex">
+      <div className="flex flex-col xl:flex-row content-center">
         <ProductsTable />
+
         <Summary />
+
+
+
       </div>
       <Discount />
+
     </section>
   );
 };

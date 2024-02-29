@@ -6,14 +6,14 @@ const Counter = (props) => {
   };
 
   return (
-    <div className="w-32 h-12 border border-platinum rounded-full flex justify-center items-center">
+    <div className="w-24 h-7 sm:w-32 sm:h-12 border border-platinum rounded-full flex justify-center items-center">
       {count === 0 ? (
-        <button className="w-10 h-10 rounded-full bg-gray flex justify-center items-center">
+        <button className="w-5 h-5 sm:w-10 sm:h-10 rounded-full bg-gray flex justify-center items-center">
           <img src="/remove.svg" alt="remove" />
         </button>
       ) : (
         <button
-          className="w-10 h-10 rounded-full bg-whiteSmoke flex justify-center items-center"
+          className="w-5 h-5 sm:w-10 sm:h-10 rounded-full bg-whiteSmoke flex justify-center items-center"
           onClick={() => handleChange(-1)}
         >
           <img src="/remove.svg" alt="remove" />
@@ -24,7 +24,7 @@ const Counter = (props) => {
         {count}
       </p>
       <button
-        className="w-10 h-10 rounded-full bg-whiteSmoke flex justify-center items-center"
+        className="w-5 h-5 sm:w-10 sm:h-10 rounded-full bg-whiteSmoke flex justify-center items-center"
         onClick={() => handleChange(+1)}
       >
         <img src="/add.svg" alt="add" />

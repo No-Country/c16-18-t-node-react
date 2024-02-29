@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import useSWR from "swr";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -174,6 +174,7 @@ const LandingPage = ({ handleSearch }) => {
                   </div>
                 </div>
               ))}
+
             </div>
           </div> */}
         </section>
@@ -184,8 +185,11 @@ const LandingPage = ({ handleSearch }) => {
               Productos más vendidos
             </h2>
             <a className="self-end flex lg:items-center gap-2" href="#">
+
+            <NavLink className="flex items-center gap-2" to="/results">
+
               Ver más <img src="/arrow-icon.svg" alt=" " />
-            </a>
+            </NavLink>
           </div>
           <div className="block xl:hidden justify-center">
             <Swiper

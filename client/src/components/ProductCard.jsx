@@ -3,7 +3,8 @@ import { useCart } from "../stores/useCart";
 import { useState } from "react";
 
 const ProductCard = ({ product, category, image, rating, price, name, modalHandler}) => {
-
+  
+  
   const {setCart, deleteProductFromCart} = useCart();
 
   const [addedToCart, setAddedToCart] = useState(false);
