@@ -11,7 +11,7 @@ const Summary = () => {
 
     const [isExploding, setIsExploding] = useState(false);
 
-    const handlePurchase = () =>{
+    const handlePurchase = () => {
         Swal.fire({
             text: "Tu pedido fue realizado",
             icon: "success",
