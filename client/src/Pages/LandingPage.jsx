@@ -185,7 +185,8 @@ const LandingPage = ({ handleSearch }) => {
             </div>
           </div>
         </section>
-        <section className="px-12 py-8 ">
+        {/* PENDIENTE DE VERSION MOBILE CON CAROUSEL */}
+        <section className="px-12 py-8 hidden invisible md:visible md:block">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
