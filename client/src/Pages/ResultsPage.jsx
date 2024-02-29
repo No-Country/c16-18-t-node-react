@@ -57,7 +57,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                             <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Vegano</button>
                             <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Vegetariano</button>
                             <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Organico</button>
-                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin T.A.C.C</button>
+                            <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin TACC</button>
                             <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin azúcar</button>
                             <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Sin aditivos</button>
                             <button className="text-sm px-4 py-2 m-1 w-fit bg-[#f2f2f2] rounded-full" onClick={(e) => categoryHandler(e)}>Bajo en grasas</button>
