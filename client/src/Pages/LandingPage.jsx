@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import useSWR from "swr";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
@@ -178,9 +178,9 @@ const LandingPage = ({ handleSearch }) => {
             </div>
             <div className="flex items-center justify-center">
               <div className="flex items-center justify-center">
-                <a className="flex items-center gap-2" href="#">
+                <NavLink className="flex items-center gap-2" to="/results">
                   <img src="/arrow-icon.svg" alt=" " />
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -191,9 +191,9 @@ const LandingPage = ({ handleSearch }) => {
             <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
             </h2>
-            <a className="flex items-center gap-2" href="#">
+            <NavLink className="flex items-center gap-2" to="/results">
               Ver más <img src="/arrow-icon.svg" alt=" " />
-            </a>
+            </NavLink>
           </div>
           <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
             {data
