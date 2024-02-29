@@ -18,6 +18,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
     const [isPriceOpen, setIsPriceOpen] = useState(false);
     const [isShopOpen, setIsShopOpen] = useState(false);
     const [toRender, setToRender] = useState([]);
+    const [priceValue, setPriceValue] = useState([0, 2500])
 
     const initializerFunction = useCallback(() => {
         if(searchedInput){
@@ -113,10 +114,11 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                             <form>
                             <Slider.Root 
                               className="relative flex items-center select-none touch-none w-full h-5"
-                              defaultValue={[0, 2500]}
+                              value={priceValue}
                               max={2500}
                               step={100}
                               minStepsBetweenThumbs={1}
+                              onValueChange={setPriceValue}
                             >
                             <Slider.Track className="relative bg-avocadoGreen grow rounded h-[5px]">
                                 <Slider.Range className="absolute bg-grayishGreen4 rounded-full h-full" />
@@ -132,7 +134,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
 
                             </Slider.Root>
                             </form>
-                            <p className="mt-4">precio:  <span className="font-semibold">x</span> - <span className="font-semibold">y</span></p>
+                            <p className="mt-4">precio:  <span className="font-semibold">{priceValue[0]}</span> - <span className="font-semibold">{priceValue[1]}</span></p>
                         </div>
                     </div>
                     <div className="relative flex flex-col py-4 cursor-pointer">
