@@ -26,7 +26,8 @@ export default {
         blueLabel: "#3A82ED",
         gray: "#808080",
         whiteSmoke: "#F2F2F2",
-        platinum: "#E6E6E6"
+        platinum: "#E6E6E6",
+        sidebarWhite: "#F7F7F8"
       },
       backgroundImage: {
         heroImg: "url('./public/hero.png')"

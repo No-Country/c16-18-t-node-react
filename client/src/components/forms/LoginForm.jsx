@@ -32,7 +32,7 @@ const LoginForm = ({ onClose }) => {
       onSubmit={async (valores, { resetForm }) => {
         try {
           const result = await handleLogin(valores);
-          console.log(result);
+          console.log(result.message);
           resetForm();
           setLoginError(null);
           setFormEnviado(true);
@@ -106,17 +106,18 @@ const LoginForm = ({ onClose }) => {
               Iniciar Sesión
             </button>
           </div>
-
-          {formEnviado && (
-            <p className="flex justify-start text-green-500 text-sm">
-              Sesión iniciada exitosamente!
-            </p>
-          )}
-          {loginError && (
-            <p className="flex justify-start text-red-600 text-sm">
-              {loginError}
-            </p>
-          )}
+          <div className="w-full h-10 flex items-center justify-center ">
+            {formEnviado && (
+              <p className="flex justify-start text-green-500 text-sm">
+                Sesión iniciada exitosamente!
+              </p>
+            )}
+            {loginError && (
+              <p className="flex justify-start text-red-600 text-sm">
+                {loginError}
+              </p>
+            )}
+          </div>
         </Form>
       )}
     </Formik>

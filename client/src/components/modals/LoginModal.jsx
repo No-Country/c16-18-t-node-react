@@ -13,13 +13,6 @@ const LoginModal = ({ visible, onClose }) => {
 
   if (!visible) return null;
 
-//   const handleLogin = async(e) => {
-//     login(email);
-//     onClose();
-//     navigate('/');
-
-// }
-
   return (
     <div
       id="container"
@@ -28,6 +21,7 @@ const LoginModal = ({ visible, onClose }) => {
     >
       <div className="w-[90%] md:w-[60%] lg:w-[45%] xl:w-[35%] bg-white p-2 rounded h-[95vh]">
         <div className="w-full flex flex-col justify-center items-center content-center">
+        <img className="absolute top-10 right-10 w-6 cursor-pointer sm:hidden" src="/cross-icon.svg" alt=" " onClick={() => {onClose()}} />
         <img
             src="/register.png"
             className="w-[210px] h-[120px] lg:w-[428px] lg:h-[241px] object-contain mb-4"
@@ -36,32 +30,6 @@ const LoginModal = ({ visible, onClose }) => {
             Iniciar sesión
           </h3>
           <LoginForm onClose={onClose}></LoginForm>
-          {/* <form>
-            <div className="flex">
-              <div className="flex flex-col mr-4">
-                <span className="font-bold text-base leading-6">Email</span>
-                <label className="mt-1 py-2 px-4 border border-gray rounded-lg">
-                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="usuario@gmail.com"></input>
-                </label>
-              </div>
-            </div>
-            <div className="flex flex-col mt-4">
-              <span className="font-bold text-base leading-6">Contraseña</span>
-              <label className="mt-1 py-2 px-4 border border-gray rounded-lg flex justify-between">
-                <input type="password" value={password} onChange={e => setpassword(e.target.value)} placeholder="********" />
-                <button >
-                  <img src="/visibility.svg"></img>
-                </button>
-              </label>
-            </div>
-            <button
-              type="submit"
-              className="mx-10 mt-12 mb-3 py-4 px-10 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6"
-              onClick={handleLogin}
-            >
-              Continuar
-            </button>
-          </form> */}
         </div>
       </div>
     </div>
