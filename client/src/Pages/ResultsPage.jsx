@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard.jsx"
 import { useCallback, useEffect, useState } from "react"
 import useSWR from "swr"
 import axios from "axios"
+import * as Slider from '@radix-ui/react-slider'
 
 const fetcher = url => axios.get(url).then(res => res.data);
 
@@ -108,9 +109,29 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                             <h2>Precio</h2>
                             <img className="rotate-90" src="/arrow-icon.svg" alt=" " />
                         </div>
-                        <div className={`relative top-full ${isPriceOpen ? 'block' : 'hidden'} mt-4 w-full bg-transparent`}>
-                            <input className="absolute w-full h-[2px] appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
-                            <input className="absolute w-full h-[2px] bg-grayishGreen4 appearance-none pointer-events-none" type="range" min="0" max="99999" step="100"/>
+                        <div className={`relative top-full ${isPriceOpen ? 'block' : 'hidden'} mt-4 w-full`}>
+                            <form>
+                            <Slider.Root 
+                              className="relative flex items-center select-none touch-none w-full h-5"
+                              defaultValue={[0, 50]}
+                              max={100}
+                              step={1}
+                              minStepsBetweenThumbs={1}
+                            >
+                            <Slider.Track className="bg-red-500 relative grow rounded-full h-[3px]">
+                                <Slider.Range className="absolute bg-red-200 rounded-full h-full" />
+                            </Slider.Track>
+                            <Slider.Thumb
+                                className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-blackA4 rounded-[10px] hover:bg-violet3 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-blackA5"
+                                aria-label="Volume"
+                            />
+                            <Slider.Thumb
+                                className="block w-5 h-5 bg-black shadow-[0_2px_10px] shadow-blackA4 rounded-[10px] hover:bg-violet3 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-blackA5"
+                                aria-label="Volume"
+                            />
+
+                            </Slider.Root>
+                            </form>
                             <p className="mt-4">precio:  <span className="font-semibold">x</span> - <span className="font-semibold">y</span></p>
                         </div>
                     </div>
