@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import UserMenu from "./UserMenu.jsx";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import RegisterModal from "./modals/RegisterModal.jsx";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
 import LoginModal from "./modals/LoginModal.jsx";
@@ -40,7 +40,7 @@ const Header = () => {
     <header className="flex justify-between items-center p-8 h-20 md:h-28">
       <div className="md:hidden">
         <button
-          className=" flex-col justify-center items-center md:hidden p-4"
+          className=" flex-col justify-center items-center md:hidden "
           onClick={handleClick}
         >
           <span
@@ -61,13 +61,13 @@ const Header = () => {
         </button>
       </div>
       <div className="flex gap-14">
-        <div>
+        <Link  to="/">
           <img src="/nutrimarket-logo.svg" />
-        </div>
-        <nav className="hidden md:flex   gap-6">
+        </Link> 
+        <nav className="hidden md:flex items-center  gap-6">
           <NavLink
             className={({ isActive }) =>
-              `hover:underline ${isActive ? "active" : ""}`
+              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
             }
             to="/"
           >
@@ -75,7 +75,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `hover:underline ${isActive ? "active" : ""}`
+              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
             }
             to="/about"
           >
@@ -83,7 +83,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `hover:underline ${isActive ? "active" : ""}`
+              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
             }
             to="/contact"
           >
@@ -96,7 +96,7 @@ const Header = () => {
           <img
             src="/magnifier-icon.svg"
             alt=" "
-            className="hidden md:flex"
+            className="hidden md:flex "
           />
           <NavLink to="/cart">
             <img src="/cart-icon.svg" alt=" " />
@@ -141,7 +141,7 @@ const Header = () => {
                 <UserMenu isOpen={isOpen} />
               </div>
             ) : (
-              <div>
+              <div className="flex text-xs lg:text-lg">
                 <button
                   onClick={() => setShowLoginModal(true)}
                   className="text-darkGreen1 font-bold"

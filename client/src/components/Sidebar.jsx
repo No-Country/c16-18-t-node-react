@@ -20,21 +20,21 @@ const Sidebar = ({isOpenMenu, onClose, setShowLoginModal, setShowRegisterModal})
         onClose();
       } 
   return (
-    <div className={`fixed inset-y-0 left-0 z-50 w-full max-h-min mt-20 bg-sidebarWhite bg-opacity-90 text-white p-4 transform ${isOpenMenu ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'}`} >
+    <div className={`fixed inset-y-0 left-0 z-50 w-full max-h-min mt-20 bg-sidebarWhite bg-opacity-90 text-darkGreen1 p-4 transform ${isOpenMenu ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'}`} >
       <div className="flex justify-end">
       </div>
       <ul className="mt-4">
         <li className="mb-2">
-          <Link to="/" className="block p-2 font-bold text-darkGreen1 hover:bg-gray-700 w-fit " onClick={() => onClose()}>Home</Link>
+          <Link to="/" className="block p-2 font-bold sm:font-extrabold sm:text-2xl text-darkGreen1 hover:underline w-fit " onClick={() => onClose()}>Home</Link>
         </li>
         <li className="mb-2">
-          <Link to="about" className="block p-2 font-bold text-darkGreen1 hover:bg-gray-700 w-fit" onClick={() => onClose()}>Sobre Nosotros</Link>
+          <Link to="about" className="block p-2 font-bold sm:font-extrabold sm:text-2xl text-darkGreen1 hover:underline w-fit" onClick={() => onClose()}>Sobre Nosotros</Link>
         </li>
         <li className="mb-2">
-          <Link to="/profile" className="block p-2 font-bold text-darkGreen1  hover:bg-gray-700 w-fit" onClick={() => onClose()}>Perfil</Link>
+          <Link to="/profile" className="block p-2 font-bold sm:font-extrabold sm:text-2xl text-darkGreen1  hover:underline w-fit" onClick={() => onClose()}>Perfil</Link>
         </li>
         <li className="mb-2">
-          <Link to="/contact" className="block p-2 font-bold text-darkGreen1  hover:bg-gray-700 w-fit" onClick={() => onClose()}>Contacto</Link>
+          <Link to="/contact" className="block p-2 font-bold sm:font-extrabold sm:text-2xl text-darkGreen1  hover:underline w-fit" onClick={() => onClose()}>Contacto</Link>
         </li>
       </ul>
       <div className="w-full h-32 flex flex-col items-center justify-around ">
