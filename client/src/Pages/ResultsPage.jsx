@@ -1,6 +1,6 @@
 import Searchbar from "../components/Searchbar.jsx"
 import ProductCard from "../components/ProductCard.jsx"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import useSWR from "swr"
 import axios from "axios"
 
@@ -8,19 +8,32 @@ const fetcher = url => axios.get(url).then(res => res.data);
 
 const ResultPage = ({handleSearch, searchedInput}) => {
 
+    const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
+
+            
+
     const [isCatOpen, setIsCatOpen] = useState(false);
     const [isProdOpen, setIsProdOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
     const [isShopOpen, setIsShopOpen] = useState(false);
-    const [category, setCategory] = useState([]);
-    const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
-    
-    const searchedData = data ? data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())) : []; 
+    const [toRender, setToRender] = useState([]);
 
+    const initializerFunction = useCallback(() => {
+        if(searchedInput){
+            setToRender(data.payload.filter((item) => item.name.toLowerCase().includes(searchedInput.toLowerCase())));
+        }else if(data){
+            setToRender(data.payload);
+        }
+    }, [data, searchedInput])
+
+    useEffect(() => {
+        initializerFunction();
+    }, [initializerFunction]);
+ 
     const categoryHandler = (e) => {
         const temp = e.target.innerText;
         const categoryFilter = data.payload.filter((item) => item.category.toLowerCase().includes(temp.toLowerCase()));
-        setCategory(categoryFilter);
+        setToRender(categoryFilter);
     }
 
     return(
@@ -138,7 +151,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                     </div>
                 </div>
                 <ul className="grid grid-cols-3 gap-8">
-                    {searchedData.map(product => <li key={product._id}><ProductCard {...product}/></li>)}
+                    {toRender.map(product => <li key={product._id}><ProductCard {...product}/></li>)}
                 </ul>
             </section>
         </main>

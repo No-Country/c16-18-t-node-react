@@ -238,7 +238,7 @@ const LandingPage = ({ handleSearch }) => {
               alt=" "
             />
           </div>
-          <div className="flex flex-col items-center px-12  w-full md:grid md:grid-flow-col md:auto-cols-fr md:gap-8 md:py-12 md:px-4">
+          <div className="flex flex-col items-center px-12 w-full md:grid md:grid-flow-col md:auto-cols-fr md:gap-8 md:py-12 md:px-4">
             <div className="w-full mt-2 flex items-center justify-center gap-4 p-4 md:mt-0  bg-[#F4F6FA] rounded-xl">
               <img src="/best-prices-icon.svg" alt=" " />
               <p>Los mejores precios y ofertas</p>
