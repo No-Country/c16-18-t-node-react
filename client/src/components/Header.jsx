@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { createPortal } from "react-dom";
 import UserMenu from "./UserMenu.jsx";
 import { Link, NavLink } from "react-router-dom";
 import RegisterModal from "./modals/RegisterModal.jsx";
@@ -162,12 +163,12 @@ const Header = () => {
         </div>
       </div>
       {isOpenMenu && <div className="fixed inset-0 bg-black bg-opacity-50" onClick={closeSidebar}></div>}
-       <Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>          
-      <RegisterModal
-        visible={showRegisterModal}
-        onClose={handleCloseRegisterModal}
-      />
-      <LoginModal visible={showLoginModal} onClose={handleCloseLoginModal} />
+      {isOpenMenu && createPortal(<Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>, document.getElementById("sidebar"))}
+      {showRegisterModal && createPortal(<RegisterModal visible={showRegisterModal} onClose={handleCloseRegisterModal}/>, document.getElementById("register-modal"))}
+      {showLoginModal && createPortal(<LoginModal visible={showLoginModal} onClose={handleCloseLoginModal}/>, document.getElementById("login-modal"))}
+      {/*<Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>          
+      <RegisterModal visible={showRegisterModal}onClose={handleCloseRegisterModal}/>
+            <LoginModal visible={showLoginModal} onClose={handleCloseLoginModal} />*/}
     </header>
   );
 };

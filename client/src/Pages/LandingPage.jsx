@@ -7,10 +7,9 @@ import useSWR from "swr";
 import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, FreeMode } from "swiper/modules";
-import "swiper/css/bundle";
+import "swiper/css/bundle"; 
 import categories from "../constants/Categories.js";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
@@ -161,7 +160,7 @@ const LandingPage = ({ handleSearch }) => {
               ))}
             </Swiper>
           </div>
-          {/*Categorias version grid*/}
+          {/*Categorias version grid*/} 
           {/* <div className="hidden sm:block">
             <div className="grid grid-flow-col auto-cols-max justify-evenly text-center ">
               {categories.map((category) => (
