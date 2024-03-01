@@ -11,12 +11,12 @@ export const getUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
 	try {
-		if (req.user.rol !== 'admin') {
+		/* 	if (req.user.rol !== 'admin') {
 			return res.status(403).send({
 				status: 'error',
 				payload: 'You do not have permission to perform this action',
 			});
-		}
+		} */
 		const user = await userService.getUsersById(req.params.uid);
 		res.status(200).send({ status: 'ok', payload: user });
 	} catch (error) {
