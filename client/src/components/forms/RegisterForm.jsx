@@ -10,10 +10,10 @@ const RegisterForm = ({ onClose }) => {
     <Formik
       initialValues={{
         name: "",
-        surname: "",
+        lastname: "",
         email: "",
         password: "",
-        password_confirmation: "",
+        confirmPassword: "",
       }}
       validate={(valores) => {
         let errores = {};
@@ -22,10 +22,10 @@ const RegisterForm = ({ onClose }) => {
         } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.name)) {
           errores.name = "Sólo inserte letras y espacios";
         }
-        if (!valores.surname) {
-          errores.surname = "Apellido inválido. Mín 3 caract.";
-        } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.surname)) {
-          errores.surname = "Sólo inserte letras y espacios";
+        if (!valores.lastname) {
+          errores.lastname = "Apellido inválido. Mín 3 caract.";
+        } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.lastname)) {
+          errores.lastname = "Sólo inserte letras y espacios";
         }
         if (!valores.email) {
           errores.email = "Ingrese un email válido";
@@ -39,19 +39,20 @@ const RegisterForm = ({ onClose }) => {
         } else if (valores.password.length < 6) {
           errores.password = "Contraseña corta. Caracteres mínimos: 6";
         }
-        if (!valores.password_confirmation) {
-          errores.password_confirmation = "Confirme su contraseña";
-        } else if (valores.password !== valores.password_confirmation) {
-          errores.password_confirmation = "No coincide con su contraseña";
+        if (!valores.confirmPassword) {
+          errores.confirmPassword = "Confirme su contraseña";
+        } else if (valores.password !== valores.confirmPassword) {
+          errores.confirmPassword = "No coincide con su contraseña";
         }
 
         return errores;
       }}
       onSubmit={async (valores, { resetForm }) => {
         try {
-          const {name, email, password } = valores;
+          const {name, lastname, email, password } = valores;
           const result = await handleRegister({
-            username: name,
+            name: name,
+            lastname: lastname,
             email,
             password,
             confirmPassword: password
@@ -100,23 +101,23 @@ const RegisterForm = ({ onClose }) => {
             <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
-                htmlFor="surname"
+                htmlFor="lastname"
               >
                 Apellido
               </label>
               <Field
                 type="text"
                 className="w-full py-1 px-4 border border-gray rounded-lg"
-                id="surname"
-                name="surname"
+                id="lastname"
+                name="lastname"
                 placeholder="Ingrese su apellido"
-                value={values.surname}
+                value={values.lastname}
                 onBlur={handleBlur}
               />
               <div className="w-full h-5">
                 <ErrorMessage
                   className="flex justify-start text-red-600 text-sm"
-                  name="surname"
+                  name="lastname"
                   component="div"
                 ></ErrorMessage>
               </div>
@@ -174,23 +175,23 @@ const RegisterForm = ({ onClose }) => {
           <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
-              htmlFor="password_confirmation"
+              htmlFor="confirmPassword"
             >
               Confirmación
             </label>
             <Field
               type="password"
               className="w-full py-1 px-4 border border-gray rounded-lg "
-              id="password_confirmation"
-              name="password_confirmation"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder="Confirme su contraseña"
-              value={values.password_confirmation}
+              value={values.confirmPassword}
               onBlur={handleBlur}
             />
             <div className="w-full h-5">
               <ErrorMessage
                 className="flex justify-start text-red-600 text-sm"
-                name="password_confirmation"
+                name="confirmPassword"
                 component="div"
               ></ErrorMessage>
             </div>

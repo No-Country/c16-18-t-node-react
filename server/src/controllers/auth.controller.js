@@ -6,6 +6,7 @@ import {
 } from "../helpers/utils/jwt.utils.js";
 import emailService from "../services/email.service.js";
 import { v4 } from "uuid";
+import businessService  from "../services/business.service.js";
 
 export const register = async (req, res) => {
   try {
@@ -32,6 +33,14 @@ export const register = async (req, res) => {
     });
 
     const userSaved = await newUser.save();
+
+    if (rol === "Vendedor") {
+      const result = await businessService.createBusiness(userSaved._id);
+      if(!result){
+        throw new Error(result.err)
+      }
+    }
+
     const token = await createAccessToken({
       id: userSaved._id,
       email: userSaved.email,
@@ -127,7 +136,7 @@ export const login = async (req, res) => {
 
     res.json({
       id: userFound._id,
-      username: userFound.username,
+      name: userFound.name,
       email: userFound.email,
       rol: userFound.rol,
       avatar: userFound.avatar,

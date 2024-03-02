@@ -6,7 +6,7 @@ const useLogin = () => {
       const {login} = useContext(AuthContext);
     const handleLogin = async(data) => {
       try {
-        const response = await fetch('https://c16-18-t-node-react.onrender.com/api/login', {
+        const response = await fetch('http://localhost:3000/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -23,9 +23,10 @@ const useLogin = () => {
         if (responseData.error) {
           throw new Error(responseData.error);
         }
-        
-        if(responseData.username){
-          login(responseData.id, responseData.username);
+        console.log("Respuesta erronea", responseData.rol)
+
+        if(responseData.name){
+          login(responseData.id, responseData.name, responseData.rol, responseData.email);
         }
         return responseData;
       } catch (error) {

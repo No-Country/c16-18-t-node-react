@@ -1,12 +1,8 @@
 import { Router } from "express";
-import {
-  getBusiness,
-  createBusiness,
-} from "../controllers/bussines.controller.js";
+import businessController from "../controllers/business.controller.js";
 
 const router = Router();
 
-router.post("/", createBusiness);
-router.get("/:id", getBusiness);
+router.get("/", businessController.getBusinessController);
 
 export default router;
