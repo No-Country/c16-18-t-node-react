@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { usersCollection, ordersCollection } from '../config/collections.config.js';
+import { options } from "../config/options.config.js";
 
 const defaultAvatars = {
 	cliente:
@@ -30,12 +30,12 @@ const usersSchema = new mongoose.Schema(
 		pedidos: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
-				ref: ordersCollection,
+				ref: options.collections.ordersCollection,
 			},
 		],
 	},
 	{ timestamps: true }
 );
 
-const userModel = mongoose.model(usersCollection, usersSchema);
+const userModel = mongoose.model(options.collections.usersCollection, usersSchema);
 export default userModel;

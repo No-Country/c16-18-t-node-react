@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
-import { productsCollection } from "../config/collections.config.js";
+import { options } from "../config/options.config.js";
+
 
 const productSchema = new mongoose.Schema({
   images: { type: Array, default: [] },
@@ -20,7 +20,5 @@ const productSchema = new mongoose.Schema({
   image: {type: String}
 }, { timestamps: {} });
 
-productSchema.plugin(mongoosePaginate);
-
-const productModel = mongoose.model(productsCollection, productSchema);
+const productModel = mongoose.model(options.collections.productsCollection, productSchema);
 export default productModel;

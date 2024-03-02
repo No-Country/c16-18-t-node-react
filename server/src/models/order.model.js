@@ -1,19 +1,15 @@
 import mongoose from "mongoose";
-import {
-  businessCollection,
-  usersCollection,
-  ordersCollection,
-} from "../config/collections.config.js";
+import { options } from "../config/options.config.js";
 
 const ordersSchema = new mongoose.Schema({
   numeroOrden: String,
   negocio: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: businessCollection,
+    ref: options.collections.businessCollection,
   },
   usuario: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: usersCollection,
+    ref: options.collections.usersCollection,
   },
   products: [],
   precioTotal: Number,
@@ -24,5 +20,5 @@ const ordersSchema = new mongoose.Schema({
   },
 });
 
-const orderModel = mongoose.model(ordersCollection, ordersSchema);
+const orderModel = mongoose.model(options.collections.ordersCollection, ordersSchema);
 export default orderModel;
