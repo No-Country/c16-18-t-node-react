@@ -38,27 +38,12 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between items-center p-8 h-20 md:h-28">
+    <header className="fixed z-40 flex justify-between items-center p-8 bg-white w-full">
       <div className="md:hidden">
-        <button
-          className=" flex-col justify-center items-center md:hidden "
-          onClick={handleClick}
-        >
-          <span
-            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm  ${
-              isOpenMenu ? "rotate-45 translate-y-1" : "-translate-y-0.5"
-            }`}
-          ></span>
-          <span
-            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
-              isOpenMenu ? "opacity-0" : "opacity-100"
-            }`}
-          ></span>
-          <span
-            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-              isOpenMenu ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
-            }`}
-          ></span>
+        <button className=" flex-col justify-center items-center md:hidden " onClick={handleClick}>
+          <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm  ${ isOpenMenu ? "rotate-45 translate-y-1" : "-translate-y-0.5"}`}></span>
+          <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${isOpenMenu ? "opacity-0" : "opacity-100"}`}></span>
+          <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpenMenu ? "-rotate-45 -translate-y-1" : "translate-y-0.5"}`}></span>
         </button>
       </div>
       <div className="flex gap-14">
@@ -66,39 +51,13 @@ const Header = () => {
           <img src="/nutrimarket-logo.svg" />
         </Link> 
         <nav className="hidden md:flex items-center  gap-6">
-          <NavLink
-            className={({ isActive }) =>
-              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
-            }
-            to="/"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
-            }
-            to="/about"
-          >
-            Sobre Nosotros
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
-            }
-            to="/contact"
-          >
-            Contacto
-          </NavLink>
+          <NavLink className={({ isActive }) => `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`} to="/">Home</NavLink>
+          <NavLink className={({ isActive }) => `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`} to="/about">Sobre Nosotros</NavLink>
+          <NavLink className={({ isActive }) => `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`} to="/contact">Contacto</NavLink>
         </nav>
       </div>
       <div>
         <div className="flex gap-6 items-center">
-          <img
-            src="/magnifier-icon.svg"
-            alt=" "
-            className="hidden md:flex "
-          />
           <NavLink to="/cart">
             <img src="/cart-icon.svg" alt=" " />
             {cartQuantity === 0 ? (
@@ -109,7 +68,6 @@ const Header = () => {
               </span>
             )}
           </NavLink>
-
           <div className="hidden md:flex">
             {user ? (
               <div
@@ -162,13 +120,9 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isOpenMenu && <div className="fixed inset-0 bg-black bg-opacity-50" onClick={closeSidebar}></div>}
-      {isOpenMenu && createPortal(<Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>, document.getElementById("sidebar"))}
       {showRegisterModal && createPortal(<RegisterModal visible={showRegisterModal} onClose={handleCloseRegisterModal}/>, document.getElementById("register-modal"))}
       {showLoginModal && createPortal(<LoginModal visible={showLoginModal} onClose={handleCloseLoginModal}/>, document.getElementById("login-modal"))}
-      {/*<Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>          
-      <RegisterModal visible={showRegisterModal}onClose={handleCloseRegisterModal}/>
-            <LoginModal visible={showLoginModal} onClose={handleCloseLoginModal} />*/}
+      <Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>
     </header>
   );
 };
