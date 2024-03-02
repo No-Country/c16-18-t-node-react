@@ -116,7 +116,7 @@ export const login = async (req, res) => {
     });
 
     if (userFound.status !== "VERIFIED") {
-      return res.json({ status: "pendient", message: "La cuenta se encuentra sin verificar" });
+      throw new Error("La cuenta se encuentra sin verificar");
     }
 
     res.cookie("token", token, {
