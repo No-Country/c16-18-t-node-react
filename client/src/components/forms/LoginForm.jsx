@@ -32,7 +32,7 @@ const LoginForm = ({ onClose }) => {
       onSubmit={async (valores, { resetForm }) => {
         try {
           const result = await handleLogin(valores);
-          console.log(result.message);
+          console.log(result);
           resetForm();
           setLoginError(null);
           setFormEnviado(true);
