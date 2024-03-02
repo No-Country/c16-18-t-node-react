@@ -1,4 +1,3 @@
-import { clsx } from "clsx";
 import { useCart } from "../stores/useCart";
 import { useState } from "react";
 
@@ -22,22 +21,11 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
 
   return (
     <>
-    <div className="w-56 h-96 sm:w-[298px] sm:h-[466px] rounded-2xl border border-gray-300 overflow-hidden">
-      <div className="w-full h-[31px] flex justify-start ">
-        <div
-          className={clsx(
-            "w-24 sm:w-[64.5px]  flex justify-center items-center  rounded-br-[20px]",
-            {
-              "bg-greenLabel": category === "Sin TACC",
-              "bg-redLabel": category === "Vegano" || category === "Sin azúcar",
-              "bg-orangeLabel": category === "Keto",
-              "bg-blueLabel": category === "Orgánico"
-            }
-          )}
-        >
-          <p className="text-xs text-white text-center">{category}</p>
-        </div>
-      </div>
+    <div className="relative w-56 h-96 sm:w-[298px] sm:h-[466px] rounded-2xl border border-gray-300 overflow-hidden">
+      <p className={`absolute w-24 py-1 px-2 text-xs text-center text-white rounded-br-[1.25rem]
+                    ${category === "Sin TACC" ? 'bg-greenLabel' : category === 'Vegano' ? 'bg-redLabel' 
+                    : category === "Sin azucar" ? 'bg-blueLabel' : 'bg-orangeLabel'}`}>{category}
+      </p>
       <div className="w-full h-72 sm:h-[435px] flex flex-col justify-between pt-1 pb-8 items-center px-5">
         <div className="w-[246px h-[246px] rounded-lg px-2">
           <img className="cursor-pointer" src={image} alt=" " onClick={() => {modalHandler()}} />
