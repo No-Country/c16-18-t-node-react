@@ -3,9 +3,7 @@ import { useState } from "react";
 
 const ProductCard = ({ product, category, image, rating, price, name, modalHandler}) => {
   
-  
   const {setCart, deleteProductFromCart} = useCart();
-
   const [addedToCart, setAddedToCart] = useState(false);
 
   const handleAddToCart = () =>{
@@ -16,13 +14,13 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
   const handleRemoveFromCart = () =>{
     deleteProductFromCart(product._id);
     setAddedToCart(false)
-  }
+  };
 
 
   return (
     <>
     <div className="relative border-[1px] border-grayishGreen4 rounded-2xl overflow-hidden">
-      <p className={`absolute w-24 py-1 px-2 text-xs text-center text-white rounded-br-[1.25rem]  
+      <p className={`absolute w-24 py-2 text-center text-xs text-white rounded-br-[1.25rem]  
                     ${category === "Sin TACC" ? 'bg-greenLabel' : category === 'Vegano' ? 'bg-redLabel' 
                     : category === "Sin azucar" ? 'bg-blueLabel' : 'bg-orangeLabel'}`}>{category}
       </p>
