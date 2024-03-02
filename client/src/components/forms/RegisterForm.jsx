@@ -59,6 +59,7 @@ const RegisterForm = ({ onClose }) => {
             email,
             password,
             confirmPassword
+
           });
           console.log("Result", result);
           resetForm();

@@ -11,9 +11,9 @@ const useRegister = () => {
         body: JSON.stringify(data)
       })
       console.log("response", response)
-      // if (!response.ok) {
-      //   throw new Error('Error en la respuesta. ', response.status);
-      // }
+      if (!response.ok) {
+        throw new Error('Error en la respuesta. ', response.status);
+      }
       const responseData = await response.json();
       console.log(responseData)
       return responseData;
