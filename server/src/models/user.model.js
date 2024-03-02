@@ -16,6 +16,8 @@ const usersSchema = new mongoose.Schema(
 		lastname: { type: String, required: true, trim: true },
 		email: { type: String, unique: true, required: true },
 		password: { type: String, required: true },
+		code: {type: String, required: true},
+		status: {type: String, required:true, default: 'UNVERIFIED'},
 		rol: {
 			type: String,
 			enum: ['Cliente', 'Vendedor', 'Admin'],

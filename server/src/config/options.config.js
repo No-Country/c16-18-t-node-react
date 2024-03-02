@@ -3,6 +3,7 @@ dotenv.config();
 
 //configuracion de env para las variables importantes
 const PORT = process.env.PORT;
+const URL = process.env.URL
 const MONGO_URL = process.env.MONGO_URL;
 const SECRET_KEY = process.env.SECRET_KEY;
 const EMAIL_USER = process.env.EMAIL_USER;
@@ -14,6 +15,7 @@ const EMAIL_PORT = process.env.EMAIL_PORT;
 export const options = {
 	server: {
 		port: PORT,
+		url: URL
 	},
 	mongo: {
 		url: MONGO_URL,

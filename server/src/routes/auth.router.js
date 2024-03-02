@@ -3,6 +3,7 @@ import {
 	register,
 	login,
 	logout,
+	confirm
 	/* getUsers, */
 } from '../controllers/auth.controller.js';
 
@@ -16,6 +17,8 @@ const router = Router();
 router.post('/register', validateRegister, register);
 
 router.post('/login', validateLogin, login);
+
+router.get('/confirm/:token', confirm);
 
 router.post('/logout', logout);
 
