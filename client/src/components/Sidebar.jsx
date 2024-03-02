@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Sidebar = ({isOpenMenu, onClose, setShowLoginModal, setShowRegisterModal}) => {
 
     useEffect(() => {
-        if (isOpenMenu) {
+        if (isOpenMenu) { // ESTO NO SE HACE, CORREGIR URGENTE
           document.body.style.overflow = 'hidden';
         } else {
           document.body.style.overflow = 'auto';
