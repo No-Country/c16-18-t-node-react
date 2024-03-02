@@ -123,9 +123,7 @@ export const login = async (req, res) => {
       throw new Error("La cuenta se encuentra sin verificar");
     }
 
-    res.cookie("token", token, {
-      httpOnly: true,
-    });
+    res.cookie("token", token);
 
     res.json({
       id: userFound._id,
