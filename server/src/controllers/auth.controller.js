@@ -89,7 +89,11 @@ export const confirm = async (req, res) => {
           }
         );
 
-        res.status(201).send({ status: "ok", payload: result });
+        if (result) {
+          res.redirect("https://c16-18-t-node-react.vercel.app/index.html");
+        } else {
+          throw new Error("Hubo un problema para verificar la cuenta");
+        }
       }
     }
   } catch (error) {
@@ -120,7 +124,7 @@ export const login = async (req, res) => {
     }
 
     res.cookie("token", token, {
-      httpOnly: true
+      httpOnly: true,
     });
 
     res.json({
