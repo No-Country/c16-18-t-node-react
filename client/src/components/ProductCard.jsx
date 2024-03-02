@@ -21,15 +21,13 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
 
   return (
     <>
-    <div className="relative w-56 h-96 sm:w-[298px] sm:h-[466px] rounded-2xl border border-gray-300 overflow-hidden">
-      <p className={`absolute w-24 py-1 px-2 text-xs text-center text-white rounded-br-[1.25rem]
+    <div className="relative border-[1px] border-grayishGreen4 rounded-2xl overflow-hidden">
+      <p className={`absolute w-24 py-1 px-2 text-xs text-center text-white rounded-br-[1.25rem]  
                     ${category === "Sin TACC" ? 'bg-greenLabel' : category === 'Vegano' ? 'bg-redLabel' 
                     : category === "Sin azucar" ? 'bg-blueLabel' : 'bg-orangeLabel'}`}>{category}
       </p>
       <div className="w-full h-72 sm:h-[435px] flex flex-col justify-between pt-1 pb-8 items-center px-5">
-        <div className="w-[246px h-[246px] rounded-lg px-2">
-          <img className="cursor-pointer" src={image} alt=" " onClick={() => {modalHandler()}} />
-        </div>
+        <img className="block w-full max-w-full aspect-square object-cover cursor-pointer" src={image} alt={`imagen de ${name}`} onClick={() => {modalHandler()}} />
         <div className="w-full flex flex-col items-center gap-1">
           <div className="w-full flex flex-col items-start  gap-0">
             <h3 className="text-[15px] text-darkGreen1 font-normal leading-6">
