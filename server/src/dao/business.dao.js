@@ -5,8 +5,8 @@ export default class BusinessDAO {
     return businessModel.find();
   };
 
-  getById = (id) => {
-    return businessModel.findOne({ _id: id });
+  getByUserId = (userid) => {
+    return businessModel.findOne({'userId': userid,});
   };
 
   create = (id) => {
@@ -27,12 +27,12 @@ export default class BusinessDAO {
     );
   };
 
-  insertProductOrder = (id, doc) => {
+  insertBusinessProduct = (id, productid) => {
     return businessModel.updateOne(
-      { _id: id },
+      {_id: id},
       {
         $push: {
-          products: doc,
+          products: { productId: productid },
         },
       }
     );

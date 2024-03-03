@@ -6,15 +6,26 @@ const businessSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: options.collections.usersCollection,
     },
-    productosId:{
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: options.collections.productsCollection,
-    },
+    products: {
+        type: [
+          {
+            productId: {
+              type: mongoose.SchemaTypes.ObjectId,
+              ref: options.collections.productsCollection,
+            },
+          },
+        ],
+        default: [],
+      },
     categoryId:{
         type: mongoose.SchemaTypes.ObjectId,
         ref: options.collections.productTypeCollection,
     }
 });
+
+businessSchema.pre("findOne", function(){
+    this.populate("products.productId")
+})
 
  const businessModel = mongoose.model(options.collections.businessCollection, businessSchema);
  

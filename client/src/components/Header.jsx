@@ -132,7 +132,7 @@ const Header = () => {
                     <p>Cerrar Sesión</p>
                   </a>
                 </div>
-                <img src="/pfp.svg" alt=" " />
+                <img className="w-[50px]" src={user.avatar} alt=" " />
                 <img
                   className="rotate-90 group-hover:rotate-[270deg]"
                   src="/arrow-icon.svg"

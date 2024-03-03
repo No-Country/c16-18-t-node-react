@@ -12,7 +12,7 @@ const UserProfilePage = () => {
         <section className="flex pb-12 gap-6">
           <aside className="flex flex-col gap-8 p-2 w-[20%] bg-darkGreen2 text-grayishGreen4">
             <div className="flex flex-col items-center self-center">
-              <img className="w-[90px]" src="/pfp.svg" alt=" " />
+              <img className="w-[90px]" src={user.avatar} alt=" " />
               <p className="font-bold">{user.name}</p>
               <p className="font-bold opacity-75">{user.email}</p>
             </div>
@@ -67,7 +67,7 @@ const UserProfilePage = () => {
                     fill="#EDEBEE"
                   />
                 </svg>
-                <Link to="/vendedor" >
+                <Link to="/misproductos" >
                     Mis productos
                   </Link>
               </li>
@@ -231,7 +231,7 @@ const UserProfilePage = () => {
         <section className="flex pb-12 gap-6">
           <aside className="flex flex-col gap-8 p-2 w-[20%] bg-darkGreen2 text-grayishGreen4">
             <div className="flex flex-col items-center self-center">
-              <img className="w-[90px]" src="/pfp.svg" alt=" " />
+              <img className="w-[90px]" src={user.avatar} alt=" " />
               <p className="font-bold">{user.name}</p>
               <p className="font-bold opacity-75">{user.email}</p>
             </div>

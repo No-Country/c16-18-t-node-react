@@ -26,7 +26,7 @@ const useLogin = () => {
         console.log("Respuesta erronea", responseData.rol)
 
         if(responseData.name){
-          login(responseData.id, responseData.name, responseData.rol, responseData.email);
+          login(responseData.id, responseData.name, responseData.rol, responseData.email, responseData.avatar);
         }
         return responseData;
       } catch (error) {

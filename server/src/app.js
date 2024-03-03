@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use("/api/productType", productTypeRouter);
-app.use("/api/bussines", bussinesRouter);
+app.use("/api/business", bussinesRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api', authRouter);
