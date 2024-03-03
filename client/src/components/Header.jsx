@@ -16,7 +16,6 @@ const Header = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const { cart } = useCart();
-
   const handleCloseRegisterModal = () => {
     setShowRegisterModal(false);
   };
@@ -93,11 +92,6 @@ const Header = () => {
       </div>
       <div>
         <div className="flex gap-6 items-center">
-          <img
-            src="/magnifier-icon.svg"
-            alt=" "
-            className="hidden md:flex "
-          />
           <NavLink to="/cart">
             <img src="/cart-icon.svg" alt=" " />
             {cartQuantity === 0 ? (
@@ -132,7 +126,8 @@ const Header = () => {
                     <p>Cerrar Sesión</p>
                   </a>
                 </div>
-                <img className="w-[50px]" src={user.avatar} alt=" " />
+
+                <img src={user?.avatar} alt=" " className="w-[60px] h-[60px] border rounded-full" />
                 <img
                   className="rotate-90 group-hover:rotate-[270deg]"
                   src="/arrow-icon.svg"

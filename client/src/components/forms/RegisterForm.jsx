@@ -11,6 +11,7 @@ const RegisterForm = ({ onClose }) => {
       initialValues={{
         name: "",
         lastname: "",
+        rol:"Cliente",
         email: "",
         password: "",
         confirmPassword: "",
@@ -48,14 +49,18 @@ const RegisterForm = ({ onClose }) => {
         return errores;
       }}
       onSubmit={async (valores, { resetForm }) => {
+        console.log(valores)
         try {
-          const {name, lastname, email, password } = valores;
+
+          const {name, email, password, lastname, rol, confirmPassword } = valores;
           const result = await handleRegister({
-            name: name,
-            lastname: lastname,
+            name,
+            lastname,
+            rol,
             email,
             password,
-            confirmPassword: password
+            confirmPassword
+
           });
           console.log("Result", result);
           resetForm();
@@ -71,14 +76,14 @@ const RegisterForm = ({ onClose }) => {
       }}
     >
       {({ values, handleBlur }) => (
-        <Form className="flex w-full flex-col items-center sm:pt-3 px-6 md:px-2 lg:px-10  ">
+        <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10  ">
           <div className="flex flex-col w-[95%] sm:flex-row justify-between ">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start text-lg lg:text-base md:text-sm  font-bold leading-6"
                 htmlFor="name"
               >
-                Nombre
+                Nombre:
               </label>
               <Field
                 type="text"
@@ -103,7 +108,7 @@ const RegisterForm = ({ onClose }) => {
                 className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
                 htmlFor="lastname"
               >
-                Apellido
+                Apellido:
               </label>
               <Field
                 type="text"
@@ -147,12 +152,30 @@ const RegisterForm = ({ onClose }) => {
               ></ErrorMessage>
             </div>
           </div>
+          <div className="flex w-[95%] flex-col">
+          <label id="rol" className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm">Tipo de usuario:</label>
+          <div role="group" className="w-[80%] flex items-center justify-around" aria-labelledby="rol">
+            <label className="px-1">
+              <Field type="radio" name="rol" value="Cliente"/>
+              Cliente
+            </label>
+            <label>
+              <Field type="radio" name="rol" value="Vendedor" />
+              Vendedor
+            </label>
+            <ErrorMessage
+                className="flex justify-start text-red-600 text-sm"
+                name="rol"
+                component="div"
+              ></ErrorMessage>
+          </div>
+          </div>
           <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
               htmlFor="password"
             >
-              Contraseña
+              Contraseña:
             </label>
             <Field
               type="password"
@@ -177,7 +200,7 @@ const RegisterForm = ({ onClose }) => {
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
               htmlFor="confirmPassword"
             >
-              Confirmación
+              Confirmación:
             </label>
             <Field
               type="password"
@@ -200,12 +223,12 @@ const RegisterForm = ({ onClose }) => {
           <div className="w-[70%] lg:w-[55%] flex items-center justify-center ">
             <button
               type="submit"
-              className="mt-4 mb-2 py-4 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6 "
+              className="mt-1 sm:mt-4 mb-0 sm:mb-2 py-4 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6 "
             >
               Registrarse
             </button>
           </div>
-        <div className="w-full h-10 flex items-center justify-center ">
+        <div className="w-full h-5 mt-1 sm:mt-0 sm:h-10 flex items-center justify-center ">
         {formEnviado && (
             <p className="flex justify-start text-green-500 text-sm ">
               Registrado exitosamente! Email de confirmacion enviado!
@@ -225,65 +248,3 @@ const RegisterForm = ({ onClose }) => {
 };
 
 export default RegisterForm;
-
-// catch (error) {
-//   if (error.response && error.response.payload && error.response.payload.msg) {
-//     throw new Error(error.response.payload.msg);
-//   } else {
-//     throw error;
-//   }
-
-{
-  /* <div className="flex">
-<div className="flex flex-col mr-4">
-  <span className="font-bold text-base leading-6">Nombre</span>
-  <label className=" py-1 px-4 border border-gray rounded-lg">
-    <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre"></input>
-  </label>
-</div>
-<div className="flex flex-col">
-  <span className="font-bold text-base leading-6">Apellido</span>
-  <label className="mt-1 py-1 px-4 border border-gray rounded-lg">
-    <input type="text" value={apellido} onChange={e => setApellido(e.target.value)} placeholder="Apellido"></input>
-  </label>
-</div>
-</div>
-
-<div className="flex flex-col mt-4">
-<span className="font-bold text-base leading-6">
-  Correo electrónico
-</span>
-<label className="mt-1 py-1 px-4 border border-gray rounded-lg">
-  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="porejemplo@gmail.com"></input>
-</label>
-</div>
-
-<div className="flex flex-col mt-4">
-<span className="font-bold text-base leading-6">Contraseña</span>
-<label className="mt-1 py-1 px-4 border border-gray rounded-lg flex justify-between">
-  <input type="password" value={password} onChange={e => setpassword(e.target.value)} placeholder="********" />
-  <button>
-    <img src="/visibility.svg"></img>
-  </button>
-</label>
-</div>
-<div className="flex flex-col mt-4">
-<span className="font-bold text-base leading-6">
-  Confirmar contraseña
-</span>
-<label className="mt-1 py-2 px-4 border border-gray rounded-lg flex justify-between">
-  <input placeholder="********"></input>
-  <button>
-    <img src="/visibility.svg"></img>
-  </button>
-</label>
-</div>
-
-<button
-type="submit"
-className="mx-10 mt-12 mb-3 py-4 px-10 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6"
-onClick={handleRegister}
->
-Continuar
-</button> */
-}
