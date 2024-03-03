@@ -51,6 +51,7 @@ const RegisterForm = ({ onClose }) => {
       onSubmit={async (valores, { resetForm }) => {
         console.log(valores)
         try {
+
           const {name, email, password, lastname, rol, confirmPassword } = valores;
           const result = await handleRegister({
             name,

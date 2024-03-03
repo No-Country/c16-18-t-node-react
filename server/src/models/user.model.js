@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { usersCollection, ordersCollection } from '../config/collections.config.js';
+import { options } from "../config/options.config.js";
 
 const defaultAvatars = {
 	Cliente:
@@ -16,6 +16,8 @@ const usersSchema = new mongoose.Schema(
 		lastname: { type: String, required: true, trim: true },
 		email: { type: String, unique: true, required: true },
 		password: { type: String, required: true },
+		code: {type: String, required: true},
+		status: {type: String, required:true, default: 'UNVERIFIED'},
 		rol: {
 			type: String,
 			enum: ['Cliente', 'Vendedor', 'Admin'],
@@ -30,12 +32,12 @@ const usersSchema = new mongoose.Schema(
 		pedidos: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
-				ref: ordersCollection,
+				ref: options.collections.ordersCollection,
 			},
 		],
 	},
 	{ timestamps: true }
 );
 
-const userModel = mongoose.model(usersCollection, usersSchema);
+const userModel = mongoose.model(options.collections.usersCollection, usersSchema);
 export default userModel;

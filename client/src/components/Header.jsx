@@ -126,6 +126,7 @@ const Header = () => {
                     <p>Cerrar Sesión</p>
                   </a>
                 </div>
+
                 <img src={user?.avatar} alt=" " className="w-[60px] h-[60px] border rounded-full" />
                 <img
                   className="rotate-90 group-hover:rotate-[270deg]"

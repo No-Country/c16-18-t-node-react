@@ -1,14 +1,32 @@
 import mongoose from "mongoose";
-import { businessCollection } from "../config/collections.config.js";
+import { options } from "../config/options.config.js";
 
 const businessSchema = new mongoose.Schema({
-    name:{
-        type: String,
-        required:true
+    userId:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: options.collections.usersCollection,
     },
-    productos:[]
+    products: {
+        type: [
+          {
+            productId: {
+              type: mongoose.SchemaTypes.ObjectId,
+              ref: options.collections.productsCollection,
+            },
+          },
+        ],
+        default: [],
+      },
+    categoryId:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: options.collections.productTypeCollection,
+    }
 });
 
- const businessModel = mongoose.model(businessCollection, businessSchema);
+businessSchema.pre("findOne", function(){
+    this.populate("products.productId")
+})
+
+ const businessModel = mongoose.model(options.collections.businessCollection, businessSchema);
  
  export default businessModel
