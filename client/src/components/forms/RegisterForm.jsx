@@ -10,10 +10,11 @@ const RegisterForm = ({ onClose }) => {
     <Formik
       initialValues={{
         name: "",
-        surname: "",
+        lastname: "",
+        rol:"Cliente",
         email: "",
         password: "",
-        password_confirmation: "",
+        confirmPassword: "",
       }}
       validate={(valores) => {
         let errores = {};
@@ -22,10 +23,10 @@ const RegisterForm = ({ onClose }) => {
         } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.name)) {
           errores.name = "Sólo inserte letras y espacios";
         }
-        if (!valores.surname) {
-          errores.surname = "Apellido inválido. Mín 3 caract.";
-        } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.surname)) {
-          errores.surname = "Sólo inserte letras y espacios";
+        if (!valores.lastname) {
+          errores.lastname = "Apellido inválido. Mín 3 caract.";
+        } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.lastname)) {
+          errores.lastname = "Sólo inserte letras y espacios";
         }
         if (!valores.email) {
           errores.email = "Ingrese un email válido";
@@ -39,22 +40,26 @@ const RegisterForm = ({ onClose }) => {
         } else if (valores.password.length < 6) {
           errores.password = "Contraseña corta. Caracteres mínimos: 6";
         }
-        if (!valores.password_confirmation) {
-          errores.password_confirmation = "Confirme su contraseña";
-        } else if (valores.password !== valores.password_confirmation) {
-          errores.password_confirmation = "No coincide con su contraseña";
+        if (!valores.confirmPassword) {
+          errores.confirmPassword = "Confirme su contraseña";
+        } else if (valores.password !== valores.confirmPassword) {
+          errores.confirmPassword = "No coincide con su contraseña";
         }
 
         return errores;
       }}
       onSubmit={async (valores, { resetForm }) => {
+        console.log(valores)
         try {
-          const {name, email, password } = valores;
+          const {name, email, password, lastname, rol, confirmPassword } = valores;
           const result = await handleRegister({
-            username: name,
+            name,
+            lastname,
+            rol,
             email,
             password,
-            confirmPassword: password
+            confirmPassword
+
           });
           console.log("Result", result);
           resetForm();
@@ -70,14 +75,14 @@ const RegisterForm = ({ onClose }) => {
       }}
     >
       {({ values, handleBlur }) => (
-        <Form className="flex w-full flex-col items-center sm:pt-3 px-6 md:px-2 lg:px-10  ">
+        <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10  ">
           <div className="flex flex-col w-[95%] sm:flex-row justify-between ">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start text-lg lg:text-base md:text-sm  font-bold leading-6"
                 htmlFor="name"
               >
-                Nombre
+                Nombre:
               </label>
               <Field
                 type="text"
@@ -100,23 +105,23 @@ const RegisterForm = ({ onClose }) => {
             <div className="flex flex-col w-full sm:w-[45%]">
               <label
                 className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
-                htmlFor="surname"
+                htmlFor="lastname"
               >
-                Apellido
+                Apellido:
               </label>
               <Field
                 type="text"
                 className="w-full py-1 px-4 border border-gray rounded-lg"
-                id="surname"
-                name="surname"
+                id="lastname"
+                name="lastname"
                 placeholder="Ingrese su apellido"
-                value={values.surname}
+                value={values.lastname}
                 onBlur={handleBlur}
               />
               <div className="w-full h-5">
                 <ErrorMessage
                   className="flex justify-start text-red-600 text-sm"
-                  name="surname"
+                  name="lastname"
                   component="div"
                 ></ErrorMessage>
               </div>
@@ -146,12 +151,30 @@ const RegisterForm = ({ onClose }) => {
               ></ErrorMessage>
             </div>
           </div>
+          <div className="flex w-[95%] flex-col">
+          <label id="rol" className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm">Tipo de usuario:</label>
+          <div role="group" className="w-[80%] flex items-center justify-around" aria-labelledby="rol">
+            <label className="px-1">
+              <Field type="radio" name="rol" value="Cliente"/>
+              Cliente
+            </label>
+            <label>
+              <Field type="radio" name="rol" value="Vendedor" />
+              Vendedor
+            </label>
+            <ErrorMessage
+                className="flex justify-start text-red-600 text-sm"
+                name="rol"
+                component="div"
+              ></ErrorMessage>
+          </div>
+          </div>
           <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
               htmlFor="password"
             >
-              Contraseña
+              Contraseña:
             </label>
             <Field
               type="password"
@@ -174,23 +197,23 @@ const RegisterForm = ({ onClose }) => {
           <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
-              htmlFor="password_confirmation"
+              htmlFor="confirmPassword"
             >
-              Confirmación
+              Confirmación:
             </label>
             <Field
               type="password"
               className="w-full py-1 px-4 border border-gray rounded-lg "
-              id="password_confirmation"
-              name="password_confirmation"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder="Confirme su contraseña"
-              value={values.password_confirmation}
+              value={values.confirmPassword}
               onBlur={handleBlur}
             />
             <div className="w-full h-5">
               <ErrorMessage
                 className="flex justify-start text-red-600 text-sm"
-                name="password_confirmation"
+                name="confirmPassword"
                 component="div"
               ></ErrorMessage>
             </div>
@@ -199,12 +222,12 @@ const RegisterForm = ({ onClose }) => {
           <div className="w-[70%] lg:w-[55%] flex items-center justify-center ">
             <button
               type="submit"
-              className="mt-4 mb-2 py-4 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6 "
+              className="mt-1 sm:mt-4 mb-0 sm:mb-2 py-4 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6 "
             >
               Registrarse
             </button>
           </div>
-        <div className="w-full h-10 flex items-center justify-center ">
+        <div className="w-full h-5 mt-1 sm:mt-0 sm:h-10 flex items-center justify-center ">
         {formEnviado && (
             <p className="flex justify-start text-green-500 text-sm ">
               Registrado exitosamente! Email de confirmacion enviado!
@@ -224,65 +247,3 @@ const RegisterForm = ({ onClose }) => {
 };
 
 export default RegisterForm;
-
-// catch (error) {
-//   if (error.response && error.response.payload && error.response.payload.msg) {
-//     throw new Error(error.response.payload.msg);
-//   } else {
-//     throw error;
-//   }
-
-{
-  /* <div className="flex">
-<div className="flex flex-col mr-4">
-  <span className="font-bold text-base leading-6">Nombre</span>
-  <label className=" py-1 px-4 border border-gray rounded-lg">
-    <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre"></input>
-  </label>
-</div>
-<div className="flex flex-col">
-  <span className="font-bold text-base leading-6">Apellido</span>
-  <label className="mt-1 py-1 px-4 border border-gray rounded-lg">
-    <input type="text" value={apellido} onChange={e => setApellido(e.target.value)} placeholder="Apellido"></input>
-  </label>
-</div>
-</div>
-
-<div className="flex flex-col mt-4">
-<span className="font-bold text-base leading-6">
-  Correo electrónico
-</span>
-<label className="mt-1 py-1 px-4 border border-gray rounded-lg">
-  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="porejemplo@gmail.com"></input>
-</label>
-</div>
-
-<div className="flex flex-col mt-4">
-<span className="font-bold text-base leading-6">Contraseña</span>
-<label className="mt-1 py-1 px-4 border border-gray rounded-lg flex justify-between">
-  <input type="password" value={password} onChange={e => setpassword(e.target.value)} placeholder="********" />
-  <button>
-    <img src="/visibility.svg"></img>
-  </button>
-</label>
-</div>
-<div className="flex flex-col mt-4">
-<span className="font-bold text-base leading-6">
-  Confirmar contraseña
-</span>
-<label className="mt-1 py-2 px-4 border border-gray rounded-lg flex justify-between">
-  <input placeholder="********"></input>
-  <button>
-    <img src="/visibility.svg"></img>
-  </button>
-</label>
-</div>
-
-<button
-type="submit"
-className="mx-10 mt-12 mb-3 py-4 px-10 bg-avocadoGreen w-96 rounded-full text-white font-semibold text-base leading-6"
-onClick={handleRegister}
->
-Continuar
-</button> */
-}
