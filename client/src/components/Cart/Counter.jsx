@@ -1,8 +1,13 @@
+import { useCart } from "../../stores/useCart";
+
 const Counter = (props) => {
-  const { count, setCount } = props;
+  const { count, setCount, product } = props;
+
+  const {setCart} = useCart()
 
   const handleChange = (quantity) => {
     setCount(count + quantity);
+    setCart(product, count);
   };
 
   return (

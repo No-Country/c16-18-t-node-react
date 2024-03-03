@@ -33,6 +33,7 @@ const ProductRow = (props) => {
             count={count}
             setCount={setCount}
             productSubtotal={productSubtotal}
+            product={product}
           />
         </td>
         <td className="pl-16">${productSubtotal}</td>

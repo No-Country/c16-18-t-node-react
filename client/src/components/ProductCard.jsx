@@ -20,6 +20,7 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
   }
 
 
+
   return (
     <>
     <div className="w-56 h-96 sm:w-[298px] sm:h-[466px] rounded-2xl border border-gray-300 overflow-hidden">
