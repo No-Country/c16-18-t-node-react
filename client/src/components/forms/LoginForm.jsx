@@ -1,11 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
 import useLogin from "../../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ onClose }) => {
   const [formEnviado, setFormEnviado] = useState(false);
   const [loginError, setLoginError] = useState(null);
   const { handleLogin } = useLogin();
+  const navigate = useNavigate();
   return (
     <Formik
       initialValues={{
@@ -39,6 +41,7 @@ const LoginForm = ({ onClose }) => {
           setTimeout(() => {
             setFormEnviado(false);
             onClose();
+            navigate("/");
           }, 1000);
           console.log(valores);
         } catch (error) {

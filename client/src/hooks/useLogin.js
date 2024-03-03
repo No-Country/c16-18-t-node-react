@@ -22,9 +22,8 @@ const useLogin = () => {
         if (responseData.error) {
           throw new Error(responseData.error);
         }
-        console.log("username", responseData.username)
         if(response.ok){
-          login(responseData.id, responseData.name, responseData.rol, responseData.email);
+          login(responseData.id, responseData.name, responseData.rol, responseData.email, responseData.avatar);
         }
         return responseData;
       } catch (error) {

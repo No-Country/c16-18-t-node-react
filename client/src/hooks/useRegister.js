@@ -12,7 +12,7 @@ const useRegister = () => {
       })
       console.log("response", response)
       if (!response.ok) {
-        throw new Error('Error en la respuesta. ', response.status);
+        throw new Error('Error al crear usuario. Revisar los datos nuevamente', response.status);
       }
       const responseData = await response.json();
       console.log(responseData)
