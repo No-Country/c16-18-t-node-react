@@ -6,7 +6,7 @@ const useLogin = () => {
       const {login} = useContext(AuthContext);
     const handleLogin = async(data) => {
       try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('https://c16-18-t-node-react-1.onrender.com/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

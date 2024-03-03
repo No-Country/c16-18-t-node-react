@@ -18,7 +18,7 @@ const fetcher = (url) => axios.get(url).then((res) => res.data);
 const LandingPage = ({ handleSearch }) => {
   const { user } = useContext(AuthContext);
   const { data } = useSWR(
-    "https://c16-18-t-node-react.onrender.com/api/products",
+    "https://c16-18-t-node-react-1.onrender.com/api/products",
     fetcher
   );
   const [modalOpen, setModalOpen] = useState(false);

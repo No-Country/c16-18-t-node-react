@@ -99,7 +99,7 @@ export const confirm = async (req, res) => {
         );
 
         if (result) {
-          res.redirect("https://c16-18-t-node-react.vercel.app/index.html");
+          res.redirect("http://localhost:5173/confirm-user");
         } else {
           throw new Error("Hubo un problema para verificar la cuenta");
         }

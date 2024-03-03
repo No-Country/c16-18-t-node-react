@@ -60,9 +60,9 @@ const Header = () => {
         </button>
       </div>
       <div className="flex gap-14">
-        <Link  to="/">
+        <Link to="/">
           <img src="/nutrimarket-logo.svg" />
-        </Link> 
+        </Link>
         <nav className="hidden md:flex items-center  gap-6">
           <NavLink
             className={({ isActive }) =>
@@ -92,16 +92,18 @@ const Header = () => {
       </div>
       <div>
         <div className="flex gap-6 items-center">
-          <NavLink to="/cart">
-            <img src="/cart-icon.svg" alt=" " />
-            {cartQuantity === 0 ? (
-              <span></span>
-            ) : (
-              <span className="absolute top-7 right-72 w-4 h-4 text-xs rounded-full bg-yellowGreen text-center">
-                {cartQuantity}
-              </span>
-            )}
-          </NavLink>
+          {user && user.rol === "Vendedor" ? null : (
+            <NavLink to="/cart">
+              <img src="/cart-icon.svg" alt=" " />
+              {cartQuantity === 0 ? (
+                <span></span>
+              ) : (
+                <span className="absolute top-7 right-72 w-4 h-4 text-xs rounded-full bg-yellowGreen text-center">
+                  {cartQuantity}
+                </span>
+              )}
+            </NavLink>
+          )}
 
           <div className="hidden md:flex">
             {user ? (
@@ -127,7 +129,11 @@ const Header = () => {
                   </a>
                 </div>
 
-                <img src={user?.avatar} alt=" " className="w-[60px] h-[60px] border rounded-full" />
+                <img
+                  src={user?.avatar}
+                  alt=" "
+                  className="w-[60px] h-[60px] border rounded-full"
+                />
                 <img
                   className="rotate-90 group-hover:rotate-[270deg]"
                   src="/arrow-icon.svg"
@@ -156,8 +162,18 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isOpenMenu && <div className="fixed inset-0 bg-black bg-opacity-50" onClick={closeSidebar}></div>}
-       <Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>          
+      {isOpenMenu && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50"
+          onClick={closeSidebar}
+        ></div>
+      )}
+      <Sidebar
+        isOpenMenu={isOpenMenu}
+        onClose={closeSidebar}
+        setShowLoginModal={setShowLoginModal}
+        setShowRegisterModal={setShowRegisterModal}
+      />
       <RegisterModal
         visible={showRegisterModal}
         onClose={handleCloseRegisterModal}
