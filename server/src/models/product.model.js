@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { options } from "../config/options.config.js";
+import { faker } from "@faker-js/faker";
 
 
 const productSchema = new mongoose.Schema({
@@ -17,7 +18,15 @@ const productSchema = new mongoose.Schema({
   category_ids: {type: Array, default: []},
   rating: { type: Number},
   category: {type: String},
-  image: {type: String}
+  image:  {
+    type: String,
+    default: () =>
+      faker.image.urlLoremFlickr({
+        width: 246,
+        height: 246,
+        category: "abstract",
+      }),
+  },
 }, { timestamps: {} });
 
 const productModel = mongoose.model(options.collections.productsCollection, productSchema);

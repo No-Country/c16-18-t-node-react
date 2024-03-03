@@ -6,30 +6,30 @@ export default class BusinessDAO {
   };
 
   getByUserId = (userid) => {
-    return businessModel.findOne({'userId': userid,});
+    return businessModel.findOne({ userId: userid });
   };
 
-  create = (id) => {
-    return businessModel.create({userId: id});
+  create = (id, businessName) => {
+    return businessModel.create({ userId: id, name: businessName });
   };
 
   updateQuantityProduct = (id, idProduct, quantity) => {
     return businessModel.updateOne(
       {
         _id: id,
-        'products.product_id': idProduct,
+        "products.product_id": idProduct,
       },
       {
         $set: {
-          'products.$.quantity': quantity,
+          "products.$.quantity": quantity,
         },
       }
     );
   };
 
-  insertBusinessProduct = (id, productid) => {
+  insertBusinessProduct = (userid, productid) => {
     return businessModel.updateOne(
-      {_id: id},
+      { userId: userid },
       {
         $push: {
           products: { productId: productid },

@@ -6,12 +6,20 @@ import {
 } from "../helpers/utils/jwt.utils.js";
 import emailService from "../services/email.service.js";
 import { v4 } from "uuid";
-import businessService  from "../services/business.service.js";
+import businessService from "../services/business.service.js";
 
 export const register = async (req, res) => {
   try {
-    const { email, name, lastname, rol, password, confirmPassword, avatar } =
-      req.body;
+    const {
+      email,
+      name,
+      lastname,
+      rol,
+      password,
+      confirmPassword,
+      avatar,
+      businessName,
+    } = req.body;
     const code = v4();
 
     const userFound = await userModel.findOne({ email });
@@ -35,9 +43,12 @@ export const register = async (req, res) => {
     const userSaved = await newUser.save();
 
     if (rol === "Vendedor") {
-      const result = await businessService.createBusiness(userSaved._id);
-      if(!result){
-        throw new Error(result.err)
+      const result = await businessService.createBusiness(
+        userSaved._id,
+        businessName
+      );
+      if (!result) {
+        throw new Error(result.err);
       }
     }
 
@@ -85,7 +96,7 @@ export const confirm = async (req, res) => {
         throw new Error("El usuario no existe");
       } else {
         if (userFound.status !== "UNVERIFIED") {
-          throw new Error("La cuenta ya se encuentra verificada");
+          res.redirect("https://c16-18-t-node-react-xi.vercel.app/home");
         }
         if (code !== userFound.code) {
           throw new Error("No existe el codigo");
@@ -99,7 +110,7 @@ export const confirm = async (req, res) => {
         );
 
         if (result) {
-          res.redirect("http://localhost:5173/confirm-user");
+          res.redirect("https://c16-18-t-node-react-xi.vercel.app/confirm-user");
         } else {
           throw new Error("Hubo un problema para verificar la cuenta");
         }

@@ -21,6 +21,14 @@ const LandingPage = ({ handleSearch }) => {
     "https://c16-18-t-node-react-1.onrender.com/api/products",
     fetcher
   );
+
+  const { data: tiendas } = useSWR(
+    "https://c16-18-t-node-react-1.onrender.com/api/business",
+    fetcher
+  );
+
+  console.log(tiendas);
+
   const [modalOpen, setModalOpen] = useState(false);
   const modalHandler = () => {
     setModalOpen(!modalOpen);
@@ -122,8 +130,8 @@ const LandingPage = ({ handleSearch }) => {
           <h2 className="mb-8 text-2xl text-center md:text-5xl md:text-start text-darkGreen1 font-extrabold">
             Categorias
           </h2>
-        {/*Categorias version carousel*/}
-          <div >
+          {/*Categorias version carousel*/}
+          <div>
             <Swiper
               loop={true}
               modules={[A11y, FreeMode]}
@@ -184,10 +192,9 @@ const LandingPage = ({ handleSearch }) => {
             <h2 className="text-xl lg:text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
             </h2>
-            <a className="self-end flex lg:items-center gap-2" href="#"/>
+            <a className="self-end flex lg:items-center gap-2" href="#" />
 
             <NavLink className="flex items-center gap-2" to="/results">
-
               Ver más <img src="/arrow-icon.svg" alt=" " />
             </NavLink>
           </div>
@@ -237,6 +244,80 @@ const LandingPage = ({ handleSearch }) => {
                         modalHandler={modalHandler}
                       />
                     ))
+                : null}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-12 py-8 md:visible md:block">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
+            <h2 className="text-xl lg:text-[2.5rem] text-darkGreen1 font-extrabold">
+              Nuestras tiendas
+            </h2>
+            <a className="self-end flex lg:items-center gap-2" href="#" />
+
+            <NavLink className="flex items-center gap-2" to="/results">
+              Ver más <img src="/arrow-icon.svg" alt=" " />
+            </NavLink>
+          </div>
+          <div className="block xl:hidden justify-center">
+            <Swiper
+              modules={[A11y, FreeMode]}
+              breakpoints={{
+                320: {
+                  slidesPerView: 1.3,
+                  spaceBetween: 30,
+                },
+                640: {
+                  slidesPerView: 2.3,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 2.5,
+                  spaceBetween: 20,
+                },
+              }}
+            >
+              {tiendas
+                ? tiendas.payload.slice(0, 8).map((tienda) => (
+                    <SwiperSlide key={tienda._id}>
+                      <section className="gap-12 p-12 md:visible ">
+                        <div className="grid grid-flow-col auto-cols-fr gap-4">
+                          <div
+                            id={tienda._id}
+                            className="flex flex-col bg-avocadoGreen rounded-xl"
+                          >
+                            <img src={tienda.imageUrl} alt="carrefour's logo" />
+                            <p className="py-4 text-lg text-center text-white font-semibold">
+                              {tienda.name}
+                            </p>
+                          </div>
+                        </div>
+                      </section>
+                    </SwiperSlide>
+                  ))
+                : null}
+            </Swiper>
+          </div>
+
+          <div className="hidden xl:block">
+            <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
+              {tiendas
+                ? tiendas.payload.slice(0, 8).map((tienda) => (
+                    <section className="gap-12 p-12 md:visible ">
+                      <div className="grid grid-flow-col auto-cols-fr gap-4">
+                        <div
+                          id={tienda._id}
+                          className="flex flex-col bg-avocadoGreen rounded-xl"
+                        >
+                          <img src={tienda.imageUrl} alt="carrefour's logo" />
+                          <p className="py-4 text-lg text-center text-white font-semibold">
+                            {tienda.name}
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                  ))
                 : null}
             </div>
           </div>

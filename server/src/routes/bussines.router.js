@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/", businessController.getBusinessController);
 router.get("/:uid", businessController.getBusinessByUserIdController);
-router.post("/:bid/product/:pid", businessController.insertProductBusinessController);
+router.post("/:uid/product/:pid", businessController.insertProductBusinessController);
 
 
 export default router;

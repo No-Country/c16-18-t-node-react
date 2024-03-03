@@ -7,19 +7,19 @@ import { useNavigate } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, FreeMode } from "swiper/modules";
 
-const AboutPage = () => {
+const MisProductosPage = () => {
   const [productos, setProductos] = useState();
-
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  if (!user || user.rol !== "Vendedor") {
-    useEffect(() => {
-      setTimeout(() => {
+
+  useEffect(() => {
+    if (!user || user.rol !== "Vendedor") {
+      const timeoutId = setTimeout(() => {
         navigate("/");
       }, 2000);
-    }, [user]);
-  } else {
-    useEffect(() => {
+
+      return () => clearTimeout(timeoutId);
+    } else {
       const fetchData = async () => {
         try {
           const response = await fetch(
@@ -35,9 +35,12 @@ const AboutPage = () => {
           console.log("Error de red:", error);
         }
       };
+
       fetchData();
-    }, [user]);
-  }
+      return () => {
+      };
+    }
+  }, [user, productos, navigate]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const modalHandler = () => {
@@ -49,7 +52,7 @@ const AboutPage = () => {
       <main className="flex flex-col px-8">
         <section className="py-12">
           <h1 className="mb-4 text-[2.625rem] text-darkGreen1 font-extrabold">
-            Panel Vendedor
+            Mis productos
           </h1>
           <div className="flex flex-col gap-4 ml-8 text-lg">
             <p className="max-w-[55ch] leading-7">Accesso Denegado</p>
@@ -135,4 +138,4 @@ const AboutPage = () => {
   }
 };
 
-export default AboutPage;
+export default MisProductosPage;

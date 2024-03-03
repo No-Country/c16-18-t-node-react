@@ -21,18 +21,18 @@ const getBusinessByUserId = async (userid) => {
   }
 };
 
-const createBusiness = async (id) => {
+const createBusiness = async (userid, businessName) => {
   try {
-    const result = await businessDAO.create(id);
+    const result = await businessDAO.create(userid, businessName);
     return result;
   } catch (err) {
     throw new Error(err.message);
   }
 };
 
-const insertProductBusiness = async (id, productid) => {
+const insertProductBusiness = async (userid, productid) => {
   try {
-    const result = await businessDAO.insertBusinessProduct(id, productid);
+    const result = await businessDAO.insertBusinessProduct(userid, productid);
     return result;
   } catch (err) {
     throw new Error(err.message);

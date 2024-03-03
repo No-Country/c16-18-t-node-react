@@ -11,10 +11,11 @@ const RegisterForm = ({ onClose }) => {
       initialValues={{
         name: "",
         lastname: "",
-        rol:"Cliente",
+        rol: "Cliente",
         email: "",
         password: "",
         confirmPassword: "",
+        businessName: ""
       }}
       validate={(valores) => {
         let errores = {};
@@ -35,6 +36,15 @@ const RegisterForm = ({ onClose }) => {
         ) {
           errores.email = "Email inválido";
         }
+
+        if (valores.rol === "Vendedor") {
+          if (!valores.businessName) {
+            errores.businessName = "Nombre inválido. Mín 3 caract.";
+          } else if (!/[a-zA-Z][a-zA-Z ]/.test(valores.businessName)) {
+            errores.businessName = "Sólo inserte letras y espacios";
+          }
+        }
+
         if (!valores.password) {
           errores.password = "Ingrese una contraseña válida.";
         } else if (valores.password.length < 6) {
@@ -49,18 +59,26 @@ const RegisterForm = ({ onClose }) => {
         return errores;
       }}
       onSubmit={async (valores, { resetForm }) => {
-        console.log(valores)
+        console.log(valores);
         try {
+          const {
+            name,
+            email,
+            password,
+            lastname,
+            rol,
+            confirmPassword,
+            businessName,
+          } = valores;
 
-          const {name, email, password, lastname, rol, confirmPassword } = valores;
           const result = await handleRegister({
             name,
             lastname,
             rol,
             email,
             password,
-            confirmPassword
-
+            confirmPassword,
+            ...(rol === "Vendedor" ? { businessName } : {}),
           });
           console.log("Result", result);
           resetForm();
@@ -128,6 +146,7 @@ const RegisterForm = ({ onClose }) => {
               </div>
             </div>
           </div>
+
           <div className="flex w-[95%] flex-col">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
@@ -152,24 +171,62 @@ const RegisterForm = ({ onClose }) => {
               ></ErrorMessage>
             </div>
           </div>
+
           <div className="flex w-[95%] flex-col">
-          <label id="rol" className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm">Tipo de usuario:</label>
-          <div role="group" className="w-[80%] flex items-center justify-around" aria-labelledby="rol">
-            <label className="px-1">
-              <Field type="radio" name="rol" value="Cliente"/>
-              Cliente
+            <label
+              id="rol"
+              className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm"
+            >
+              Tipo de usuario:
             </label>
-            <label>
-              <Field type="radio" name="rol" value="Vendedor" />
-              Vendedor
-            </label>
-            <ErrorMessage
+            <div
+              role="group"
+              className="w-[80%] flex items-center justify-around"
+              aria-labelledby="rol"
+            >
+              <label className="px-1">
+                <Field type="radio" name="rol" value="Cliente" />
+                Cliente
+              </label>
+              <label>
+                <Field type="radio" name="rol" value="Vendedor" />
+                Vendedor
+              </label>
+              <ErrorMessage
                 className="flex justify-start text-red-600 text-sm"
                 name="rol"
                 component="div"
               ></ErrorMessage>
+            </div>
           </div>
-          </div>
+
+          {values.rol === "Vendedor" && (
+            <div className="flex w-[95%] flex-col">
+              <label
+                className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm "
+                htmlFor="businessName"
+              >
+                Nombre de la Tienda:
+              </label>
+              <Field
+                type="text"
+                className="w-full py-1 px-4 border border-gray rounded-lg "
+                id="businessName"
+                name="businessName"
+                placeholder="Ingrese el nombre de la tienda"
+                value={values.businessName}
+                onBlur={handleBlur}
+              />
+              <div className="w-full h-5">
+                <ErrorMessage
+                  className="flex justify-start text-red-600 text-sm"
+                  name="businessName"
+                  component="div"
+                ></ErrorMessage>
+              </div>
+            </div>
+          )}
+
           <div className="flex w-[95%] flex-col ">
             <label
               className="w-full flex justify-start font-bold leading-6 text-lg lg:text-base md:text-sm  "
@@ -228,19 +285,18 @@ const RegisterForm = ({ onClose }) => {
               Registrarse
             </button>
           </div>
-        <div className="w-full h-5 mt-1 sm:mt-0 sm:h-10 flex items-center justify-center ">
-        {formEnviado && (
-            <p className="flex justify-start text-green-500 text-sm ">
-              Registrado exitosamente! Email de confirmacion enviado!
-            </p>
-          )}
-          {loginError && (
-            <p className="flex justify-start text-red-600 text-sm">
-              {loginError}
-            </p>
-          )}
-        </div>
-          
+          <div className="w-full h-5 mt-1 sm:mt-0 sm:h-10 flex items-center justify-center ">
+            {formEnviado && (
+              <p className="flex justify-start text-green-500 text-sm ">
+                Registrado exitosamente! Email de confirmacion enviado!
+              </p>
+            )}
+            {loginError && (
+              <p className="flex justify-start text-red-600 text-sm">
+                {loginError}
+              </p>
+            )}
+          </div>
         </Form>
       )}
     </Formik>

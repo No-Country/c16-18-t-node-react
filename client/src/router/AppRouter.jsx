@@ -6,6 +6,7 @@ import UserProfilePage from "../Pages/UserProfilePage";
 import ResultPage from "../Pages/ResultsPage";
 import CartPage from "../Pages/CartPage";
 import MisProductosPage from "../Pages/MisProductosPage";
+import AgregarProductoPage from "../Pages/AgregarProductoPage";
 import PurchaseSuccessPage from "../Pages/PurchaseSuccessPage";
 import { AuthContext } from "../auth/context/AuthContext";
 import { useContext } from "react";
@@ -22,6 +23,7 @@ const AppRouter = ({ data, searchedInput, handleSearch }) => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/misproductos" element={<MisProductosPage />} />
+        <Route path="/agregarproducto" element={<AgregarProductoPage />} />
         <Route path="/results" element={<ResultPage searchedInput={searchedInput}  handleSearch={handleSearch}/>} />
         {/* Si esta loggeado, mostrar el componente de comercios cercanos */}
         <Route path="/profile" element={<UserProfilePage />} />

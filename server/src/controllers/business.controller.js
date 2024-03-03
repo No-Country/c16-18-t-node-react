@@ -20,7 +20,7 @@ const getBusinessByUserIdController = async (req, res) => {
 
 const insertProductBusinessController = async (req, res) => {
   try {
-    const result = await businessService.insertProductBusiness(req.params.bid, req.params.pid);
+    const result = await businessService.insertProductBusiness(req.params.uid, req.params.pid);
     res.status(200).send({ status: "ok", payload: result });
   } catch (err) {
     res.status(400).send({ status: "error", payload: err.message });
