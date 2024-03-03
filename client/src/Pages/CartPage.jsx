@@ -9,14 +9,9 @@ const CartPage = () => {
       <SearchBar />
       <div className="flex flex-col xl:flex-row content-center">
         <ProductsTable />
-
         <Summary />
-
-
-
       </div>
       <Discount />
-
     </section>
   );
 };
