@@ -42,7 +42,7 @@ export const register = async (req, res) => {
 
     const userSaved = await newUser.save();
 
-    if (rol === "Vendedor") {
+    if (userSaved.rol === "Vendedor") {
       const result = await businessService.createBusiness(
         userSaved._id,
         businessName
