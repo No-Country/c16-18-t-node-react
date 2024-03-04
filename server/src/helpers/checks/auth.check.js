@@ -17,17 +17,6 @@ export const validateRegister = validateChecks([
   body("password")
     .isLength({ min: 5 })
     .withMessage("La contraseña debe tener al menos 5 caracteres"),
-  body("businessName")
-    .isLength({ min: 5 })
-    .withMessage("Debe tener al menos 5 caracteres")
-    .notEmpty()
-    .withMessage("El nombre del negocio es requerido")
-    .custom((value) => {
-      if (!/^[A-Z]/.test(value)) {
-        throw new Error("El nombre del negocio debe comenzar con mayúscula");
-      }
-      return true;
-    }),
 ]);
 
 export const validateLogin = validateChecks([
