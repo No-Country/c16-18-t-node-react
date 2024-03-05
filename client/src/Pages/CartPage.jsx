@@ -10,7 +10,7 @@ const CartPage = () => {
 
   const { user } = useContext(AuthContext);
 
-  const userId= user.id
+  const userId = user ? user.id || null : null;
 
   localStorage.setItem('userId', userId);
 
@@ -20,7 +20,7 @@ const CartPage = () => {
     <section className="mb-5 w-full">
       <SearchBar />
       <div className="flex flex-col xl:flex-row content-center">
-        <ProductsTable />
+        <ProductsTable userId={userId} />
         <Summary />
       </div>
       <Discount />

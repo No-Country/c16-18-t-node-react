@@ -1,11 +1,15 @@
 import { useCart } from "../../stores/useCart";
 import ProductRow from "./ProductRow";
 
-const ProductsTable = () => {
-  const { cart } = useCart();
+const ProductsTable = (props) => {
+  const{userId} = props;
+  // const { cart } = useCart();
+  // console.log(cart)
 
-  const cartLS = JSON.parse(localStorage.getItem('cart'));
+  const cartLS =  JSON.parse(localStorage.getItem("cart")) || null;
+  console.log(cartLS)
 
+  const emptyCart = [];
   return (
 
     <div className="w-5/6 lg:w-11/12 mt-12 mx-8 sm:ml-16 border border-platinum rounded-lg">
@@ -21,9 +25,10 @@ const ProductsTable = () => {
           </tr>
         </thead>
         <tbody className="w-full">
-          {cartLS? cartLS.cart.map((product) => {
+
+          {userId? cartLS.map((product) => {
             return <ProductRow key={product._id} product={product} />;
-          }): cart.map((product) => {
+          }) : emptyCart.map((product) => {
             return <ProductRow key={product._id} product={product} />;
           }) }
           <tr className="text-center">

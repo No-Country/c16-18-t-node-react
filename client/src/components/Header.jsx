@@ -94,7 +94,7 @@ const Header = () => {
         <div className="flex gap-6 items-center">
           <NavLink to="/cart">
             <img src="/cart-icon.svg" alt=" " />
-            {cartQuantity === 0 ? (
+            {logout===false && cartQuantity === 0 ? (
               <span></span>
             ) : (
               <span className="absolute top-7 right-72 w-4 h-4 text-xs rounded-full bg-yellowGreen text-center">
