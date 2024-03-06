@@ -96,7 +96,7 @@ export const confirm = async (req, res) => {
         throw new Error("El usuario no existe");
       } else {
         if (userFound.status !== "UNVERIFIED") {
-          res.redirect("https://c16-18-t-node-react-xi.vercel.app/home");
+          return res.redirect("https://c16-18-t-node-react-xi.vercel.app/home");
         }
         if (code !== userFound.code) {
           throw new Error("No existe el codigo");
@@ -110,7 +110,7 @@ export const confirm = async (req, res) => {
         );
 
         if (result) {
-          res.redirect("https://c16-18-t-node-react-xi.vercel.app/confirm-user");
+          return res.redirect("https://c16-18-t-node-react-xi.vercel.app/confirm-user");
         } else {
           throw new Error("Hubo un problema para verificar la cuenta");
         }
