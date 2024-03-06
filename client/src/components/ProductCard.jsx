@@ -6,6 +6,8 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
   const {setCart, deleteProductFromCart} = useCart();
   const [addedToCart, setAddedToCart] = useState(false);
 
+
+
   const handleAddToCart = () =>{
     setCart(product);
     setAddedToCart(true);
@@ -15,6 +17,7 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
     deleteProductFromCart(product._id);
     setAddedToCart(false)
   };
+
 
 
   return (
