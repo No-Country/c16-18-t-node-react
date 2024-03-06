@@ -94,7 +94,7 @@ const RegisterForm = ({ onClose }) => {
       }}
     >
       {({ values, handleBlur }) => (
-        <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10  ">
+        <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10 ">
           <div className="flex flex-col w-[95%] sm:flex-row justify-between ">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label
