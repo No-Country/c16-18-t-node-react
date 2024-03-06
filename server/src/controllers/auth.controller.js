@@ -4,7 +4,8 @@ import { createAccessToken } from '../helpers/utils/jwt.utils.js';
 
 export const register = async (req, res) => {
 	try {
-		const { email, name, lastname, rol, password, confirmPassword } = req.body;
+		const { email, name, lastname, rol, password, confirmPassword, avatar } =
+			req.body;
 
 		const userFound = await userModel.findOne({ email });
 		if (userFound) return res.status(400).json(['The email is already in use']);
@@ -19,6 +20,7 @@ export const register = async (req, res) => {
 			lastname,
 			email,
 			rol,
+			avatar,
 			password: passwordHash,
 		});
 
@@ -37,6 +39,7 @@ export const register = async (req, res) => {
 			lastname: userSaved.lastname,
 			email: userSaved.email,
 			rol: userSaved.rol,
+			avatar: userSaved.avatar,
 			createdAt: userSaved.createdAt,
 			updatedAt: userSaved.updatedAt,
 		});
@@ -65,9 +68,10 @@ export const login = async (req, res) => {
 
 		res.json({
 			id: userFound._id,
-			username: userFound.username,
+			name: userFound.name,
 			email: userFound.email,
 			rol: userFound.rol,
+			avatar: userFound.avatar,
 			createdAt: userFound.createdAt,
 			updatedAt: userFound.updatedAt,
 		});
@@ -82,10 +86,3 @@ export const logout = (req, res) => {
 	});
 	return res.sendStatus(200);
 };
-
-// esto es solo para verificar que se cargaron los datos, no va aqui
-/* export const getUsers = async (req, res) => {
-	const users = await usersModel.find();
-	res.json(users);
-};
- */

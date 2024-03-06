@@ -6,9 +6,20 @@ const ProductRow = (props) => {
   const { product } = props;
   const productId = product._id;
 
-  const [count, setCount] = useState(1);
+  // const productInCart = cart.find(product => product._id === productId);
 
-  const { setSubtotal, deleteProductFromCart } = useCart();
+  // // Verificar si se encontró el producto
+  // if (productInCart) {
+  //     const amount = product.amount;
+  //     console.log("La cantidad del producto es:", amount);
+  //     return amount
+  // } else {
+  //     console.log("Producto no encontrado en el carrito.");
+  // }
+
+  const [count, setCount] = useState(product.amount);
+
+  const { setSubtotal, deleteProductFromCart} = useCart();
 
   const productSubtotal = product.price * count;
 
@@ -33,6 +44,7 @@ const ProductRow = (props) => {
             count={count}
             setCount={setCount}
             productSubtotal={productSubtotal}
+            productId={product._id}
           />
         </td>
         <td className="pl-16">${productSubtotal}</td>
@@ -57,6 +69,7 @@ const ProductRow = (props) => {
               count={count}
               setCount={setCount}
               productSubtotal={productSubtotal}
+              productId={productId}
             />
             <p>${productSubtotal}</p>
           </div>
