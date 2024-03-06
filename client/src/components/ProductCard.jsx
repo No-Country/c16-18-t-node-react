@@ -1,20 +1,24 @@
 import { useCart } from "../stores/useCart";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../auth/context/AuthContext.jsx";
+
 
 const ProductCard = ({ product, category, image, rating, price, name, modalHandler}) => {
-  
+    const { user } = useContext(AuthContext);
   const {setCart, deleteProductFromCart} = useCart();
   const [addedToCart, setAddedToCart] = useState(false);
 
 
 
   const handleAddToCart = () =>{
+    
     setCart(product);
     setAddedToCart(true);
   };
 
-  const handleRemoveFromCart = () =>{
+  const handleRemoveFromCart = () => {
     deleteProductFromCart(product._id);
+
     setAddedToCart(false)
   };
 
@@ -38,9 +42,9 @@ const ProductCard = ({ product, category, image, rating, price, name, modalHandl
             {addedToCart ? <img src="/check.svg" /> : <img src="/button-cart.svg" />}
             {addedToCart ? 'Agregado' : 'Agregar al carrito'}
           </button>
+
         </div>
       </div>
-    </div>
     </>
   );
 };

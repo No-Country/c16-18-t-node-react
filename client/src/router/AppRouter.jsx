@@ -5,6 +5,8 @@ import ContactPage from "../Pages/ContactPage";
 import UserProfilePage from "../Pages/UserProfilePage";
 import ResultPage from "../Pages/ResultsPage";
 import CartPage from "../Pages/CartPage";
+import MisProductosPage from "../Pages/MisProductosPage";
+import AgregarProductoPage from "../Pages/AgregarProductoPage";
 import PurchaseSuccessPage from "../Pages/PurchaseSuccessPage";
 import { AuthContext } from "../auth/context/AuthContext";
 import { useContext } from "react";
@@ -20,6 +22,11 @@ const AppRouter = ({ data, searchedInput, handleSearch }) => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/misproductos" element={<MisProductosPage />} />
+        <Route path="/agregarproducto" element={<AgregarProductoPage />} />
+        <Route path="/results" element={<ResultPage searchedInput={searchedInput}  handleSearch={handleSearch}/>} />
+        {/* Si esta loggeado, mostrar el componente de comercios cercanos */}
+        <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/confirm-user" element={<ConfirmUserPage />} />  
         <Route
           path="/results"
@@ -36,7 +43,6 @@ const AppRouter = ({ data, searchedInput, handleSearch }) => {
             <Route path="/purchase-success" element={<PurchaseSuccessPage />} />
           </>
         )}
-
         <Route path="/*" element={<Navigate to="/" />} />
       </>
     </Routes>

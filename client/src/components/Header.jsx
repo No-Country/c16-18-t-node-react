@@ -47,9 +47,9 @@ const Header = () => {
         </button>
       </div>
       <div className="flex gap-14">
-        <Link  to="/">
+        <Link to="/">
           <img src="/nutrimarket-logo.svg" />
-        </Link> 
+        </Link>
         <nav className="hidden md:flex items-center  gap-6">
           <NavLink className={({ isActive }) => `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`} to="/">Home</NavLink>
           <NavLink className={({ isActive }) => `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`} to="/about">Sobre Nosotros</NavLink>
@@ -58,6 +58,7 @@ const Header = () => {
       </div>
       <div>
         <div className="flex gap-6 items-center">
+         {user && user.rol === "Vendedor" ? null : (
           <NavLink to="/cart">
             <img src="/cart-icon.svg" alt=" " />
             {logout===false && cartQuantity === 0 ? (
@@ -68,6 +69,7 @@ const Header = () => {
               </span>
             )}
           </NavLink>
+                  )}
           <div className="hidden md:flex">
             {user ? (
               <div
@@ -91,7 +93,12 @@ const Header = () => {
                     <p>Cerrar Sesión</p>
                   </a>
                 </div>
-                <img src={user?.avatar} alt=" " className="w-[60px] h-[60px] border rounded-full" />
+
+                <img
+                  src={user?.avatar}
+                  alt=" "
+                  className="w-[60px] h-[60px] border rounded-full"
+                />
                 <img
                   className="rotate-90 group-hover:rotate-[270deg]"
                   src="/arrow-icon.svg"
@@ -120,9 +127,11 @@ const Header = () => {
           </div>
         </div>
       </div>
+
       {showRegisterModal && createPortal(<RegisterModal visible={showRegisterModal} onClose={handleCloseRegisterModal}/>, document.getElementById("register-modal"))}
       {showLoginModal && createPortal(<LoginModal visible={showLoginModal} onClose={handleCloseLoginModal}/>, document.getElementById("login-modal"))}
       <Sidebar isOpenMenu={isOpenMenu} onClose={closeSidebar} setShowLoginModal={setShowLoginModal} setShowRegisterModal={setShowRegisterModal}/>
+      
     </header>
   );
 };

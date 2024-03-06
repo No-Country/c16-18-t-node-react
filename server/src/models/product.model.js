@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
-import { productsCollection } from "../config/collections.config.js";
+import { options } from "../config/options.config.js";
+import { faker } from "@faker-js/faker";
+
 
 const productSchema = new mongoose.Schema({
   images: { type: Array, default: [] },
@@ -17,10 +18,16 @@ const productSchema = new mongoose.Schema({
   category_ids: {type: Array, default: []},
   rating: { type: Number},
   category: {type: String},
-  image: {type: String}
+  image:  {
+    type: String,
+    default: () =>
+      faker.image.urlLoremFlickr({
+        width: 246,
+        height: 246,
+        category: "abstract",
+      }),
+  },
 }, { timestamps: {} });
 
-productSchema.plugin(mongoosePaginate);
-
-const productModel = mongoose.model(productsCollection, productSchema);
+const productModel = mongoose.model(options.collections.productsCollection, productSchema);
 export default productModel;
