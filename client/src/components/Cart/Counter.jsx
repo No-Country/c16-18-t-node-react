@@ -1,28 +1,9 @@
-import { useEffect, useState } from "react";
-import { useCart } from "../../stores/useCart";
-
-
 const Counter = (props) => {
-  const { count, setCount, productId } = props;
-
-  const {updateProductAmount} = useCart();
-
-  const [newAmount, setNewAmount] = useState(count);
-
+  const { count, setCount } = props;
 
   const handleChange = (quantity) => {
-    const updatedAmount = count + quantity
-    console.log(updatedAmount);
     setCount(count + quantity);
-    setNewAmount(updatedAmount);
   };
-
-  // updateProductAmount(productId, newAmount);
-  useEffect(() => {
-    // Access the state value for newAmount within useEffect
-    updateProductAmount(productId, newAmount);
-  }, [updateProductAmount, newAmount, productId]);
-
 
   return (
     <div className="w-24 h-7 sm:w-32 sm:h-12 border border-platinum rounded-full flex justify-center items-center">
