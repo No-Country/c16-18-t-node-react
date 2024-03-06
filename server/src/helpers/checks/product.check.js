@@ -1,13 +1,23 @@
 import { body, param } from "express-validator";
 import { validateChecks } from "../../middlewares/validate.middleware.js";
 
+const allowedCategories = [
+  "SIN T.A.C.C",
+  "SIN EXCESO DE AZUCAR",
+  "KETO",
+  "VEGANO",
+  "ORGÁNICO",
+  "DIABÉTICO",
+];
+
 export const validateId = validateChecks([
   param("pid").isMongoId().withMessage("El ID del producto no es válido"),
 ]);
 
 export const validateCreate = validateChecks([
   body("name")
-    .notEmpty().isString()
+    .notEmpty()
+    .isString()
     .withMessage("El nombre del producto es requerido")
     .isLength({ min: 3, max: 50 })
     .withMessage("Debe tener al menos 5 caracteres")
@@ -50,8 +60,9 @@ export const validateCreate = validateChecks([
       }
       return true;
     }),
-    body("description")
-    .notEmpty().isString()
+  body("description")
+    .notEmpty()
+    .isString()
     .withMessage("La descripcion del producto es requerido")
     .isLength({ min: 3, max: 50 })
     .withMessage("Debe tener al menos 5 caracteres")
@@ -61,7 +72,7 @@ export const validateCreate = validateChecks([
       }
       return true;
     }),
-    body("rating")
+  body("rating")
     .notEmpty()
     .isNumeric()
     .withMessage("El rating debe ser un número")
@@ -70,6 +81,17 @@ export const validateCreate = validateChecks([
       if (numericValue < 1 || numericValue > 5) {
         throw new Error("El rating debe estar en el rango de 1 a 5");
       }
+      return true;
+    }),
+
+  body("category")
+    .isString()
+    .withMessage("La categoría debe ser una cadena de texto")
+    .custom((value) => {
+      if (!allowedCategories.includes(value)) {
+        throw new Error(`Debe ingresar una categoria`);
+      }
+
       return true;
     }),
 ]);

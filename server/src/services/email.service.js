@@ -6,7 +6,7 @@ const sendEmail = async (email, token) => {
     const emailTemplate = `<div>
         <h1>Bienvenido!!, ${email}</h1>
         <p>Para confirmar cuenta ingrese en el siguiente link</p>
-        <a href="${options.server.url}/api/confirm/${token}"
+        <a href="${options.server.url_backend}/api/confirm/${token}"
         target="_blank"
         >VERIFICAR CUENTA</a>
 

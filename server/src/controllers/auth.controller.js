@@ -7,6 +7,7 @@ import {
 import emailService from "../services/email.service.js";
 import { v4 } from "uuid";
 import businessService from "../services/business.service.js";
+import { options } from "../config/options.config.js";
 
 export const register = async (req, res) => {
   try {
@@ -23,10 +24,15 @@ export const register = async (req, res) => {
     const code = v4();
 
     const userFound = await userModel.findOne({ email });
-    if (userFound) return res.status(400).json(["The email is already in use"]);
+    if (userFound)
+      return res
+        .status(400)
+        .send({ status: "error", payload: "The email is already in use" });
 
     if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not macth!" });
+      return res
+        .status(400)
+        .send({ status: "error", payload: "Passwords do not macth!" });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -77,7 +83,9 @@ export const register = async (req, res) => {
       throw new Error("Hubo un problema al enviar el correo");
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res
+      .status(500)
+      .json({ status: "error", payload: "Hubo un problema en el servidor" });
   }
 };
 
@@ -96,7 +104,7 @@ export const confirm = async (req, res) => {
         throw new Error("El usuario no existe");
       } else {
         if (userFound.status !== "UNVERIFIED") {
-          return res.redirect("https://c16-18-t-node-react-xi.vercel.app/home");
+          return res.redirect(`${options.server.url_frontend}/home`);
         }
         if (code !== userFound.code) {
           throw new Error("No existe el codigo");
@@ -110,14 +118,14 @@ export const confirm = async (req, res) => {
         );
 
         if (result) {
-          return res.redirect("https://c16-18-t-node-react-xi.vercel.app/confirm-user");
+          return res.redirect(`${options.server.url_frontend}/confirm-user`);
         } else {
           throw new Error("Hubo un problema para verificar la cuenta");
         }
       }
     }
   } catch (error) {
-    res.status(500).json({ status: "error", message: error.message });
+    return res.status(500).json({ status: "error", payload: error.message });
   }
 };
 
@@ -126,11 +134,16 @@ export const login = async (req, res) => {
 
   try {
     const userFound = await userModel.findOne({ email });
-    if (!userFound) return res.status(400).json({ message: "User not found" });
+    if (!userFound)
+      return res
+        .status(400)
+        .send({ status: "error", payload: "User not found" });
 
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch)
-      return res.status(400).json({ message: "Incorrect credentials" });
+      return res
+        .status(400)
+        .send({ status: "error", payload: "Incorrect credentials" });
 
     const token = await createAccessToken({
       id: userFound._id,
@@ -155,7 +168,7 @@ export const login = async (req, res) => {
       updatedAt: userFound.updatedAt,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).send({ status: "error", payload: error.message });
   }
 };
 
