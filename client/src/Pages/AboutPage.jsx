@@ -16,7 +16,6 @@ const AboutPage = () => {
           </p>
         </div>
       </section> 
-
     </main>
   )
 }
