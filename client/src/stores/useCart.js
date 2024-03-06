@@ -3,7 +3,7 @@ import { create } from "zustand";
 export const useCart = create((set) => ({
   cart:JSON.parse(localStorage.getItem('cart')) || [],
 
-  userId: localStorage.getItem("userId") || null,
+  // userId: localStorage.getItem("userId") || null,
 
   //agrego productos a cart y le agrego la propiedad amount
   setCart: (product) =>
@@ -13,7 +13,8 @@ export const useCart = create((set) => ({
       const updatedCart = [...state.cart, productWithAmount];
       localStorage.setItem(
         "cart",
-        JSON.stringify({ cart: updatedCart, userId: state.userId })
+        JSON.stringify(updatedCart)
+        // JSON.stringify({ cart: updatedCart, userId: state.userId })
       );
       return { cart: updatedCart, userId: state.userId };
     }),
@@ -44,7 +45,8 @@ export const useCart = create((set) => ({
       product._id === productId ? { ...product, amount: newAmount } : product
     );
     localStorage.setItem("cart", JSON.stringify(updatedCart)); // Guardar en localStorage
-    return { cart: updatedCart, userId: state.userId }; // Devolver el nuevo estado actualizado
+    // return { cart: updatedCart, userId: state.userId };  Devolver el nuevo estado actualizado
+    return {cart: updatedCart};
   }),
 
 
@@ -55,7 +57,10 @@ export const useCart = create((set) => ({
       const newSubtotal = state.subtotal.filter(
         (item) => item.productId !== productId
       );
-      return { cart: newCart, subtotal: newSubtotal };
+      console.log(newCart)
+      // console.log(newSubtotal)
+      return { cart: newCart };
+      // return { cart: newCart, subtotal: newSubtotal };
     }),
 
   // clearCart: () => set({ cart: [] }),

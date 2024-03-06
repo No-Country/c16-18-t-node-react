@@ -64,8 +64,6 @@ const Summary = () => {
       >
         Realizar compra
       </button>
-
-      {/* {isExploding && <ConfettiExplosion />} */}
     </div>
   );
 };
