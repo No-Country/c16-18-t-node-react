@@ -2,14 +2,42 @@ import { AuthContext } from "../auth/context/AuthContext.jsx";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Field, Form, Formik } from "formik";
-import useCreateProduct from "../hooks/useCreateProduct";
+import { useProduct, useCategories } from "../hooks/useApi.js";
 
 const AgregarProductoPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [formEnviado, setFormEnviado] = useState(false);
   const [productError, setProductError] = useState(null);
-  const { handleCreateProduct } = useCreateProduct();
+  const [categories, setCategories] = useState();
+
+  const product = useProduct();
+
+  const handleSubmit = async (valores, { resetForm }) => {
+    try {
+      const { name, price, stock, sku, description, rating, category, userId } =
+        valores;
+      const result = await product.handleCreateProduct({
+        name,
+        price,
+        stock,
+        sku,
+        description,
+        rating,
+        category,
+        userId,
+      });
+
+      console.log("Resultadoooooo", result);
+
+      resetForm();
+      setProductError(null);
+      setFormEnviado(true);
+    } catch (error) {
+      console.log(error);
+      setProductError(error);
+    }
+  };
 
   useEffect(() => {
     if (!user || user.rol !== "Vendedor") {
@@ -18,6 +46,13 @@ const AgregarProductoPage = () => {
       }, 2000);
 
       return () => clearTimeout(timeoutId);
+    } else {
+      useCategories()
+        .handleGetCategories()
+        .then((data) => {
+          console.log(data);
+          setCategories(data);
+        });
     }
   }, [user, navigate]);
 
@@ -54,40 +89,7 @@ const AgregarProductoPage = () => {
                   category: "",
                   userId: user ? user.id : "",
                 }}
-                onSubmit={async (valores, { resetForm }) => {
-                  try {
-                    const {
-                      name,
-                      price,
-                      stock,
-                      sku,
-                      description,
-                      rating,
-                      category,
-                      userId,
-                    } = valores;
-
-                    const result = await handleCreateProduct({
-                      name,
-                      price,
-                      stock,
-                      sku,
-                      description,
-                      rating,
-                      category,
-                      userId,
-                    });
-
-                    console.log("Resultadoooooo", result);
-
-                    resetForm();
-                    setProductError(null);
-                    setFormEnviado(true);
-                  } catch (error) {
-                    console.log(error);
-                    setProductError(error);
-                  }
-                }}
+                onSubmit={handleSubmit}
               >
                 {({ values, handleBlur }) => (
                   <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10">
@@ -293,13 +295,29 @@ const AgregarProductoPage = () => {
                         name="category"
                         onBlur={handleBlur}
                       >
+                       
                         <option value="" label="Seleccione una categoría" />
-                        {/* {categories.map((category) => (
-                          <option key={category._id} value={category.name}>
-                            {category.name}
-                          </option>
-                        ))} */}
+                        {categories
+                          ? categories.payload.map((category) => (
+                              <option key={category._id} value={category.name}>
+                                {category.name}
+                              </option>
+                            ))
+                          : null}
                       </Field>
+                      {productError &&
+                          productError
+                            .filter((error) => error.path === "category")
+                            .map((error) => (
+                              <div className="w-full h-5">
+                                <div
+                                  className="flex justify-start text-red-600 text-sm"
+                                  key={error.category}
+                                >
+                                  {error.msg}
+                                </div>
+                              </div>
+                            ))}
                     </div>
 
                     <div className="w-[70%] lg:w-[55%] flex items-center justify-center">

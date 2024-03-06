@@ -1,13 +1,33 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
-import useLogin from "../../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useApi";
 
 const LoginForm = ({ onClose }) => {
   const [formEnviado, setFormEnviado] = useState(false);
   const [loginError, setLoginError] = useState(null);
-  const { handleLogin } = useLogin();
   const navigate = useNavigate();
+  const auth = useAuth();
+
+  const handleSubmit = async (valores, { resetForm }) => {
+    try {
+      const result = await auth.handleLogin(valores);
+      console.log(result);
+      resetForm();
+      setLoginError(null);
+      setFormEnviado(true);
+      setTimeout(() => {
+        setFormEnviado(false);
+        onClose();
+        navigate("/");
+      }, 1000);
+      console.log(valores);
+    } catch (error) {
+      console.log("Error al iniciar sesion", error);
+      setLoginError(error);
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -31,24 +51,7 @@ const LoginForm = ({ onClose }) => {
 
         return errores;
       }}
-      onSubmit={async (valores, { resetForm }) => {
-        try {
-          const result = await handleLogin(valores);
-          console.log(result);
-          resetForm();
-          setLoginError(null);
-          setFormEnviado(true);
-          setTimeout(() => {
-            setFormEnviado(false);
-            onClose();
-            navigate("/");
-          }, 1000);
-          console.log(valores);
-        } catch (error) {
-          console.log("Error al iniciar sesion", error.message);
-          setLoginError(error.message);
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       {({ values, handleBlur }) => (
         <Form className="flex w-full flex-col items-center  sm:w-[80%] sm:pt-3 px-10 ">

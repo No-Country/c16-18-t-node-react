@@ -9,7 +9,7 @@ const fetcher = url => axios.get(url).then(res => res.data);
 
 const ResultPage = ({handleSearch, searchedInput}) => {
 
-    const {data} = useSWR('https://c16-18-t-node-react-1.onrender.com/api/products', fetcher);
+    const {data} = useSWR('http://localhost:3000/api/products', fetcher);
 
             
 

@@ -1,35 +1,40 @@
 import ProductCard from "../components/ProductCard.jsx";
 import ProductModal from "../components/modals/ProductModal.jsx";
 import Searchbar from "../components/Searchbar.jsx";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import useSWR from "swr";
-import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../auth/context/AuthContext.jsx";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, FreeMode } from "swiper/modules";
 import "swiper/css/bundle";
-import categories from "../constants/Categories.js";
-
-const fetcher = (url) => axios.get(url).then((res) => res.data);
+import { useBusiness, useProduct, useCategories } from "../hooks/useApi.js";
 
 const LandingPage = ({ handleSearch }) => {
   const { user } = useContext(AuthContext);
-  const { data } = useSWR(
-    "https://c16-18-t-node-react-1.onrender.com/api/products",
-    fetcher
-  );
-
-  const { data: tiendas } = useSWR(
-    "https://c16-18-t-node-react-1.onrender.com/api/business",
-    fetcher
-  );
-
-  console.log(tiendas);
-
   const [modalOpen, setModalOpen] = useState(false);
+  const [products, setProducts] = useState();
+  const [tiendas, setTiendas] = useState();
+  const [categories, setCategories] = useState();
+
+  useEffect(() => {
+    useProduct()
+      .handleGetProducts()
+      .then((data) => {
+        setProducts(data);
+      });
+    useBusiness()
+      .handleGetBusiness()
+      .then((data) => {
+        setTiendas(data);
+      });
+    useCategories()
+      .handleGetCategories()
+      .then((data) => {
+        setCategories(data);
+      });
+  }, []);
+
   const modalHandler = () => {
     setModalOpen(!modalOpen);
   };
@@ -152,21 +157,23 @@ const LandingPage = ({ handleSearch }) => {
                 },
               }}
             >
-              {categories.map((category) => (
-                <SwiperSlide key={category.name}>
-                  <div
-                    className="relative rounded-full w-20 h-20 lg:w-36 lg:h-36 xl:w-44 xl:h-44 text-xs lg:text-xl"
-                    key={category.name}
-                  >
-                    <img src={category.image} alt=" " />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <p className="text-white text-center font-extrabold">
-                        {category.name}
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+              {categories
+                ? categories.payload.map((category) => (
+                    <SwiperSlide key={category.name}>
+                      <div
+                        className="relative rounded-full w-20 h-20 lg:w-36 lg:h-36 xl:w-44 xl:h-44 text-xs lg:text-xl"
+                        key={category.name}
+                      >
+                        <img src={category.image} alt=" " />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <p className="text-white text-center font-extrabold">
+                            {category.name}
+                          </p>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))
+                : null}
             </Swiper>
           </div>
           {/*Categorias version grid*/}
@@ -216,8 +223,8 @@ const LandingPage = ({ handleSearch }) => {
                 },
               }}
             >
-              {data
-                ? data.payload.slice(0, 8).map((product) => (
+              {products
+                ? products.payload.slice(0, 8).map((product) => (
                     <SwiperSlide key={product._id}>
                       <ProductCard
                         product={product}
@@ -233,8 +240,8 @@ const LandingPage = ({ handleSearch }) => {
 
           <div className="hidden xl:block">
             <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
-              {data
-                ? data.payload
+              {products
+                ? products.payload
                     .slice(0, 8)
                     .map((product) => (
                       <ProductCard

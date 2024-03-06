@@ -1,11 +1,50 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
-import useRegister from "../../hooks/useRegister";
+import { useAuth } from "../../hooks/useApi";
 
 const RegisterForm = ({ onClose }) => {
   const [formEnviado, setFormEnviado] = useState(false);
   const [loginError, setLoginError] = useState(null);
-  const { handleRegister } = useRegister();
+
+  const auth = useAuth();
+
+  const handleSubmit = async (valores, { resetForm }) => {
+    console.log(valores);
+    const {
+      name,
+      email,
+      password,
+      lastname,
+      rol,
+      confirmPassword,
+      businessName,
+    } = valores;
+
+    try {
+      const data = await auth.handleRegister({
+        name,
+        lastname,
+        rol,
+        email,
+        password,
+        confirmPassword,
+        ...(rol === "Vendedor" ? { businessName } : {}),
+      });
+
+      console.log(data);
+      resetForm();
+      setLoginError(null);
+      setFormEnviado(true);
+
+      setTimeout(() => {
+        setFormEnviado(false);
+        onClose();
+      }, 2000);
+    } catch (error) {
+      setLoginError(error);
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -15,7 +54,7 @@ const RegisterForm = ({ onClose }) => {
         email: "",
         password: "",
         confirmPassword: "",
-        businessName: ""
+        businessName: "",
       }}
       validate={(valores) => {
         let errores = {};
@@ -58,40 +97,7 @@ const RegisterForm = ({ onClose }) => {
 
         return errores;
       }}
-      onSubmit={async (valores, { resetForm }) => {
-        console.log(valores);
-        try {
-          const {
-            name,
-            email,
-            password,
-            lastname,
-            rol,
-            confirmPassword,
-            businessName,
-          } = valores;
-
-          const result = await handleRegister({
-            name,
-            lastname,
-            rol,
-            email,
-            password,
-            confirmPassword,
-            ...(rol === "Vendedor" ? { businessName } : {}),
-          });
-          console.log("Result", result);
-          resetForm();
-          setLoginError(null);
-          setFormEnviado(true);
-          setTimeout(() => {
-            setFormEnviado(false);
-            onClose();
-          }, 2000);
-        } catch (error) {
-          setLoginError(error.message);
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       {({ values, handleBlur }) => (
         <Form className="flex w-full flex-col items-center px-6 md:px-2 lg:px-10 ">

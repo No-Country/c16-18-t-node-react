@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { useNavigate } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, FreeMode } from "swiper/modules";
+import { useBusiness } from "../hooks/useApi.js";
 
 const MisProductosPage = () => {
   const [productos, setProductos] = useState();
@@ -20,27 +21,15 @@ const MisProductosPage = () => {
 
       return () => clearTimeout(timeoutId);
     } else {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(
-            `https://c16-18-t-node-react-1.onrender.com/api/business/${user.id}`
-          );
-          if (response.ok) {
-            const data = await response.json();
-            setProductos(data);
-          } else {
-            console.log("Error en la solicitud");
-          }
-        } catch (error) {
-          console.log("Error de red:", error);
-        }
-      };
-
-      fetchData();
-      return () => {
-      };
+      useBusiness()
+        .handleGetMyBusines(`/${user.id}`)
+        .then((data) => {
+          console.log(data);
+          setProductos(data);
+        });
     }
-  }, [user, productos, navigate]);
+    return () => {};
+  }, [user, navigate]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const modalHandler = () => {
@@ -114,9 +103,7 @@ const MisProductosPage = () => {
             <div className="hidden xl:block">
               <div className="grid grid-cols-1 gap-y-2 lg:grid-cols-4 lg:gap-x-8">
                 {!productos || productos.payload.products.length === 0 ? (
-                  <div >
-                    No tienes productos en tu cuenta
-                  </div>
+                  <div>No tienes productos en tu cuenta</div>
                 ) : (
                   productos.payload.products
                     .slice(0, 8)
