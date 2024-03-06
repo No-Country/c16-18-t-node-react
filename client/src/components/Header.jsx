@@ -17,6 +17,7 @@ const Header = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const { cart } = useCart();
+  const cartQuantity = cart.length;
   const handleCloseRegisterModal = () => {
     setShowRegisterModal(false);
   };
@@ -27,7 +28,7 @@ const Header = () => {
   const handleLogout = () => {
     logout(false);
   };
-  const cartQuantity = cart.length;
+  
   const handleClick = () => {
     setIsOpenMenu(!isOpenMenu);
   };
@@ -37,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed z-40 flex justify-between items-center p-8 bg-white w-full">
+    <header className="fixed z-50 flex justify-between items-center p-8 bg-white w-full">
       <div className="md:hidden">
         <button className=" flex-col justify-center items-center md:hidden " onClick={handleClick}>
           <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm  ${ isOpenMenu ? "rotate-45 translate-y-1" : "-translate-y-0.5"}`}></span>

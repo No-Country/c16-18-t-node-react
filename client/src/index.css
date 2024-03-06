@@ -6,5 +6,6 @@
     @apply text-darkGreen1 underline hover:text-darkGreen2;
 }
 
-:root{--swiper-theme-color: black ;
+:root{
+    --swiper-theme-color: black ;
 } 

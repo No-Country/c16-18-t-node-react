@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../auth/context/AuthContext";
 
@@ -9,13 +9,6 @@ const Sidebar = ({
   setShowRegisterModal,
 }) => {
   const { user, logout } = useContext(AuthContext);
-  useEffect(() => {
-    if (isOpenMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isOpenMenu]);
 
   const loginSideBar = () => {
     setShowLoginModal(true);
