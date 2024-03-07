@@ -11,8 +11,6 @@ const ResultPage = ({handleSearch, searchedInput}) => {
 
     const {data} = useSWR('https://c16-18-t-node-react-1.onrender.com/api/products', fetcher);
 
-            
-
     const [isCatOpen, setIsCatOpen] = useState(false);
     const [isProdOpen, setIsProdOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
