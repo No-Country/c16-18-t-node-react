@@ -23,7 +23,7 @@ const createProductController = async (req, res) => {
     const result = await productService.createProduct(req.body);
     res.status(201).send({ status: "ok", payload: result });
   } catch (err) {
-    res.status(400).send({ status: "error", payload: err.message });
+    res.status(400).send({ status: "error", payload: err });
   }
 };
 

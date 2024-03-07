@@ -32,7 +32,7 @@ const createProduct = async (product) => {
     );
     return inserProduct;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err);
   }
 };
 
