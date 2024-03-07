@@ -43,15 +43,15 @@ const ResultPage = ({handleSearch, searchedInput}) => {
 
     return(
         <>
-        <main className="px-8 my-12">
+        <main className="relative px-8 my-12 max-w-[1440px] m-auto">
             <section className="flex items-center justify-between">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-[2.625rem] max-w-[32ch]">¡Encuentra rápidamente tus productos favoritos o descubre nuevas opciones que se adapten a tus necesidades y gustos!</h1>
                     <Searchbar handleSearch={handleSearch}/>
                 </div>
-                <img className="relative -right-8" src="/hero2.svg" alt=" " />
+                <img src="/hero2.svg" alt=" " />
             </section>
-            <section className="flex gap-8">
+            <section className="flex justify-between gap-8">
                 <div className="w-1/4">
                     <div className="relative py-4 cursor-pointer"> 
                         <div className="flex justify-between" onClick={() => {setIsCatOpen(!isCatOpen)}}>
@@ -177,7 +177,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
                         </div>
                     </div>
                 </div>
-                <ul className="grid grid-cols-3 gap-8">
+                <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {toRender.map(product => <li key={product._id}><ProductCard product={product} category={product.category} image={product.image} rating={product.rating} price={product.price} name={product.name} modalHandler={product.modalHandler}/></li>)}
                 </ul>
             </section>
