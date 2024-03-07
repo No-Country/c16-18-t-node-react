@@ -17,14 +17,13 @@ const AboutPage = () => {
       </section>
       <section> {/*no use formik por que no hay ningun mail o lugar en el backend a donde deba enviarse el mensaje, es solo para la demo*/}
         <h2 className="mb-4 text-[2.625rem] text-darkGreen1 text-center font-extrabold lg:text-left">Contacto</h2>
-        <form className="grid grid-cols-2 gap-4">
+        <form className="grid grid-cols-2 gap-4 lg:max-w-[50%]">
           <input className="px-2 py-1 border-[1px] border-grayishGreen4 rounded outline-grayishGreen3 caret-grayishGreen3" type="text" placeholder="Nombre" />
           <input className="px-2 py-1 border-[1px] border-grayishGreen4 rounded outline-grayishGreen3 caret-grayishGreen3" type="Email" placeholder="Email"/>
           <textarea className="px-2 py-1 col-span-2 border-[1px] border-grayishGreen4 rounded outline-grayishGreen3 caret-grayishGreen3" name="message" id="message" cols="30" rows="10" placeholder="Mensaje"/>
           <button className="col-span-2 justify-self-center px-12 py-3 text-white font-bold bg-avocadoGreen rounded-full" type="button" onClick={() => {alert("Gracias por tu mensaje, sera respondido a la brevedad")}}>Enviar</button>
         </form>
       </section> 
-
     </main>
   )
 }
