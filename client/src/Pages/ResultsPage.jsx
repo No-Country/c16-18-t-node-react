@@ -11,8 +11,6 @@ const ResultPage = ({handleSearch, searchedInput}) => {
 
     const {data} = useSWR('https://c16-18-t-node-react.onrender.com/api/products', fetcher);
 
-            
-
     const [isCatOpen, setIsCatOpen] = useState(false);
     const [isProdOpen, setIsProdOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
@@ -46,7 +44,7 @@ const ResultPage = ({handleSearch, searchedInput}) => {
     return(
         <>
         <main className="px-8 my-12">
-            <section className="flex items-center">
+            <section className="flex items-center justify-between">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-[2.625rem] max-w-[32ch]">¡Encuentra rápidamente tus productos favoritos o descubre nuevas opciones que se adapten a tus necesidades y gustos!</h1>
                     <Searchbar handleSearch={handleSearch}/>
