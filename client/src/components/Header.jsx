@@ -38,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed z-50 flex justify-between items-center w-full p-8 bg-white max-w-[1440px] mx-auto lg:static">
+    <header className="fixed z-50 flex justify-between items-center w-full p-8 bg-white lg:static">
       <div className="md:hidden">
         <button
           className=" flex-col justify-center items-center md:hidden"
