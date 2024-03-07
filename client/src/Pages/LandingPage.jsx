@@ -114,9 +114,9 @@ const LandingPage = ({ handleSearch }) => {
           </div>
         </section>
 
-        <section className="relative left-1/2 -translate-x-1/2 w-screen px-2 pb-3 sm:p-12 bg-[#edebee]">
+        <section className="relative left-1/2 -translate-x-1/2 w-screen p-8 bg-[#edebee]">
           <div className="max-w-[1440px] mx-auto">
-            <h2 className="mb-8 text-2xl text-center md:text-5xl md:text-start text-darkGreen1 font-extrabold">
+            <h2 className="mb-8 text-xl text-center md:text-5xl md:text-start text-darkGreen1 font-extrabold">
               Categorias
             </h2>
             {/*Categorias version carousel*/}
@@ -177,7 +177,7 @@ const LandingPage = ({ handleSearch }) => {
           </div>
         </section>
 
-        <section className="px-12 py-8 md:visible md:block">
+        <section className="px-8 py-8 md:visible md:block">
           <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
             <h2 className="text-xl lg:text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
@@ -239,7 +239,7 @@ const LandingPage = ({ handleSearch }) => {
             </div>
           </div>
         </section>
-        <section className="flex flex-col gap-8 py-12 md:py-0 md:p-12">
+        <section className="flex flex-col gap-8 py-12">
           <div className="flex flex-col items-center md:flex-row md:justify-between">
             <div className="flex flex-col items-center px-4 md:items-start">
               <h2 className="text-center text-xl md:text-start md:text-4xl xl:text-5xl font-bold max-w-[30ch]">

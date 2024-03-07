@@ -82,14 +82,6 @@ const Header = () => {
           >
             Sobre Nosotros
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
-            }
-            to="/contact"
-          >
-            Contacto
-          </NavLink>
         </nav>
       </div>
       <div>
