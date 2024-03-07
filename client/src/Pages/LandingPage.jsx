@@ -34,7 +34,7 @@ const LandingPage = ({ handleSearch }) => {
           document.getElementById("product-modal")
         )}
       <main>
-        <section className="relative justify-center items-center overflow-hidden invisible hidden md:visible md:flex">
+        <section className="relative left-1/2 w-screen -translate-x-1/2 justify-center items-center overflow-hidden invisible hidden md:visible md:flex">
           <img className="w-full" src="/hero.png" alt=" " />
           <div className="absolute top-1/2">
             <h1 className="mb-2 text-[2.625rem] max-w-[20ch]">
@@ -46,7 +46,7 @@ const LandingPage = ({ handleSearch }) => {
             <Searchbar handleSearch={handleSearch} />
           </div>
         </section>
-        <section className=" flex relative justify-center items-center overflow-hidden visible  md:invisible md:hidden aspect-auto">
+        <section className="flex relative justify-center items-center overflow-hidden md:hidden">
           <img className="w-full" src="/hero-mobile.png" alt=" " />
           <div className="absolute top-1/2 px-4 ">
             <h1 className="mb-2 text-3xl max-w-lg sm:text-3xl sm:max-w-xl text-center">
@@ -59,11 +59,7 @@ const LandingPage = ({ handleSearch }) => {
           </div>
         </section>
         {/* Mobile */}
-        <section
-          className={` ${
-            user ? "md:block" : "md:hidden"
-          } gap-12 p-12 invisible hidden md:visible `}
-        >
+        <section className={`${user ? "md:block" : "md:hidden"} gap-12 p-12 invisible hidden md:visible `}>
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-[2.5rem] text-darkGreen1 font-extrabold">
               Comercios cercanos
@@ -118,38 +114,55 @@ const LandingPage = ({ handleSearch }) => {
           </div>
         </section>
 
-        <section className="px-2 pb-3 sm:p-12 bg-[#edebee]">
-          <h2 className="mb-8 text-2xl text-center md:text-5xl md:text-start text-darkGreen1 font-extrabold">
-            Categorias
-          </h2>
-        {/*Categorias version carousel*/}
-          <div >
-            <Swiper
-              loop={true}
-              modules={[A11y, FreeMode]}
-              slidesPerView={4}
-              spaceBetween={40}
-              breakpoints={{
-                640: {
-                  slidesPerView: 6,
-                  spaceBetween: 40,
-                },
-                1024: {
-                  slidesPerView: 5.5,
-                  spaceBetween: 20,
-                },
-                1280: {
-                  slidesPerView: 6,
-                  spaceBetween: 20,
-                },
-              }}
-            >
-              {categories.map((category) => (
-                <SwiperSlide key={category.name}>
-                  <div
-                    className="relative rounded-full w-20 h-20 lg:w-36 lg:h-36 xl:w-44 xl:h-44 text-xs lg:text-xl"
-                    key={category.name}
-                  >
+        <section className="relative left-1/2 -translate-x-1/2 w-screen p-8 bg-[#edebee]">
+          <div className="max-w-[1440px] mx-auto">
+            <h2 className="mb-8 text-xl text-center md:text-5xl md:text-start text-darkGreen1 font-extrabold">
+              Categorias
+            </h2>
+            {/*Categorias version carousel*/}
+            <div >
+              <Swiper
+                loop={true}
+                modules={[A11y, FreeMode]}
+                slidesPerView={4}
+                spaceBetween={40}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 6,
+                    spaceBetween: 40,
+                  },
+                  1024: {
+                    slidesPerView: 5.5,
+                    spaceBetween: 20,
+                  },
+                  1280: {
+                    slidesPerView: 6,
+                    spaceBetween: 20,
+                  },
+                }}
+              >
+                {categories.map((category) => (
+                  <SwiperSlide key={category.name}>
+                    <div
+                      className="relative rounded-full w-20 h-20 lg:w-36 lg:h-36 xl:w-44 xl:h-44 text-xs lg:text-xl"
+                      key={category.name}
+                    >
+                      <img src={category.image} alt=" " />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <p className="text-white text-center font-extrabold">
+                          {category.name}
+                        </p>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+            {/*Categorias version grid*/}
+            {/* <div className="hidden sm:block">
+              <div className="grid grid-flow-col auto-cols-max justify-evenly text-center ">
+                {categories.map((category) => (
+                  <div className="relative rounded-full w-24 h-24 text-xs md:w-44 md:h-44 md:text-xl" key={category.name}>
                     <img src={category.image} alt=" " />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <p className="text-white text-center font-extrabold">
@@ -157,29 +170,14 @@ const LandingPage = ({ handleSearch }) => {
                       </p>
                     </div>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          {/*Categorias version grid*/}
-          {/* <div className="hidden sm:block">
-            <div className="grid grid-flow-col auto-cols-max justify-evenly text-center ">
-              {categories.map((category) => (
-                <div className="relative rounded-full w-24 h-24 text-xs md:w-44 md:h-44 md:text-xl" key={category.name}>
-                  <img src={category.image} alt=" " />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-white text-center font-extrabold">
-                      {category.name}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
 
-            </div>
-          </div> */}
+              </div>
+            </div> */}
+          </div>
         </section>
 
-        <section className="px-12 py-8 md:visible md:block">
+        <section className="px-8 py-8 md:visible md:block">
           <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
             <h2 className="text-xl lg:text-[2.5rem] text-darkGreen1 font-extrabold">
               Productos más vendidos
@@ -241,7 +239,7 @@ const LandingPage = ({ handleSearch }) => {
             </div>
           </div>
         </section>
-        <section className="flex flex-col gap-8 py-12 md:py-0 md:p-12">
+        <section className="flex flex-col gap-8 py-12">
           <div className="flex flex-col items-center md:flex-row md:justify-between">
             <div className="flex flex-col items-center px-4 md:items-start">
               <h2 className="text-center text-xl md:text-start md:text-4xl xl:text-5xl font-bold max-w-[30ch]">

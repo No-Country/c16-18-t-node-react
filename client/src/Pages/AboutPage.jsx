@@ -24,7 +24,6 @@ const AboutPage = () => {
           <button className="col-span-2 justify-self-center px-12 py-3 text-white font-bold bg-avocadoGreen rounded-full" type="button" onClick={() => {alert("Gracias por tu mensaje, sera respondido a la brevedad")}}>Enviar</button>
         </form>
       </section> 
-
     </main>
   )
 }

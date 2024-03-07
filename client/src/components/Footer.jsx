@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className=" w-full pb-8 bg-darkGreen1 flex items-center justify-center">
-      <div className="w-[90%] lg:w-[80%] h-full">
+    <footer className="relative left-1/2 flex items-center justify-center w-screen pb-8 bg-darkGreen1 -translate-x-1/2">
+      <div className="w-[90%] max-w-screen mx-auto lg:w-[80%] h-full">
         <hr className=" w-[90%] pt-4 lg:pt-10 mt-8 lg:mt-24 mx-auto" />
         <div className="flex flex-col justify-center items-center md:flex-row md:justify-around text-white">
           <div className="w-full flex flex-col items-center text-center my-2  lg:items-start  lg:w-auto ">

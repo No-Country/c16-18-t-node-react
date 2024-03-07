@@ -38,10 +38,10 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed z-50 flex justify-between items-center p-8 bg-white w-full lg:static">
+    <header className="fixed z-50 flex justify-between items-center w-full p-8 bg-white lg:static">
       <div className="md:hidden">
         <button
-          className=" flex-col justify-center items-center md:hidden "
+          className=" flex-col justify-center items-center md:hidden"
           onClick={handleClick}
         >
           <span
@@ -81,14 +81,6 @@ const Header = () => {
             to="/about"
           >
             Sobre Nosotros
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `hover:underline text-xs lg:text-lg ${isActive ? "active" : ""}`
-            }
-            to="/contact"
-          >
-            Contacto
           </NavLink>
         </nav>
       </div>
